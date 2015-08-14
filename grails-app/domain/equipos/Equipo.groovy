@@ -3,6 +3,7 @@ package equipos
 class Equipo {
 	String nombre
 	String contacto
+	//prueba de Pablo
 	
 	static hasMany = [jugadores: Jugador]
 	static belongsTo = torneos.Torneo
