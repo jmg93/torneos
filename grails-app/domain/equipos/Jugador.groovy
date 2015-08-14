@@ -7,6 +7,8 @@ class Jugador {
 	Integer dni
 	Boolean capitan
 	
+	//comentario de prueba
+	
 	static belongsTo = Equipo
 	
 	public String toString(){
