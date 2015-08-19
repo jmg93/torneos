@@ -32,15 +32,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${torneoInstance?.formato}">
-				<li class="fieldcontain">
-					<span id="formato-label" class="property-label"><g:message code="torneo.formato.label" default="Formato" /></span>
-					
-						<span class="property-value" aria-labelledby="formato-label"><g:link controller="formatoTorneo" action="show" id="${torneoInstance?.formato?.id}">${torneoInstance?.formato?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${torneoInstance?.fechaInicio}">
 				<li class="fieldcontain">
 					<span id="fechaInicio-label" class="property-label"><g:message code="torneo.fechaInicio.label" default="Fecha Inicio" /></span>

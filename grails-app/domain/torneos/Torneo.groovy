@@ -2,7 +2,6 @@ package torneos
 
 class Torneo {
 	String nombre
-	FormatoTorneo formato
 	Date fechaInicio
 	Date fechaLimite
 	Integer nMaxEquipos
@@ -20,7 +19,6 @@ class Torneo {
 
     static constraints = {
 		nombre(size:2..20)
-		formato()
 		fechaInicio()
 		fechaLimite()
 		nMaxEquipos()

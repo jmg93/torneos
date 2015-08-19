@@ -11,15 +11,6 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'formato', 'error')} required">
-	<label for="formato">
-		<g:message code="torneo.formato.label" default="Formato" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="formato" name="formato.id" from="${torneos.FormatoTorneo.list()}" optionKey="id" required="" value="${torneoInstance?.formato?.id}" class="many-to-one"/>
-
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'fechaInicio', 'error')} required">
 	<label for="fechaInicio">
 		<g:message code="torneo.fechaInicio.label" default="Fecha Inicio" />
