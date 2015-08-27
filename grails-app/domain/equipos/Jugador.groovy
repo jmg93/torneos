@@ -7,7 +7,6 @@ class Jugador {
 	Integer dni
 	Boolean capitan
 	
-	//comentario de prueba
 	
 	static belongsTo = Equipo
 	
@@ -16,5 +15,10 @@ class Jugador {
 	}
 
     static constraints = {
+		apellido(size:2..20)
+		nombre(size:2..20)
+		nCamiseta()
+		capitan()
+		dni()
 	}
 }

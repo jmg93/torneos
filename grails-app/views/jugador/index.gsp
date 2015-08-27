@@ -26,13 +26,13 @@
 					
 						<g:sortableColumn property="apellido" title="${message(code: 'jugador.apellido.label', default: 'Apellido')}" />
 					
-						<g:sortableColumn property="capitan" title="${message(code: 'jugador.capitan.label', default: 'Capitan')}" />
-					
-						<g:sortableColumn property="dni" title="${message(code: 'jugador.dni.label', default: 'Dni')}" />
+						<g:sortableColumn property="nombre" title="${message(code: 'jugador.nombre.label', default: 'Nombre')}" />
 					
 						<g:sortableColumn property="nCamiseta" title="${message(code: 'jugador.nCamiseta.label', default: 'N Camiseta')}" />
 					
-						<g:sortableColumn property="nombre" title="${message(code: 'jugador.nombre.label', default: 'Nombre')}" />
+						<g:sortableColumn property="capitan" title="${message(code: 'jugador.capitan.label', default: 'Capitan')}" />
+					
+						<g:sortableColumn property="dni" title="${message(code: 'jugador.dni.label', default: 'Dni')}" />
 					
 					</tr>
 				</thead>
@@ -42,13 +42,13 @@
 					
 						<td><g:link action="show" id="${jugadorInstance.id}">${fieldValue(bean: jugadorInstance, field: "apellido")}</g:link></td>
 					
-						<td><g:formatBoolean boolean="${jugadorInstance.capitan}" /></td>
-					
-						<td>${fieldValue(bean: jugadorInstance, field: "dni")}</td>
+						<td>${fieldValue(bean: jugadorInstance, field: "nombre")}</td>
 					
 						<td>${fieldValue(bean: jugadorInstance, field: "nCamiseta")}</td>
 					
-						<td>${fieldValue(bean: jugadorInstance, field: "nombre")}</td>
+						<td><g:formatBoolean boolean="${jugadorInstance.capitan}" /></td>
+					
+						<td>${fieldValue(bean: jugadorInstance, field: "dni")}</td>
 					
 					</tr>
 				</g:each>

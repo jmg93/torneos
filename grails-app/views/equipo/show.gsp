@@ -23,6 +23,15 @@
 			</g:if>
 			<ol class="property-list equipo">
 			
+				<g:if test="${equipoInstance?.nombre}">
+				<li class="fieldcontain">
+					<span id="nombre-label" class="property-label"><g:message code="equipo.nombre.label" default="Nombre" /></span>
+					
+						<span class="property-value" aria-labelledby="nombre-label"><g:fieldValue bean="${equipoInstance}" field="nombre"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${equipoInstance?.contacto}">
 				<li class="fieldcontain">
 					<span id="contacto-label" class="property-label"><g:message code="equipo.contacto.label" default="Contacto" /></span>
@@ -39,15 +48,6 @@
 						<g:each in="${equipoInstance.jugadores}" var="j">
 						<span class="property-value" aria-labelledby="jugadores-label"><g:link controller="jugador" action="show" id="${j.id}">${j?.encodeAsHTML()}</g:link></span>
 						</g:each>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${equipoInstance?.nombre}">
-				<li class="fieldcontain">
-					<span id="nombre-label" class="property-label"><g:message code="equipo.nombre.label" default="Nombre" /></span>
-					
-						<span class="property-value" aria-labelledby="nombre-label"><g:fieldValue bean="${equipoInstance}" field="nombre"/></span>
 					
 				</li>
 				</g:if>

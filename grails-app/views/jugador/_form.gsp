@@ -7,7 +7,25 @@
 		<g:message code="jugador.apellido.label" default="Apellido" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="apellido" required="" value="${jugadorInstance?.apellido}"/>
+	<g:textField name="apellido" maxlength="20" required="" value="${jugadorInstance?.apellido}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: jugadorInstance, field: 'nombre', 'error')} required">
+	<label for="nombre">
+		<g:message code="jugador.nombre.label" default="Nombre" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="nombre" maxlength="20" required="" value="${jugadorInstance?.nombre}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: jugadorInstance, field: 'nCamiseta', 'error')} required">
+	<label for="nCamiseta">
+		<g:message code="jugador.nCamiseta.label" default="N Camiseta" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="nCamiseta" type="number" value="${jugadorInstance.nCamiseta}" required=""/>
 
 </div>
 
@@ -26,24 +44,6 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="dni" type="number" value="${jugadorInstance.dni}" required=""/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: jugadorInstance, field: 'nCamiseta', 'error')} required">
-	<label for="nCamiseta">
-		<g:message code="jugador.nCamiseta.label" default="N Camiseta" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="nCamiseta" type="number" value="${jugadorInstance.nCamiseta}" required=""/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: jugadorInstance, field: 'nombre', 'error')} required">
-	<label for="nombre">
-		<g:message code="jugador.nombre.label" default="Nombre" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="nombre" required="" value="${jugadorInstance?.nombre}"/>
 
 </div>
 
