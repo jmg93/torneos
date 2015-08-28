@@ -88,7 +88,16 @@
 		<g:message code="torneo.equipos.label" default="Equipos" />
 		
 	</label>
-	<g:select name="equipos" from="${equipos.Equipo.list()}" multiple="multiple" optionKey="id" size="5" value="${torneoInstance?.equipos*.id}" class="many-to-many"/>
+	
+<ul class="one-to-many">
+<g:each in="${torneoInstance?.equipos?}" var="e">
+    <li><g:link controller="equipo" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="equipo" action="create" params="['torneo.id': torneoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'equipo.label', default: 'Equipo')])}</g:link>
+</li>
+</ul>
+
 
 </div>
 

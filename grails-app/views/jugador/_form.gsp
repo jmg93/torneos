@@ -47,3 +47,12 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: jugadorInstance, field: 'equipo', 'error')} required">
+	<label for="equipo">
+		<g:message code="jugador.equipo.label" default="Equipo" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="equipo" name="equipo.id" from="${equipos.Equipo.list()}" optionKey="id" required="" value="${jugadorInstance?.equipo?.id}" class="many-to-one"/>
+
+</div>
+

@@ -34,6 +34,8 @@
 					
 						<g:sortableColumn property="dni" title="${message(code: 'jugador.dni.label', default: 'Dni')}" />
 					
+						<th><g:message code="jugador.equipo.label" default="Equipo" /></th>
+					
 					</tr>
 				</thead>
 				<tbody>
@@ -49,6 +51,8 @@
 						<td><g:formatBoolean boolean="${jugadorInstance.capitan}" /></td>
 					
 						<td>${fieldValue(bean: jugadorInstance, field: "dni")}</td>
+					
+						<td>${fieldValue(bean: jugadorInstance, field: "equipo")}</td>
 					
 					</tr>
 				</g:each>

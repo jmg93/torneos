@@ -32,6 +32,8 @@
 					
 						<th><g:message code="partido.visitante.label" default="Visitante" /></th>
 					
+						<th><g:message code="partido.torneo.label" default="Torneo" /></th>
+					
 					</tr>
 				</thead>
 				<tbody>
@@ -45,6 +47,8 @@
 						<td>${fieldValue(bean: partidoInstance, field: "local")}</td>
 					
 						<td>${fieldValue(bean: partidoInstance, field: "visitante")}</td>
+					
+						<td>${fieldValue(bean: partidoInstance, field: "torneo")}</td>
 					
 					</tr>
 				</g:each>

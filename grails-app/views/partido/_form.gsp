@@ -65,3 +65,12 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: partidoInstance, field: 'torneo', 'error')} required">
+	<label for="torneo">
+		<g:message code="partido.torneo.label" default="Torneo" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="torneo" name="torneo.id" from="${torneos.Torneo.list()}" optionKey="id" required="" value="${partidoInstance?.torneo?.id}" class="many-to-one"/>
+
+</div>
+

@@ -8,7 +8,7 @@ class Jugador {
 	Boolean capitan
 	
 	
-	static belongsTo = Equipo
+	static belongsTo = [equipo:Equipo]
 	
 	public String toString(){
 		"$nombre $apellido"

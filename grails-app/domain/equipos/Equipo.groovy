@@ -6,7 +6,7 @@ class Equipo {
 	//prueba de Pablo
 	
 	static hasMany = [jugadores: Jugador]
-	static belongsTo = torneos.Torneo
+	static belongsTo = [torneo:torneos.Torneo]
 	
 	public String toString(){
 		return nombre

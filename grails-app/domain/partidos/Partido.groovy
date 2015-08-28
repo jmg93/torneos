@@ -6,8 +6,12 @@ class Partido {
 	equipos.Equipo local
 	equipos.Equipo visitante
 	
-	static belongsTo = [torneos.Torneo]
+	static belongsTo = [torneo:torneos.Torneo]
 	static hasMany = [goleadores: equipos.Jugador, amonestados: equipos.Jugador, expulsados:equipos.Jugador]
+	
+	public String toString(){
+		"$local - $visitante"
+	}
 	
     static constraints = {
 		fechaPartido()

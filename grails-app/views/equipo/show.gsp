@@ -52,6 +52,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${equipoInstance?.torneo}">
+				<li class="fieldcontain">
+					<span id="torneo-label" class="property-label"><g:message code="equipo.torneo.label" default="Torneo" /></span>
+					
+						<span class="property-value" aria-labelledby="torneo-label"><g:link controller="torneo" action="show" id="${equipoInstance?.torneo?.id}">${equipoInstance?.torneo?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form url="[resource:equipoInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

@@ -92,6 +92,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${partidoInstance?.torneo}">
+				<li class="fieldcontain">
+					<span id="torneo-label" class="property-label"><g:message code="partido.torneo.label" default="Torneo" /></span>
+					
+						<span class="property-value" aria-labelledby="torneo-label"><g:link controller="torneo" action="show" id="${partidoInstance?.torneo?.id}">${partidoInstance?.torneo?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form url="[resource:partidoInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
