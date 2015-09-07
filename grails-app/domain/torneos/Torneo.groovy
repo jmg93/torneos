@@ -5,6 +5,8 @@ class Torneo {
 	Date fechaInicio
 	Date fechaLimite
 	Integer nMaxEquipos
+	List partidos
+	List equipos
 	Integer nMinJugadorXEquipo
 	Integer nMaxJugadorXEquipo
 	Boolean fixture
@@ -24,6 +26,7 @@ class Torneo {
 		nMaxEquipos()
 		nMinJugadorXEquipo(min:5)
 		nMaxJugadorXEquipo(max:99)
+		//equipos.length <= nMaxEquipos
 		clave(size:6..16, nullable:true)
 		fixture()
 		reglamento(maxSize:2000, nullable:true)

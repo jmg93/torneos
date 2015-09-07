@@ -101,3 +101,21 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'partidos', 'error')} ">
+	<label for="partidos">
+		<g:message code="torneo.partidos.label" default="Partidos" />
+		
+	</label>
+	
+<ul class="one-to-many">
+<g:each in="${torneoInstance?.partidos?}" var="p">
+    <li><g:link controller="partido" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="partido" action="create" params="['torneo.id': torneoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'partido.label', default: 'Partido')])}</g:link>
+</li>
+</ul>
+
+
+</div>
+

@@ -5,6 +5,9 @@ class Partido {
 	Date fechaPartido
 	equipos.Equipo local
 	equipos.Equipo visitante
+	Collection goleadores
+	Collection amonestados
+	Collection expulsados
 	
 	static belongsTo = [torneo:torneos.Torneo]
 	static hasMany = [goleadores: equipos.Jugador, amonestados: equipos.Jugador, expulsados:equipos.Jugador]
