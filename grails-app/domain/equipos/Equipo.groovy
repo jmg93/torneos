@@ -3,6 +3,7 @@ package equipos
 class Equipo {
 	String nombre
 	String contacto
+	List jugadores
 	//prueba de Pablo
 	//prueba de Edu
 	
