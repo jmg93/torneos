@@ -16,7 +16,7 @@
 		<g:message code="equipo.contacto.label" default="Contacto" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="contacto" required="" value="${equipoInstance?.contacto}"/>
+	<g:field type="email" name="contacto" required="" value="${equipoInstance?.contacto}"/>
 
 </div>
 

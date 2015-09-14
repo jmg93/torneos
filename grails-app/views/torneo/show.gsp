@@ -86,15 +86,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${torneoInstance?.fixture}">
-				<li class="fieldcontain">
-					<span id="fixture-label" class="property-label"><g:message code="torneo.fixture.label" default="Fixture" /></span>
-					
-						<span class="property-value" aria-labelledby="fixture-label"><g:formatBoolean boolean="${torneoInstance?.fixture}" /></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${torneoInstance?.reglamento}">
 				<li class="fieldcontain">
 					<span id="reglamento-label" class="property-label"><g:message code="torneo.reglamento.label" default="Reglamento" /></span>

@@ -34,7 +34,7 @@
 		<g:message code="torneo.nMaxEquipos.label" default="N Max Equipos" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="nMaxEquipos" type="number" value="${torneoInstance.nMaxEquipos}" required=""/>
+	<g:field name="nMaxEquipos" type="number" min="2" value="${torneoInstance.nMaxEquipos}" required=""/>
 
 </div>
 
@@ -62,15 +62,6 @@
 		
 	</label>
 	<g:textField name="clave" maxlength="16" value="${torneoInstance?.clave}"/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'fixture', 'error')} ">
-	<label for="fixture">
-		<g:message code="torneo.fixture.label" default="Fixture" />
-		
-	</label>
-	<g:checkBox name="fixture" value="${torneoInstance?.fixture}" />
 
 </div>
 

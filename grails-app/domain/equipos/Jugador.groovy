@@ -17,8 +17,8 @@ class Jugador {
     static constraints = {
 		apellido(size:2..20)
 		nombre(size:2..20)
-		nCamiseta()
+		nCamiseta(range: 1..99)
+		dni(size: 7..8)
 		capitan()
-		dni()
 	}
 }

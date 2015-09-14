@@ -59,34 +59,67 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${partidoInstance?.amonestados}">
+				<g:if test="${partidoInstance?.goleadoresLocal}">
 				<li class="fieldcontain">
-					<span id="amonestados-label" class="property-label"><g:message code="partido.amonestados.label" default="Amonestados" /></span>
+					<span id="goleadoresLocal-label" class="property-label"><g:message code="partido.goleadoresLocal.label" default="Goleadores Local" /></span>
 					
-						<g:each in="${partidoInstance.amonestados}" var="a">
-						<span class="property-value" aria-labelledby="amonestados-label"><g:link controller="jugador" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
+						<g:each in="${partidoInstance.goleadoresLocal}" var="g">
+						<span class="property-value" aria-labelledby="goleadoresLocal-label"><g:link controller="jugador" action="show" id="${g.id}">${g?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${partidoInstance?.expulsados}">
+				<g:if test="${partidoInstance?.goleadoresVisitante}">
 				<li class="fieldcontain">
-					<span id="expulsados-label" class="property-label"><g:message code="partido.expulsados.label" default="Expulsados" /></span>
+					<span id="goleadoresVisitante-label" class="property-label"><g:message code="partido.goleadoresVisitante.label" default="Goleadores Visitante" /></span>
 					
-						<g:each in="${partidoInstance.expulsados}" var="e">
-						<span class="property-value" aria-labelledby="expulsados-label"><g:link controller="jugador" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></span>
+						<g:each in="${partidoInstance.goleadoresVisitante}" var="g">
+						<span class="property-value" aria-labelledby="goleadoresVisitante-label"><g:link controller="jugador" action="show" id="${g.id}">${g?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${partidoInstance?.goleadores}">
+				<g:if test="${partidoInstance?.amonestadosLocal}">
 				<li class="fieldcontain">
-					<span id="goleadores-label" class="property-label"><g:message code="partido.goleadores.label" default="Goleadores" /></span>
+					<span id="amonestadosLocal-label" class="property-label"><g:message code="partido.amonestadosLocal.label" default="Amonestados Local" /></span>
 					
-						<g:each in="${partidoInstance.goleadores}" var="g">
-						<span class="property-value" aria-labelledby="goleadores-label"><g:link controller="jugador" action="show" id="${g.id}">${g?.encodeAsHTML()}</g:link></span>
+						<g:each in="${partidoInstance.amonestadosLocal}" var="a">
+						<span class="property-value" aria-labelledby="amonestadosLocal-label"><g:link controller="jugador" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${partidoInstance?.amonestadosVisitante}">
+				<li class="fieldcontain">
+					<span id="amonestadosVisitante-label" class="property-label"><g:message code="partido.amonestadosVisitante.label" default="Amonestados Visitante" /></span>
+					
+						<g:each in="${partidoInstance.amonestadosVisitante}" var="a">
+						<span class="property-value" aria-labelledby="amonestadosVisitante-label"><g:link controller="jugador" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${partidoInstance?.expulsadosLocal}">
+				<li class="fieldcontain">
+					<span id="expulsadosLocal-label" class="property-label"><g:message code="partido.expulsadosLocal.label" default="Expulsados Local" /></span>
+					
+						<g:each in="${partidoInstance.expulsadosLocal}" var="e">
+						<span class="property-value" aria-labelledby="expulsadosLocal-label"><g:link controller="jugador" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${partidoInstance?.expulsadosVisitante}">
+				<li class="fieldcontain">
+					<span id="expulsadosVisitante-label" class="property-label"><g:message code="partido.expulsadosVisitante.label" default="Expulsados Visitante" /></span>
+					
+						<g:each in="${partidoInstance.expulsadosVisitante}" var="e">
+						<span class="property-value" aria-labelledby="expulsadosVisitante-label"><g:link controller="jugador" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>

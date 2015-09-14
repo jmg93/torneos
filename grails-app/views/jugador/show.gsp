@@ -50,20 +50,20 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${jugadorInstance?.capitan}">
-				<li class="fieldcontain">
-					<span id="capitan-label" class="property-label"><g:message code="jugador.capitan.label" default="Capitan" /></span>
-					
-						<span class="property-value" aria-labelledby="capitan-label"><g:formatBoolean boolean="${jugadorInstance?.capitan}" /></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${jugadorInstance?.dni}">
 				<li class="fieldcontain">
 					<span id="dni-label" class="property-label"><g:message code="jugador.dni.label" default="Dni" /></span>
 					
 						<span class="property-value" aria-labelledby="dni-label"><g:fieldValue bean="${jugadorInstance}" field="dni"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${jugadorInstance?.capitan}">
+				<li class="fieldcontain">
+					<span id="capitan-label" class="property-label"><g:message code="jugador.capitan.label" default="Capitan" /></span>
+					
+						<span class="property-value" aria-labelledby="capitan-label"><g:formatBoolean boolean="${jugadorInstance?.capitan}" /></span>
 					
 				</li>
 				</g:if>

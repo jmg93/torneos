@@ -5,22 +5,27 @@ class Partido {
 	Date fechaPartido
 	equipos.Equipo local
 	equipos.Equipo visitante
-	Collection goleadores
-	Collection amonestados
-	Collection expulsados
+	Collection goleadoresLocal
+	Collection amonestadosLocal
+	Collection expulsadosLocal
+	Collection goleadoresVisitante
+	Collection amonestadosVisitante
+	Collection expulsadosVisitante
 	
 	static belongsTo = [torneo:torneos.Torneo]
-	static hasMany = [goleadores: equipos.Jugador, amonestados: equipos.Jugador, expulsados:equipos.Jugador]
+	static hasMany = [goleadoresLocal: equipos.Jugador, amonestadosLocal: equipos.Jugador, expulsadosLocal:equipos.Jugador,goleadoresVisitante: equipos.Jugador, amonestadosVisitante: equipos.Jugador, expulsadosVisitante:equipos.Jugador]
 	
 	public String toString(){
 		"$local - $visitante"
 	}
 	
     static constraints = {
-		fechaPartido()
+		fechaPartido(min: new Date())
 		nFecha()
 		local()
 		visitante()
+		goleadoresLocal()
+		goleadoresVisitante()
 		
     }
 }

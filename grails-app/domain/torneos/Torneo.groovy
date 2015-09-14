@@ -9,7 +9,6 @@ class Torneo {
 	List equipos
 	Integer nMinJugadorXEquipo
 	Integer nMaxJugadorXEquipo
-	Boolean fixture
 	String clave
 	String reglamento
 	
@@ -20,15 +19,16 @@ class Torneo {
 	}		
 
     static constraints = {
-		nombre(size:2..20)
-		fechaInicio()
-		fechaLimite()
-		nMaxEquipos()
+		nombre(size:2..20, unique:true)
+		fechaInicio(min: new Date())
+		fechaLimite(min: new Date())
+		nMaxEquipos(min:2)
 		nMinJugadorXEquipo(min:5)
 		nMaxJugadorXEquipo(max:99)
 		//equipos.length <= nMaxEquipos
 		clave(size:6..16, nullable:true)
-		fixture()
 		reglamento(maxSize:2000, nullable:true)
+		equipos()
+		partidos()
     }
 }

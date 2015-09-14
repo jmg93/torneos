@@ -30,9 +30,9 @@
 					
 						<g:sortableColumn property="nCamiseta" title="${message(code: 'jugador.nCamiseta.label', default: 'N Camiseta')}" />
 					
-						<g:sortableColumn property="capitan" title="${message(code: 'jugador.capitan.label', default: 'Capitan')}" />
-					
 						<g:sortableColumn property="dni" title="${message(code: 'jugador.dni.label', default: 'Dni')}" />
+					
+						<g:sortableColumn property="capitan" title="${message(code: 'jugador.capitan.label', default: 'Capitan')}" />
 					
 						<th><g:message code="jugador.equipo.label" default="Equipo" /></th>
 					
@@ -48,9 +48,9 @@
 					
 						<td>${fieldValue(bean: jugadorInstance, field: "nCamiseta")}</td>
 					
-						<td><g:formatBoolean boolean="${jugadorInstance.capitan}" /></td>
-					
 						<td>${fieldValue(bean: jugadorInstance, field: "dni")}</td>
+					
+						<td><g:formatBoolean boolean="${jugadorInstance.capitan}" /></td>
 					
 						<td>${fieldValue(bean: jugadorInstance, field: "equipo")}</td>
 					

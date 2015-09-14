@@ -25,16 +25,7 @@
 		<g:message code="jugador.nCamiseta.label" default="N Camiseta" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="nCamiseta" type="number" value="${jugadorInstance.nCamiseta}" required=""/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: jugadorInstance, field: 'capitan', 'error')} ">
-	<label for="capitan">
-		<g:message code="jugador.capitan.label" default="Capitan" />
-		
-	</label>
-	<g:checkBox name="capitan" value="${jugadorInstance?.capitan}" />
+	<g:select name="nCamiseta" from="${1..99}" class="range" required="" value="${fieldValue(bean: jugadorInstance, field: 'nCamiseta')}"/>
 
 </div>
 
@@ -44,6 +35,15 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="dni" type="number" value="${jugadorInstance.dni}" required=""/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: jugadorInstance, field: 'capitan', 'error')} ">
+	<label for="capitan">
+		<g:message code="jugador.capitan.label" default="Capitan" />
+		
+	</label>
+	<g:checkBox name="capitan" value="${jugadorInstance?.capitan}" />
 
 </div>
 
