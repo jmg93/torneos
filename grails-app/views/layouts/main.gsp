@@ -17,7 +17,7 @@
 		<g:layoutHead/>
 	</head>
 	<body>
-		<div id="grailsLogo" role="banner"><a href="#"><asset:image src="logo2_v1.png" width="300" height="100" alt="Grails"/></a></div>
+		<div id="grailsLogo" role="banner"><a href="/TorneosYa v0/"><asset:image src="logo2_v1.png" width="300" height="100" alt="Grails"/></a></div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
