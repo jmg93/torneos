@@ -11,13 +11,14 @@ class TorneoController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-	def sortearFixture() { 
+	def sortearFixture(Torneo torneoInstance) { 
 		//ATENCION: Lo siguiente no se va a entender nadaa (?)
 		def diaManiana = new Date()
 		
 		def todosTorneos = Torneo.list()
 		def cantTorneos = todosTorneos.size()
-		def torneoo = todosTorneos.get(cantTorneos - 1)
+		//def torneoo = todosTorneos.get(cantTorneos - 1)
+		def torneoo = torneoInstance
 		
 		println torneoo.nombre
 		
@@ -57,13 +58,18 @@ class TorneoController {
 		cantPartidos = todosPartidos.size()
 		println cantPartidos
 		
+		render "Fixture generado con éxito"
+		render "<br/>"
 		
 		for (int i = 0; i < cantPartidos; i++) {
 			def partidoAMostrar = todosPartidos.get(i)
-			println 'fecha ' +  partidoAMostrar.nFecha + ': ' + partidoAMostrar.local + ' VERSUS ' + partidoAMostrar.visitante
+			render partidoAMostrar
+			render "<br/>"
+			//render 'Fecha ' +  partidoAMostrar.nFecha + ': ' + partidoAMostrar.local + ' vs ' + partidoAMostrar.visitante
 			}
 		
-		render "<p> hola prueba</p>"
+		//render "<p>Fixture creado con éxito</p>"
+		//render torneoo.partidos.list()
     }
 	
 				
