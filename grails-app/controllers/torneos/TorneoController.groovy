@@ -58,7 +58,8 @@ class TorneoController {
 		cantPartidos = todosPartidos.size()
 		println cantPartidos
 		
-		render "Fixture generado con éxito"
+		render "Fixture del torneo ${torneoo.nombre} generado con éxito"
+		render "<br/>"
 		render "<br/>"
 		
 		for (int i = 0; i < cantPartidos; i++) {
