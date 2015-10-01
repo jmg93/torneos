@@ -11,6 +11,16 @@ class TorneoController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+	def crearFixture(Torneo torneoInstance){
+		def cantPartidos = torneoInstance.partidos.size()
+		if (cantPartidos == 0){
+			sortearFixture(torneoInstance)
+		}else{
+			render "Ya generaste el fixture" 
+		}
+	}
+	
+	
 	def sortearFixture(Torneo torneoInstance) { 
 		//ATENCION: Lo siguiente no se va a entender nadaa (?)
 		def diaManiana = new Date()
@@ -46,7 +56,7 @@ class TorneoController {
 		for (int nLocal = 0; nLocal < cantEquipos; nLocal++) {
 			for (int nVisitante = nLocal + 1; nVisitante < cantEquipos; nVisitante++) {
 				if ( (todosEquipos.get(nLocal).nombre != "equipoLibre") && (todosEquipos.get(nVisitante).nombre != "equipoLibre") ) {
-					def partidoAagregar = new Partido(nFecha: nVisitante, fechaPartido: diaManiana, local: todosEquipos.get(nLocal), visitante: todosEquipos.get(nVisitante) )
+					def partidoAagregar = new Partido(nFecha: nVisitante, local: todosEquipos.get(nLocal), visitante: todosEquipos.get(nVisitante) )
 					torneoo.addToPartidos(partidoAagregar)
 					torneoo.save(flush: true)
 				}

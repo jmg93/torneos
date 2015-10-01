@@ -16,11 +16,11 @@ class Partido {
 	static hasMany = [goleadoresLocal: equipos.Jugador, amonestadosLocal: equipos.Jugador, expulsadosLocal:equipos.Jugador,goleadoresVisitante: equipos.Jugador, amonestadosVisitante: equipos.Jugador, expulsadosVisitante:equipos.Jugador]
 	
 	public String toString(){
-		"$local - $visitante"
+		"$local vs. $visitante"
 	}
 	
     static constraints = {
-		fechaPartido(min: new Date())
+		fechaPartido(min: new Date(), nullable:true)
 		nFecha()
 		local()
 		visitante()

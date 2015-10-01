@@ -123,16 +123,16 @@ grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'usuarios.UserR
 grails.plugin.springsecurity.authority.className = 'usuarios.Role'
 grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                ['permitAll'],
-	'/index':           ['permitAll'],
-	'/index.gsp':       ['permitAll'],
+	'/**':                ['permitAll'], //borrar los dos asteriscos, ahora estan
+	'/index':           ['permitAll'],	 //para no tener que poner usuario y pass
+	'/index.gsp':       ['permitAll'],	 //a cada rato.. 
 	'/assets/**':       ['permitAll'],
 	'/**/js/**':        ['permitAll'],
 	'/**/css/**':       ['permitAll'],
 	'/**/images/**':    ['permitAll'],
 	'/**/favicon.ico':  ['permitAll'],
 	'/register/**':     ['permitAll'],
-	'/user/**':         ['ROLE_SU'],
-	'/role/**':         ['ROLE_SU'],
+	//'/user/**':         ['ROLE_SU'],
+	//'/role/**':         ['ROLE_SU'],
 ]
 

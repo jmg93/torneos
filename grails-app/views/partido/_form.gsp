@@ -2,12 +2,12 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: partidoInstance, field: 'fechaPartido', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: partidoInstance, field: 'fechaPartido', 'error')} ">
 	<label for="fechaPartido">
 		<g:message code="partido.fechaPartido.label" default="Fecha Partido" />
-		<span class="required-indicator">*</span>
+		
 	</label>
-	<g:datePicker name="fechaPartido" precision="day"  value="${partidoInstance?.fechaPartido}"  />
+	<g:datePicker name="fechaPartido" precision="day"  value="${partidoInstance?.fechaPartido}" default="none" noSelection="['': '']" />
 
 </div>
 
