@@ -32,5 +32,8 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="nav">
+				<g:link class="home" action="show" id="${torneoInstance.id}">Volver al torneo</g:link>
+			</div>
 	</body>
 </html>

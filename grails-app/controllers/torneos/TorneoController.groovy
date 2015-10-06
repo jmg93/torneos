@@ -18,9 +18,9 @@ class TorneoController {
 		def todosPartidos
 		if (cantPartidos == 0){
 			todosPartidos = FixtureService.sortearFixture(torneoInstance)
-			render(view: "mostrarFixture",  model: [todosPartidos:todosPartidos])
+			render(view: "mostrarFixture",  model: [todosPartidos:todosPartidos, torneoInstance:torneoInstance])
 		}else{
-			render "Ya generaste el fixture"
+			render "Ya generaste el Fixture"
 		}
 	}
 	
