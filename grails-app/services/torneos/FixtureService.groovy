@@ -57,19 +57,6 @@ class FixtureService {
 		
 		return todosPartidos
 		
-		//render "Fixture del torneo ${torneoo.nombre} generado con éxito"
-		//render "<br/>"
-		//render "<br/>"
-		
-		//for (int i = 0; i < cantPartidos; i++) {
-			//def partidoAMostrar = todosPartidos.get(i)
-			//render partidoAMostrar
-			//render "<br/>"
-			//render 'Fecha ' +  partidoAMostrar.nFecha + ': ' + partidoAMostrar.local + ' vs ' + partidoAMostrar.visitante
-			//}
-		
-		//render "<p>Fixture creado con éxito</p>"
-		//render torneoo.partidos.list()
 	}
 	
     def serviceMethod() {
