@@ -24,15 +24,15 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="fechaPartido" title="${message(code: 'partido.fechaPartido.label', default: 'Fecha Partido')}" />
-					
-						<g:sortableColumn property="nFecha" title="${message(code: 'partido.nFecha.label', default: 'N Fecha')}" />
+						<g:sortableColumn property="nFecha" title="${message(code: 'partido.nFecha.label', default: 'Nro Fecha')}" />
 					
 						<th><g:message code="partido.local.label" default="Local" /></th>
 					
 						<th><g:message code="partido.visitante.label" default="Visitante" /></th>
 					
 						<th><g:message code="partido.torneo.label" default="Torneo" /></th>
+						
+						<g:sortableColumn property="fechaPartido" title="${message(code: 'partido.fechaPartido.label', default: 'Fecha')}" />
 					
 					</tr>
 				</thead>
@@ -40,15 +40,15 @@
 				<g:each in="${partidoInstanceList}" status="i" var="partidoInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${partidoInstance.id}">${fieldValue(bean: partidoInstance, field: "fechaPartido")}</g:link></td>
-					
-						<td>${fieldValue(bean: partidoInstance, field: "nFecha")}</td>
+						<td><g:link action="show" id="${partidoInstance.id}">${fieldValue(bean: partidoInstance, field: "nFecha")}</g:link></td>
 					
 						<td>${fieldValue(bean: partidoInstance, field: "local")}</td>
 					
 						<td>${fieldValue(bean: partidoInstance, field: "visitante")}</td>
 					
 						<td>${fieldValue(bean: partidoInstance, field: "torneo")}</td>
+						
+						<td>${fieldValue(bean: partidoInstance, field: "fechaPartido")}</td>
 					
 					</tr>
 				</g:each>

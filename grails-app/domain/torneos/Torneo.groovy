@@ -9,7 +9,6 @@ class Torneo {
 	List equipos
 	Integer nMinJugadorXEquipo
 	Integer nMaxJugadorXEquipo
-	String clave
 	String reglamento
 	
 	static hasMany = [equipos: equipos.Equipo, partidos: partidos.Partido]
@@ -25,8 +24,6 @@ class Torneo {
 		nMaxEquipos(min:2)
 		nMinJugadorXEquipo(min:5)
 		nMaxJugadorXEquipo(max:99)
-		//equipos.length <= nMaxEquipos
-		clave(size:6..16, nullable:true)
 		reglamento(maxSize:2000, nullable:true)
 		equipos()
 		partidos()

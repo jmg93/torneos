@@ -1,8 +1,7 @@
 package torneos
 
 
-import partidos.Partido 
-import equipos.Equipo
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -10,7 +9,7 @@ import grails.transaction.Transactional
 class TorneoController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+	
 	def FixtureService
 	
 	def crearFixture(Torneo torneoInstance){
@@ -23,7 +22,7 @@ class TorneoController {
 			render "Ya generaste el Fixture"
 		}
 	}
-	
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Torneo.list(params), model:[torneoInstanceCount: Torneo.count()]

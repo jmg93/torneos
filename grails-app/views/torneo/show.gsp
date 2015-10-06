@@ -78,15 +78,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${torneoInstance?.clave}">
-				<li class="fieldcontain">
-					<span id="clave-label" class="property-label"><g:message code="torneo.clave.label" default="Clave" /></span>
-					
-						<span class="property-value" aria-labelledby="clave-label"><g:fieldValue bean="${torneoInstance}" field="clave"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${torneoInstance?.reglamento}">
 				<li class="fieldcontain">
 					<span id="reglamento-label" class="property-label"><g:message code="torneo.reglamento.label" default="Reglamento" /></span>

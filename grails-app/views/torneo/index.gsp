@@ -24,18 +24,14 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="nombre" title="${message(code: 'torneo.nombre.label', default: 'Nombre')}" />
+						<g:sortableColumn property="nombre" title="${message(code: 'torneo.nombre.label', default: 'Torneo')}" />
 					
 						<g:sortableColumn property="fechaInicio" title="${message(code: 'torneo.fechaInicio.label', default: 'Fecha Inicio')}" />
 					
-						<g:sortableColumn property="fechaLimite" title="${message(code: 'torneo.fechaLimite.label', default: 'Fecha Limite')}" />
+						<g:sortableColumn property="fechaLimite" title="${message(code: 'torneo.fechaLimite.label', default: 'Límite de inscripción')}" />
 					
-						<g:sortableColumn property="nMaxEquipos" title="${message(code: 'torneo.nMaxEquipos.label', default: 'N Max Equipos')}" />
-					
-						<g:sortableColumn property="nMinJugadorXEquipo" title="${message(code: 'torneo.nMinJugadorXEquipo.label', default: 'N Min Jugador XE quipo')}" />
-					
-						<g:sortableColumn property="nMaxJugadorXEquipo" title="${message(code: 'torneo.nMaxJugadorXEquipo.label', default: 'N Max Jugador XE quipo')}" />
-					
+						<g:sortableColumn property="nMaxEquipos" title="${message(code: 'torneo.nMaxEquipos.label', default: 'Límite de equipos')}" />
+									
 					</tr>
 				</thead>
 				<tbody>
@@ -44,15 +40,12 @@
 					
 						<td><g:link action="show" id="${torneoInstance.id}">${fieldValue(bean: torneoInstance, field: "nombre")}</g:link></td>
 					
-						<td><g:formatDate date="${torneoInstance.fechaInicio}" /></td>
+						<td><g:formatDate format="dd - MMM - yyyy" date="${torneoInstance.fechaInicio}" /></td>
 					
-						<td><g:formatDate date="${torneoInstance.fechaLimite}" /></td>
+						<td><g:formatDate format="dd - MMM - yyyy" date="${torneoInstance.fechaLimite}" /></td>
 					
 						<td>${fieldValue(bean: torneoInstance, field: "nMaxEquipos")}</td>
-					
-						<td>${fieldValue(bean: torneoInstance, field: "nMinJugadorXEquipo")}</td>
-					
-						<td>${fieldValue(bean: torneoInstance, field: "nMaxJugadorXEquipo")}</td>
+
 					
 					</tr>
 				</g:each>

@@ -56,15 +56,6 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'clave', 'error')} ">
-	<label for="clave">
-		<g:message code="torneo.clave.label" default="Clave" />
-		
-	</label>
-	<g:textField name="clave" maxlength="16" value="${torneoInstance?.clave}"/>
-
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'reglamento', 'error')} ">
 	<label for="reglamento">
 		<g:message code="torneo.reglamento.label" default="Reglamento" />
