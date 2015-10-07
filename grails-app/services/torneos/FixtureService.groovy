@@ -9,51 +9,66 @@ class FixtureService {
 
 	
 	def sortearFixture(Torneo torneoInstance) {
-		//ATENCION: Lo siguiente no se va a entender nadaa (?)
-		def diaManiana = new Date()
-		
-		def todosTorneos = Torneo.list()
-		def cantTorneos = todosTorneos.size()
-		//def torneoo = todosTorneos.get(cantTorneos - 1)
+				
 		def torneoo = torneoInstance
 		
 		println torneoo.nombre
 		
 		def todosPartidos = torneoo.partidos
-		def cantPartidos = todosPartidos.size()
-		
-		println cantPartidos
 		
 		def todosEquipos = Equipo.where{torneo == torneoo}.list()
 		def equipoAuxi = new Equipo()
 		def cantEquipos = todosEquipos.size()
 		
-		def nrandom = Math.abs(new Random().nextInt() % cantEquipos) //genera un num random entre 0 y numero de equipos - 1
-		equipoAuxi = todosEquipos.get(0)
-		todosEquipos[0] = todosEquipos.get(nrandom)
-		todosEquipos[nrandom] = equipoAuxi
+		//ordenamiento random de todos los equipos
+		for (int i = cantEquipos - 1; i > 1; i--) {
+			def nrandom = Math.abs(new Random().nextInt() % (i+1)) //genera un num random entre 0 y i
+			equipoAuxi = todosEquipos.get(nrandom)
+			todosEquipos[nrandom] = todosEquipos.get(i)
+			todosEquipos[i] = equipoAuxi
+		}
 		
 		if (cantEquipos % 2 != 0)
-			todosEquipos.add(new Equipo(nombre: "equipoLibre", contacto:"libre@gmail.com"))
+			todosEquipos.add(new Equipo(nombre: "equipoLibre", contacto:"libre@gmail.com"))	
 		
 		cantEquipos = todosEquipos.size()
 		def cantFechas = todosEquipos.size() - 1
 		def cantPartidosPorFecha = cantEquipos.intdiv(2)
 		
-		for (int nLocal = 0; nLocal < cantEquipos; nLocal++) {
-			for (int nVisitante = nLocal + 1; nVisitante < cantEquipos; nVisitante++) {
-				if ( (todosEquipos.get(nLocal).nombre != "equipoLibre") && (todosEquipos.get(nVisitante).nombre != "equipoLibre") ) {
-					def partidoAagregar = new Partido(nFecha: nVisitante, local: todosEquipos.get(nLocal), visitante: todosEquipos.get(nVisitante) )
-					torneoo.addToPartidos(partidoAagregar)
-					torneoo.save(flush: true)
-				}
-			}
-		}
-	
+		def equiposLocal = new int[cantPartidosPorFecha]
+		def equiposVisitante = new int[cantPartidosPorFecha]
 		
+		for (int i = 0; i < cantPartidosPorFecha; i++){
+			equiposLocal[i] = i
+			equiposVisitante[i] = i + cantPartidosPorFecha
+		}
+		
+		for (int numFecha = 1; numFecha <= cantFechas; numFecha++){
+			for (int j = 0; j < cantPartidosPorFecha; j++){
+				if ( (todosEquipos.get(equiposLocal[j]).nombre != "equipoLibre") && (todosEquipos.get(equiposVisitante[j]).nombre != "equipoLibre") ) {
+					println numFecha
+					def partidoAagregar = new Partido(nFecha: numFecha, local: todosEquipos.get(equiposLocal[j]), visitante: todosEquipos.get(equiposVisitante[j]) )
+					torneoo.addToPartidos(partidoAagregar)
+					torneoo.save(flush: true)					
+				}				
+			}
+			
+			//movimiento de los equipos
+			int nAuxi = 0
+			for (int i = cantPartidosPorFecha - 1 ; i > 0; i--){
+				nAuxi = equiposVisitante[i - 1]
+				equiposVisitante[i-1] = equiposVisitante[cantPartidosPorFecha - 1]
+				equiposVisitante[cantPartidosPorFecha - 1] = nAuxi	
+			}
+			for (int i = 1; i < cantPartidosPorFecha; i++) {
+				nAuxi = equiposLocal[i]
+				equiposLocal[i] = equiposVisitante[cantPartidosPorFecha - 1]
+				equiposVisitante[cantPartidosPorFecha - 1] = nAuxi
+			}
+			
+		}
+					
 		todosPartidos = torneoo.partidos
-		cantPartidos = todosPartidos.size()
-		println cantPartidos
 		
 		return todosPartidos
 		

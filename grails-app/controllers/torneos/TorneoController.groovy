@@ -12,7 +12,16 @@ class TorneoController {
 	
 	def FixtureService
 	
-	def crearFixture(Torneo torneoInstance){
+	def mostrarFixture(Torneo torneoInstance) {
+		
+		if (torneoInstance.partidos.size() > 0)
+			[todosPartidos: torneoInstance.partidos, torneoInstance: torneoInstance]
+		else
+			render "El fixture no ha sido generado todavía"
+
+	}
+	
+	def crearFixture(Torneo torneoInstance){		
 		def cantPartidos = torneoInstance.partidos.size()
 		def todosPartidos
 		if (cantPartidos == 0){
