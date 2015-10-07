@@ -16,7 +16,9 @@
 			</ul>
 		</div>
 		<div id="edit-partido" class="content scaffold-edit" role="main">
-			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
+			<h1><g:message/>${partidoInstance.torneo}, Fecha ${partidoInstance.nFecha}</h1>
+			<h1><g:message/>${partidoInstance}</h1>
+			
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -30,7 +32,7 @@
 			<g:form url="[resource:partidoInstance, action:'update']" method="PUT" >
 				<g:hiddenField name="version" value="${partidoInstance?.version}" />
 				<fieldset class="form">
-					<g:render template="form"/>
+					<g:render template="cargarResultado"/>
 				</fieldset>
 				<fieldset class="buttons">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
