@@ -10,6 +10,20 @@ h1, h2, h3, h4, h5, h6 {
 
 /* BASE LAYOUT */
 
+#colIzq{ 
+    float:left; 
+    width:300px;
+    margin-left:4em;
+}  
+#colDer{ 
+    float: right;
+    width:300px;    
+} 
+
+#fechaPartido{
+	margin-left:8em;
+}
+
 html {
 	background-color: #ddd;
 	background-image: -moz-linear-gradient(center top, #aaa, #ddd);
@@ -234,6 +248,12 @@ fieldset,
 	width: 25%;
 }
 
+.fieldcontain .listajugadores{
+	color: #666666;
+	width: 100%;
+	text-align:left;
+}
+
 .fieldcontain .property-label {
 	float: left;
 }
@@ -248,6 +268,7 @@ label {
 	display: inline-block;
 	margin: 0 0.25em 0 0;
 }
+
 
 input, select, textarea {
 	background-color: #fcfcfc;
