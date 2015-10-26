@@ -17,11 +17,11 @@
 			<div class="content scaffold-list">
 				<table class="table table-striped table-bordered table-hover table-condensed">
 					<thead>
-						<g:sortableColumn property="nCamiseta" defaultOrder="desc" title="Nro" />
-						<th>Nombre</th>
-						<th>Am</th>
-						<th>Exp</th>
-						<th>Goles</th>
+						<g:sortableColumn property="nCamiseta" defaultOrder="desc" title="N°" />
+						<th>Jugador</th>
+						<th style="text-align: center"><asset:image src="amarilla.png" width="15" height="20" alt="Amonestado"/></th>
+						<th style="text-align: center"><asset:image src="roja.png" width="15" height="20" alt="Expulsado"/></th>
+						<th style="text-align: center"><asset:image src="goles.png" width="20" height="20" alt="Goles"/></th>
 					</thead>
 					<tbody>
 						<g:each in="${partidoInstance.local.jugadores}" status="i" var="jugador">
@@ -84,11 +84,11 @@
 			<div class="content scaffold-list">
 				<table class="table table-striped table-bordered table-hover table-condensed">
 					<thead>
-						<g:sortableColumn property="nCamiseta" defaultOrder="desc" title="Nro" />
-						<th>Nombre</th>
-						<th>Am</th>
-						<th>Exp</th>
-						<th>Goles</th>
+						<g:sortableColumn property="nCamiseta" defaultOrder="desc" title="N°" />
+						<th>Jugador</th>
+						<th style="text-align: center"><asset:image src="amarilla.png" width="15" height="20" alt="Amonestado"/></th>
+						<th style="text-align: center"><asset:image src="roja.png" width="15" height="20" alt="Expulsado"/></th>
+						<th style="text-align: center"><asset:image src="goles.png" width="20" height="20" alt="Goles"/></th>
 					</thead>
 					<tbody>
 						<g:each in="${partidoInstance.visitante.jugadores}" status="i" var="jugador">

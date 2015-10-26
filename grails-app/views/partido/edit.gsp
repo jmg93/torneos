@@ -16,7 +16,7 @@
 			</ul>
 		</div>
 		<div id="edit-partido" class="content scaffold-edit" role="main">
-			<h1><g:message/>${partidoInstance.torneo}, Fecha ${partidoInstance.nFecha}</h1>
+			<h1><g:message/>${partidoInstance.torneo}, Fecha ${partidoInstance.nFecha}, ${partidoInstance }</h1>
 			
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
