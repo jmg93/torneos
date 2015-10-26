@@ -4,6 +4,7 @@ class Equipo {
 	String nombre
 	String contacto
 	List jugadores
+	Boolean aceptado
 	
 	static hasMany = [jugadores: Jugador]
 	static belongsTo = [torneo:torneos.Torneo]

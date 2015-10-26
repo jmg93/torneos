@@ -12,12 +12,9 @@ h1, h2, h3, h4, h5, h6 {
 
 #colIzq{ 
     float:left; 
-    width:300px;
-    margin-left:4em;
 }  
 #colDer{ 
-    float: right;
-    width:300px;    
+    float: right;    
 } 
 
 #fechaPartido{
@@ -275,6 +272,14 @@ input, select, textarea {
 	border: 1px solid #cccccc;
 	font-size: 1em;
 	padding: 0.2em 0.4em;
+}
+
+.nGoles{
+	background-color: #fcfcfc;
+	border: 1px solid #cccccc;
+	font-size: 1em;
+	padding: 0.2em 0.4em;
+	width: 50px;
 }
 
 select {

@@ -41,6 +41,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${equipoInstance?.aceptado}">
+				<li class="fieldcontain">
+					<span id="aceptado-label" class="property-label"><g:message code="equipo.aceptado.label" default="Aceptado" /></span>
+					
+						<span class="property-value" aria-labelledby="aceptado-label"><g:formatBoolean boolean="${equipoInstance?.aceptado}" /></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${equipoInstance?.jugadores}">
 				<li class="fieldcontain">
 					<span id="jugadores-label" class="property-label"><g:message code="equipo.jugadores.label" default="Jugadores" /></span>

@@ -20,6 +20,15 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: equipoInstance, field: 'aceptado', 'error')} ">
+	<label for="aceptado">
+		<g:message code="equipo.aceptado.label" default="Aceptado" />
+		
+	</label>
+	<g:checkBox name="aceptado" value="${equipoInstance?.aceptado}" />
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: equipoInstance, field: 'jugadores', 'error')} ">
 	<label for="jugadores">
 		<g:message code="equipo.jugadores.label" default="Jugadores" />

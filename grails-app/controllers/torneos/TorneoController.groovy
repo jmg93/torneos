@@ -17,7 +17,7 @@ class TorneoController {
 		if (torneoInstance.partidos.size() > 0)
 			[todosPartidos: torneoInstance.partidos, torneoInstance: torneoInstance]
 		else
-			render "El fixture no ha sido generado todavía"
+			render "El fixture no ha sido generado todavï¿½a"
 
 	}
 	
@@ -70,6 +70,11 @@ class TorneoController {
             respond torneoInstance.errors, view:'create'
             return
         }
+		
+		if (torneoInstance.fechaInicio<=torneoInstance.fechaLimite){
+			respond torneoInstance.errors, view:'create'
+			return
+		}
 
         torneoInstance.save flush:true
 

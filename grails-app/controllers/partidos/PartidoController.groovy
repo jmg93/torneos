@@ -61,6 +61,37 @@ class PartidoController {
             respond partidoInstance.errors, view:'edit'
             return
         }
+		
+		def locales = partidoInstance.local.jugadores
+		def visitantes = partidoInstance.visitante.jugadores
+		
+		for(j in locales){
+			def n = j.id
+
+			if(params."jugador[${n}]".amonestado == "on")
+				partidoInstance.amonestadosLocal.add(j)
+				
+			if(params."jugador[${n}]".expulsado == "on")
+				partidoInstance.expulsadosLocal.add(j)
+				
+			for(int i=0;i<params."jugador[${n}]".goles.toInteger(); i++)
+				partidoInstance.goleadoresLocal.add(j)				
+		}
+		
+		for(j in visitantes){
+			def n = j.id
+
+			if(params."jugador[${n}]".amonestado == "on")
+				partidoInstance.amonestadosVisitante.add(j)
+				
+			if(params."jugador[${n}]".expulsado == "on")
+				partidoInstance.expulsadosVisitante.add(j)
+				
+			for(int i=0;i<params."jugador[${n}]".goles.toInteger(); i++)
+				partidoInstance.goleadoresVisitante.add(j)
+		}
+		
+		
 
         partidoInstance.save flush:true
 

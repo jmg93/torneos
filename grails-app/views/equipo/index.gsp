@@ -28,6 +28,8 @@
 					
 						<g:sortableColumn property="contacto" title="${message(code: 'equipo.contacto.label', default: 'Contacto')}" />
 					
+						<g:sortableColumn property="aceptado" title="${message(code: 'equipo.aceptado.label', default: 'Aceptado')}" />
+					
 						<th><g:message code="equipo.torneo.label" default="Torneo" /></th>
 					
 					</tr>
@@ -39,6 +41,8 @@
 						<td><g:link action="show" id="${equipoInstance.id}">${fieldValue(bean: equipoInstance, field: "nombre")}</g:link></td>
 					
 						<td>${fieldValue(bean: equipoInstance, field: "contacto")}</td>
+					
+						<td><g:formatBoolean boolean="${equipoInstance.aceptado}" /></td>
 					
 						<td>${fieldValue(bean: equipoInstance, field: "torneo")}</td>
 					
