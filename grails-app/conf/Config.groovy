@@ -136,3 +136,21 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	//'/role/**':         ['ROLE_SU'],
 ]
 
+//password validation of RegisterController.groovy
+grails.plugin.springsecurity.ui.password.validationRegex='^([a-zA-Z0-9!@#$%^&]{6,20})$'
+grails.plugin.springsecurity.ui.password.minLength=6
+grails.plugin.springsecurity.ui.password.maxLength=20
+
+grails {
+	mail {
+	  host = "smtp.gmail.com"
+	  port = 465
+	  username = "torneosya@gmail.com"
+	  password = "tyids2015"
+	  props = ["mail.smtp.auth":"true",
+			   "mail.smtp.socketFactory.port":"465",
+			   "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+			   "mail.smtp.socketFactory.fallback":"false"]
+ 
+	}
+ }
