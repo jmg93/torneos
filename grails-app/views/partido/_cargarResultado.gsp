@@ -39,7 +39,7 @@
 									<g:checkBox name="jugador[${jugador.id}].expulsado"/>
 								</td>
 								<td>
-									<g:field type="number" class="nGoles" min="0" name="jugador[${jugador.id}].goles"/>
+									<g:field type="number" class="nGoles" min="0" name="jugador[${jugador.id}].goles" value="0"/>
 								</td>
 							</tr>
 						</g:each>
@@ -92,7 +92,7 @@
 					</thead>
 					<tbody>
 						<g:each in="${partidoInstance.visitante.jugadores}" status="i" var="jugador">
-							<tr class="${(i % 2) == 0 ? 'info' : ''}">
+							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 								<td>
 									${jugador.nCamiseta}
 								</td>
@@ -106,7 +106,7 @@
 									<g:checkBox name="jugador[${jugador.id}].expulsado"/>
 								</td>
 								<td>
-									<g:field type="number" class="nGoles" min="0" name="jugador[${jugador.id}].goles"/>
+									<g:field type="number" class="nGoles" min="0" name="jugador[${jugador.id}].goles" value="0"/>
 								</td>
 							</tr>
 						</g:each>
