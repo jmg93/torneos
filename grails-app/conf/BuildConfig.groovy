@@ -63,6 +63,8 @@ grails.project.dependency.resolution = {
         compile ":asset-pipeline:1.9.9"
 		compile ":spring-security-core:2.0-RC5"
 		compile ":spring-security-ui:1.0-RC2"
+		
+		compile ":codenarc:0.24.1" //plugin para análisis estático de código
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
