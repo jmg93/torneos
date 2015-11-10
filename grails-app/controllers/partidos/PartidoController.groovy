@@ -64,6 +64,13 @@ class PartidoController {
 		
 		def locales = partidoInstance.local.jugadores
 		def visitantes = partidoInstance.visitante.jugadores
+	
+		partidoInstance.goleadoresLocal.clear()
+		partidoInstance.amonestadosLocal.clear()
+		partidoInstance.expulsadosLocal.clear()
+		partidoInstance.amonestadosVisitante.clear()
+		partidoInstance.expulsadosVisitante.clear()
+		partidoInstance.goleadoresVisitante.clear()
 		
 		for(j in locales){
 			def n = j.id
@@ -90,8 +97,6 @@ class PartidoController {
 			for(int i=0;i<params."jugador[${n}]".goles.toInteger(); i++)
 				partidoInstance.goleadoresVisitante.add(j)
 		}
-		
-		
 
         partidoInstance.save flush:true
 
