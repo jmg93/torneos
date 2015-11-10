@@ -83,33 +83,70 @@ class FixtureService {
 		def cantPartidos = todosPartidos.size()
 		def cantEquipos = todosEquipos.size()
 		int puntosDelEquipo = 0
+		int ganados = 0
+		int empatados = 0
+		int perdidos = 0
+		def filas = []
+		
 		println cantEquipos
 		println cantPartidos
 		
 		for (equipo in todosEquipos) {
 			def partidosDelEquipo = Partido.where{ ( (local == equipo) || (visitante == equipo) ) && ( (goleadoresLocal.size() > 0) || (goleadoresVisitante.size() > 0) )  }
-			println "el equipo " + equipo + " jugo " + partidosDelEquipo.size() + " partidos..."						
+			//println "el equipo " + equipo + " jugo " + partidosDelEquipo.size() + " partidos..."						
 			
 			puntosDelEquipo = 0
+			ganados = 0
+			empatados = 0
+			perdidos = 0
+			int[] fila = new int[5]
+			fila[0] = equipo.id
+			
 			for (partido in partidosDelEquipo) { //todos los partidos jugados por el equipo
 				if (partido.local.nombre == equipo.nombre) 
 					{ //el equipo jugo de local
-						if (partido.goleadoresLocal.size() > partido.goleadoresVisitante.size() )
+						if (partido.goleadoresLocal.size() > partido.goleadoresVisitante.size() ){
 							puntosDelEquipo = puntosDelEquipo + 3
-						if ( partido.goleadoresLocal.size() == partido.goleadoresVisitante.size() ) //si empato
+							ganados++
+						}
+						if ( partido.goleadoresLocal.size() == partido.goleadoresVisitante.size() ){ //si empato
 							puntosDelEquipo = puntosDelEquipo + 1
+							empatados++
+						}
 					}
 				else
 					{ //el equipo jugo de visitante
-						if (partido.goleadoresLocal.size() < partido.goleadoresVisitante.size() )
+						if (partido.goleadoresLocal.size() < partido.goleadoresVisitante.size() ){
 							puntosDelEquipo = puntosDelEquipo + 3
-						if ( partido.goleadoresLocal.size() == partido.goleadoresVisitante.size() ) //si empato
+							ganados++
+						}
+						if ( partido.goleadoresLocal.size() == partido.goleadoresVisitante.size() ){ //si empato
 							puntosDelEquipo = puntosDelEquipo + 1
-					}					
+							empatados++
+						}
+					}				
 			}
-			println "y lleva ganados " + puntosDelEquipo + " puntos."
-		}
+			perdidos = partidosDelEquipo.size() - (ganados + empatados)
+			//println "y lleva ganados " + puntosDelEquipo + " puntos."
+			fila[1] = puntosDelEquipo
+			fila[2] = ganados
+			fila[3] = empatados
+			fila[4] = perdidos
 			
+			filas.add(fila)
+						
+			print equipo.toString()
+			print fila[1]
+			print fila[2]
+			print fila[3]
+			print fila[4]
+			println " "
+			
+			
+		}
+		println filas
+		filas.sort( {a, b -> b[1] <=> a[1] })
+		return filas
 	}
 	
     def serviceMethod() {

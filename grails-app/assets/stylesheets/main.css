@@ -12,9 +12,11 @@ h1, h2, h3, h4, h5, h6 {
 
 #colIzq{ 
     float:left; 
+    width:48%;
 }  
 #colDer{ 
-    float: right;    
+    float: right;
+    width:48%;    
 } 
 
 #fechaPartido{

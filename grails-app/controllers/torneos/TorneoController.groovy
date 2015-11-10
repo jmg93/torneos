@@ -17,23 +17,17 @@ class TorneoController {
 		if (torneoInstance.partidos.size() > 0)
 			[todosPartidos: torneoInstance.partidos, torneoInstance: torneoInstance]
 		else
-			render "El fixture no ha sido generado todav�a"
+			render "El fixture no ha sido generado todavía"
 
 	}
 	
 	def mostrarTabla(Torneo torneoInstance) {
 		def cantPartidos = torneoInstance.partidos.size()
-		def todosPartidos
-		if (cantPartidos != 0){
-			todosPartidos = FixtureService.calcularTabla(torneoInstance)
-			render "<h1> hola prueba </h1>"
-			//render(view: "mostrarFixture",  model: [todosPartidos:todosPartidos, torneoInstance:torneoInstance])
+		def filas
+		filas = FixtureService.calcularTabla(torneoInstance)
+		//render "<h1> hola prueba </h1>"
+		render(view: "tablaPosiciones",  model: [filas:filas, torneoInstance:torneoInstance])
 		}
-		else 
-		{
-			render "Todavia no se genero el fixture"
-		}
-	}
 	
 	def crearFixture(Torneo torneoInstance){		
 		def cantPartidos = torneoInstance.partidos.size()

@@ -20,7 +20,7 @@ class Partido {
 	}
 	
     static constraints = {
-		fechaPartido(min: new Date(), nullable:true)
+		fechaPartido(max:new Date(), nullable:true)
 		nFecha()
 		local()
 		visitante()

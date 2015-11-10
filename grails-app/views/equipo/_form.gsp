@@ -20,33 +20,6 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: equipoInstance, field: 'aceptado', 'error')} ">
-	<label for="aceptado">
-		<g:message code="equipo.aceptado.label" default="Aceptado" />
-		
-	</label>
-	<g:checkBox name="aceptado" value="${equipoInstance?.aceptado}" />
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: equipoInstance, field: 'jugadores', 'error')} ">
-	<label for="jugadores">
-		<g:message code="equipo.jugadores.label" default="Jugadores" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${equipoInstance?.jugadores?}" var="j">
-    <li><g:link controller="jugador" action="show" id="${j.id}">${j?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="jugador" action="create" params="['equipo.id': equipoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'jugador.label', default: 'Jugador')])}</g:link>
-</li>
-</ul>
-
-
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: equipoInstance, field: 'torneo', 'error')} required">
 	<label for="torneo">
 		<g:message code="equipo.torneo.label" default="Torneo" />
