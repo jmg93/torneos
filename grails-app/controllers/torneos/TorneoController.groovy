@@ -29,7 +29,7 @@ class TorneoController {
 		render(view: "tablaPosiciones",  model: [filas:filas, torneoInstance:torneoInstance])
 		}
 	
-	def crearFixture(Torneo torneoInstance){		
+	def crearFixture(Torneo torneoInstance){
 		def cantPartidos = torneoInstance.partidos.size()
 		def todosPartidos
 		if (cantPartidos == 0){

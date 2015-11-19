@@ -12,6 +12,7 @@ class Torneo {
 	String reglamento
 	
 	static hasMany = [equipos: equipos.Equipo, partidos: partidos.Partido]
+	static belongsTo = [usuario: usuarios.User]
 	
 	public String toString(){
 		return nombre

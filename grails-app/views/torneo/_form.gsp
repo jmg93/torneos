@@ -101,3 +101,12 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'usuario', 'error')} required">
+	<label for="usuario">
+		<g:message code="torneo.usuario.label" default="Usuario" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="usuario" name="usuario.id" from="${usuarios.User.list()}" optionKey="id" required="" value="${torneoInstance?.usuario?.id}" class="many-to-one"/>
+
+</div>
+

@@ -111,6 +111,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${torneoInstance?.usuario}">
+				<li class="fieldcontain">
+					<span id="usuario-label" class="property-label"><g:message code="torneo.usuario.label" default="Usuario" /></span>
+					
+						<span class="property-value" aria-labelledby="usuario-label"><g:link controller="user" action="show" id="${torneoInstance?.usuario?.id}">${torneoInstance?.usuario?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form url="[resource:torneoInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

@@ -8,10 +8,13 @@ class User implements Serializable {
 
 	String username
 	String password
+	List torneos
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+	
+	static hasMany = [torneos: torneos.Torneo]
 
 	User(String username, String password) {
 		this()
