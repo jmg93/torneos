@@ -18,7 +18,7 @@ class Jugador {
 		apellido(size:2..20)
 		nombre(size:2..20)
 		nCamiseta(range: 1..99)
-		dni(size: 7..8)
+		dni(range: 1000000..99999999)
 		capitan()
 	}
 }

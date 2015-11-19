@@ -6,7 +6,7 @@
 			<g:message code="partido.fechaPartido.label" default="Fecha" />
 			
 		</label>
-		<g:datePicker name="fechaPartido" precision="day"  value="${partidoInstance?.fechaPartido}" default="none" noSelection="['': '']" />
+		<g:datePicker name="fechaPartido" precision="day"  value="${partidoInstance?.fechaPartido}" relativeYears="[-4..0]" default="none" noSelection="['': '']" />
 			
 	</div>
 </div>

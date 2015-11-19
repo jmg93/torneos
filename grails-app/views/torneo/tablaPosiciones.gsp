@@ -11,9 +11,9 @@
 					<thead>
 						<g:sortableColumn property="posicion" defaultOrder="asc" title="Posición" />
 						<g:sortableColumn property="equipo" defaultOrder="asc" title="Equipo" />
-						<g:sortableColumn property="ganados" title="Ganados" />
-						<g:sortableColumn property="empatados" title="Empatados"/>
-						<g:sortableColumn property="perdidos" title="Perdidos"/>
+						<g:sortableColumn property="ganados" title="Ganados (+3)" />
+						<g:sortableColumn property="empatados" title="Empatados (+1)"/>
+						<g:sortableColumn property="perdidos" title="Perdidos (+0)"/>
 						<g:sortableColumn property="puntos" title="Puntos"/>
 					</thead>
 					<tbody>

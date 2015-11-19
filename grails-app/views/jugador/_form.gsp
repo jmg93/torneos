@@ -34,7 +34,7 @@
 		<g:message code="jugador.dni.label" default="Dni" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="dni" type="number" value="${jugadorInstance.dni}" required=""/>
+	<g:field name="dni" type="number" min="1000000" max="99999999" value="${jugadorInstance.dni}" required=""/>
 
 </div>
 

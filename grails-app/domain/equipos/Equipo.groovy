@@ -16,5 +16,6 @@ class Equipo {
     static constraints = {
 		nombre(size:2..20)
 		contacto(email: true)
+		aceptado(nullable:true)
     }
 }
