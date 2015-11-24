@@ -4,11 +4,27 @@ package equipos
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import torneos.Torneo
 
 @Transactional(readOnly = true)
 class EquipoController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	
+	def AdministrarService
+		
+	def aceptar(Equipo equipoInstance){
+		AdministrarService.aceptarEquipo(equipoInstance)
+		def torneo = equipoInstance.torneo
+		redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
+	}
+	
+	def eliminar(Equipo equipoInstance){
+		def torneo = equipoInstance.torneo
+		torneo.equipos.remove(equipoInstance)
+		equipoInstance.delete(flush:true)
+		redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
+	}
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -34,6 +50,8 @@ class EquipoController {
             respond equipoInstance.errors, view:'create'
             return
         }
+		
+		equipoInstance.aceptado = false
 
         equipoInstance.save flush:true
 

@@ -3,7 +3,9 @@ package torneos
 
 
 import static org.springframework.http.HttpStatus.*
-import grails.transaction.Transactional
+
+import org.springframework.transaction.annotation.Transactional
+
 
 @Transactional(readOnly = true)
 class TorneoController {
@@ -11,6 +13,12 @@ class TorneoController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 	
 	def FixtureService
+	
+	def listaEquipos(Torneo torneoInstance){
+		def equipos = torneoInstance.equipos
+		render(view:"aceptarEquipos", model: [equipos:equipos, torneoInstance:torneoInstance])
+	}
+	
 	
 	def mostrarFixture(Torneo torneoInstance) {
 		

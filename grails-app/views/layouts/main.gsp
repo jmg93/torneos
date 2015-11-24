@@ -4,6 +4,8 @@
 <!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"><!--<![endif]-->
+
+
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -17,7 +19,15 @@
 		<g:layoutHead/>
 	</head>
 	<body>
-		<div id="grailsLogo" role="banner"><a href="/TorneosYa/"><asset:image src="logo2_v1.png" width="300" height="100" alt="Grails"/></a></div>
+		<div id="grailsLogo" role="banner"><a href="/TorneosYa/"><asset:image src="logo2_v1.png" width="300" height="100" alt="Grails"/></a>
+		<sec:ifNotLoggedIn>
+				<span style="margin: 1%; position: relative; top: -32%; right: -54%;" ><g:link controller="login">Ingresá</g:link></span>
+		</sec:ifNotLoggedIn>
+		<sec:ifLoggedIn>
+				<span style="margin: 1%; position: relative; top: -32%; right: -46%;" >Hola <sec:username/>  |  <g:link controller='logout' style="margin:0em">Salir</g:link></span>
+		</sec:ifLoggedIn>
+		
+		</div>		
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
