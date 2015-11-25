@@ -25,9 +25,12 @@ class TorneoController {
 	def mostrarFixture(Torneo torneoInstance) {
 		
 		if (torneoInstance.partidos.size() > 0)
-			[todosPartidos: torneoInstance.partidos, torneoInstance: torneoInstance]
-		else
-			render "El fixture no ha sido generado todavía"
+			render view:"mostrarFixture", model: [todosPartidos: torneoInstance.partidos, torneoInstance: torneoInstance]
+		else{
+			flash.message = "El fixture no ha sido generado todavía"
+			redirect action:"show", id:torneoInstance.id
+			//render "El fixture no ha sido generado todavía"
+		}
 
 	}
 	
@@ -35,7 +38,6 @@ class TorneoController {
 		def cantPartidos = torneoInstance.partidos.size()
 		def filas
 		filas = FixtureService.calcularTabla(torneoInstance)
-		//render "<h1> hola prueba </h1>"
 		render(view: "tablaPosiciones",  model: [filas:filas, torneoInstance:torneoInstance])
 		}
 	
@@ -46,7 +48,9 @@ class TorneoController {
 			todosPartidos = FixtureService.sortearFixture(torneoInstance)
 			render(view: "mostrarFixture",  model: [todosPartidos:todosPartidos, torneoInstance:torneoInstance])
 		}else{
-			render "Ya generaste el Fixture"
+			flash.message = "Ya generaste el fixture"
+			redirect action:"listaEquipos", id:torneoInstance.id
+			//render "Ya generaste el Fixture"
 		}
 	}
 
@@ -68,7 +72,13 @@ class TorneoController {
     def save(Torneo torneoInstance) {
 		torneoInstance.usuario = springSecurityService.currentUser
 		
-        if (torneoInstance == null) {
+		if (torneoInstance.fechaInicio<=torneoInstance.fechaLimite){
+			flash.message = "La fecha de Inicio no puede ser anterior a la fecha Límite de inscripción"
+			redirect action:"create"
+			//render "La fecha de Inicio no puede ser anterior a la fecha Límite de inscripción"
+		}else{
+
+		if (torneoInstance == null) {
             notFound()
             return
         }
@@ -78,9 +88,6 @@ class TorneoController {
             return
         }
 		
-		if (torneoInstance.fechaInicio<=torneoInstance.fechaLimite){
-			render "La fecha de Inicio no puede ser anterior a la fecha Límite de inscripción"
-		}
 
         torneoInstance.save flush:true
 
@@ -91,6 +98,7 @@ class TorneoController {
             }
             '*' { respond torneoInstance, [status: CREATED] }
         }
+		}
     }
 
     def edit(Torneo torneoInstance) {

@@ -14,15 +14,27 @@ class EquipoController {
 	def AdministrarService
 		
 	def aceptar(Equipo equipoInstance){
-		AdministrarService.aceptarEquipo(equipoInstance)
 		def torneo = equipoInstance.torneo
-		redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
-	}
+		if (equipoInstance.jugadores.size() > torneo.nMaxJugadorXEquipo) {
+			flash.message = "El equipo tiene más jugadores de los que permite el torneo"
+			redirect controller:"torneo", action:"listaEquipos", id:torneo.id	
+		}else{
+			if (equipoInstance.jugadores.size()< torneo.nMinJugadorXEquipo){
+				flash.message = "El equipo tiene menos jugadores de los que permite el torneo"
+				redirect controller:"torneo", action:"listaEquipos", id:torneo.id
+			}else{
+				AdministrarService.aceptarEquipo(equipoInstance)
+				flash.message = "Equipo ${equipoInstance} aceptado en el torneo"
+				redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
+			}
+		}
+    }
 	
 	def eliminar(Equipo equipoInstance){
 		def torneo = equipoInstance.torneo
 		torneo.equipos.remove(equipoInstance)
 		equipoInstance.delete(flush:true)
+		flash.message = 'Equipo ${equipoInstance} eliminado del torneo'
 		redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
 	}
 
