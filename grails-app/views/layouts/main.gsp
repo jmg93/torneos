@@ -21,10 +21,13 @@
 	<body>
 		<div id="grailsLogo" role="banner"><a href="/TorneosYa/"><asset:image src="logo2_v1.png" width="300" height="100" alt="Grails"/></a>
 		<sec:ifNotLoggedIn>
-				<span style="margin: 1%; position: relative; top: -32%; right: -54%;" ><g:link controller="login">Ingresá</g:link></span>
+					<g:link class="buttons" style="position: relative; left: 32em; bottom: 1.15em;" controller="login">Ingresá</g:link>
+					<g:link class="buttons" style="position: relative; left: 20em; bottom: 1.15em;" controller="register">Registrate</g:link>
 		</sec:ifNotLoggedIn>
 		<sec:ifLoggedIn>
-				<span style="margin: 1%; position: relative; top: -32%; right: -46%;" >Hola <sec:username/>  |  <g:link controller='logout' style="margin:0em">Salir</g:link></span>
+				<span style="margin: 1%; position: relative; bottom: 2.8em; left: 27em;" >
+					Hola <sec:username/>  |  <g:link controller='logout' style="margin:0em">Salir</g:link>
+				</span>
 		</sec:ifLoggedIn>
 		
 		</div>		

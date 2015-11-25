@@ -2,6 +2,7 @@
 
 
 
+
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'nombre', 'error')} required">
 	<label for="nombre">
 		<g:message code="torneo.nombre.label" default="Nombre" />
@@ -16,7 +17,7 @@
 		<g:message code="torneo.fechaInicio.label" default="Fecha Inicio" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="fechaInicio" precision="day"  value="${torneoInstance?.fechaInicio}"  />
+	<g:datePicker name="fechaInicio" precision="day" relativeYears="[0..5]" value="${torneoInstance?.fechaInicio}"  />
 
 </div>
 
@@ -25,7 +26,7 @@
 		<g:message code="torneo.fechaLimite.label" default="Fecha Limite" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="fechaLimite" precision="day"  value="${torneoInstance?.fechaLimite}"  />
+	<g:datePicker name="fechaLimite" precision="day" relativeYears="[0..5]" value="${torneoInstance?.fechaLimite}"  />
 
 </div>
 
@@ -83,30 +84,9 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'partidos', 'error')} ">
-	<label for="partidos">
-		<g:message code="torneo.partidos.label" default="Partidos" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${torneoInstance?.partidos?}" var="p">
-    <li><g:link controller="partido" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="partido" action="create" params="['torneo.id': torneoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'partido.label', default: 'Partido')])}</g:link>
-</li>
-</ul>
-
-
-</div>
 
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'usuario', 'error')} required">
-	<label for="usuario">
-		<g:message code="torneo.usuario.label" default="Usuario" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="usuario" name="usuario.id" from="${usuarios.User.list()}" optionKey="id" required="" value="${torneoInstance?.usuario?.id}" class="many-to-one"/>
-
+	<g:hiddenField name="usuario.id" value="${applicationContext.springSecurityService.currentUser.id}" />
+	
 </div>
 

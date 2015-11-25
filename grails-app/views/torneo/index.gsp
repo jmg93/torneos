@@ -30,7 +30,7 @@
 					
 						<g:sortableColumn property="fechaLimite" title="${message(code: 'torneo.fechaLimite.label', default: 'Límite de inscripción')}" />
 					
-						<g:sortableColumn property="nMaxEquipos" title="${message(code: 'torneo.nMaxEquipos.label', default: 'Límite de equipos')}" />
+						<g:sortableColumn property="nMaxEquipos" title="${message(code: 'torneo.usuario.label', default: 'Creador')}" />
 									
 					</tr>
 				</thead>
@@ -44,7 +44,7 @@
 					
 						<td><g:formatDate format="dd - MMM - yyyy" date="${torneoInstance.fechaLimite}" /></td>
 					
-						<td>${fieldValue(bean: torneoInstance, field: "nMaxEquipos")}</td>
+						<td>${fieldValue(bean: torneoInstance, field: "usuario")}</td>
 
 					
 					</tr>

@@ -12,7 +12,7 @@
 <p/>
 
 
-<g:form action='register' name='registerForm' style="width: 75%; padding-left: 22%;">
+<g:form action='register' name='registerForm' style="width: 75%; padding-left: 22%; padding-bottom:4%;">
 
 	<g:if test='${emailSent}'>
 	<br/>

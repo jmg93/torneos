@@ -3,6 +3,7 @@ package torneos
 
 
 import static org.springframework.http.HttpStatus.*
+import grails.plugin.springsecurity.annotation.Secured
 
 import org.springframework.transaction.annotation.Transactional
 
@@ -13,6 +14,7 @@ class TorneoController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 	
 	def FixtureService
+	def springSecurityService
 	
 	def listaEquipos(Torneo torneoInstance){
 		def equipos = torneoInstance.equipos
@@ -57,12 +59,15 @@ class TorneoController {
         respond torneoInstance
     }
 
+	@Secured(['ROLE_USER'])
     def create() {
         respond new Torneo(params)
     }
 
     @Transactional
     def save(Torneo torneoInstance) {
+		torneoInstance.usuario = springSecurityService.currentUser
+		
         if (torneoInstance == null) {
             notFound()
             return
@@ -74,8 +79,7 @@ class TorneoController {
         }
 		
 		if (torneoInstance.fechaInicio<=torneoInstance.fechaLimite){
-			respond torneoInstance.errors, view:'create'
-			return
+			render "La fecha de Inicio no puede ser anterior a la fecha Límite de inscripción"
 		}
 
         torneoInstance.save flush:true
