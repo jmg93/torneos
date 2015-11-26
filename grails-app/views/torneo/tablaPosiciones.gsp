@@ -6,6 +6,9 @@
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
+			<div class="nav">
+				<g:link class="home" action="show" style="width: 15%;" id="${torneoInstance.id}">Volver al torneo</g:link>
+			</div>
 			<div id="tablaFixture" class="content scaffold-list">
 				<table class="table table-striped table-bordered table-hover table-condensed">
 					<thead>
@@ -42,8 +45,6 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="nav">
-				<g:link class="home" action="show" id="${torneoInstance.id}">Volver al torneo</g:link>
-			</div>
+
 	</body>
 </html>

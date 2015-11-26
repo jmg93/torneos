@@ -12,20 +12,27 @@ class EquipoController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 	
 	def AdministrarService
+	def FixtureService
 		
 	def aceptar(Equipo equipoInstance){
 		def torneo = equipoInstance.torneo
-		if (equipoInstance.jugadores.size() > torneo.nMaxJugadorXEquipo) {
-			flash.message = "El equipo tiene más jugadores de los que permite el torneo"
-			redirect controller:"torneo", action:"listaEquipos", id:torneo.id	
-		} else {
-			if (equipoInstance.jugadores.size()< torneo.nMinJugadorXEquipo){
-				flash.message = "El equipo tiene menos jugadores de los que permite el torneo"
-				redirect controller:"torneo", action:"listaEquipos", id:torneo.id
+		
+		if (FixtureService.getCantidadEquipos(torneo) >= torneo.nMaxEquipos){
+			flash.message = "El torneo ya tiene los ${torneo.nMaxEquipos} equipos permitidos"
+			redirect controller:"torneo", action:"listaEquipos", id:torneo.id
+		}else{
+			if (equipoInstance.jugadores.size() > torneo.nMaxJugadorXEquipo) {
+				flash.message = "El equipo tiene más jugadores de los que permite el torneo"
+				redirect controller:"torneo", action:"listaEquipos", id:torneo.id	
 			} else {
-				AdministrarService.aceptarEquipo(equipoInstance)
-				flash.message = "Equipo ${equipoInstance} aceptado en el torneo"
-				redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
+				if (equipoInstance.jugadores.size()< torneo.nMinJugadorXEquipo){
+					flash.message = "El equipo tiene menos jugadores de los que permite el torneo"
+					redirect controller:"torneo", action:"listaEquipos", id:torneo.id
+				} else {
+					AdministrarService.aceptarEquipo(equipoInstance)
+					flash.message = "Equipo ${equipoInstance} aceptado en el torneo"
+					redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
+				}
 			}
 		}
     }

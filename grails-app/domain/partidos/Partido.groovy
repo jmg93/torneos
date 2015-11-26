@@ -1,5 +1,7 @@
 package partidos
 
+import groovy.time.TimeCategory
+
 class Partido {
 	Integer nFecha
 	Date fechaPartido
@@ -20,7 +22,7 @@ class Partido {
 	}
 	
     static constraints = {
-		fechaPartido(max:new Date(), nullable:true)
+		fechaPartido(max:use(TimeCategory) {(new Date()) + 6.hours}, nullable:true)
 		nFecha()
 		local()
 		visitante()
