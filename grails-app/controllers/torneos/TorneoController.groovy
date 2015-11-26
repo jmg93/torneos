@@ -19,41 +19,51 @@ class TorneoController {
 	def listaEquipos(Torneo torneoInstance){
 		def equipos = torneoInstance.equipos
 		render(view:"aceptarEquipos", model: [equipos:equipos, torneoInstance:torneoInstance])
-	}
+	}	
 	
-	
-	def mostrarFixture(Torneo torneoInstance) {
-		
-		if (torneoInstance.partidos.size() > 0)
+	def mostrarFixture(Torneo torneoInstance) {		
+		if (FixtureService.torneoEmpezado(torneoInstance))
 			render view:"mostrarFixture", model: [todosPartidos: torneoInstance.partidos, torneoInstance: torneoInstance]
 		else{
 			flash.message = "El fixture no ha sido generado todavía"
 			redirect action:"show", id:torneoInstance.id
-			//render "El fixture no ha sido generado todavía"
 		}
-
 	}
 	
 	def mostrarTabla(Torneo torneoInstance) {
-		def cantPartidos = torneoInstance.partidos.size()
-		def filas
-		filas = FixtureService.calcularTabla(torneoInstance)
-		render(view: "tablaPosiciones",  model: [filas:filas, torneoInstance:torneoInstance])
-		}
+		if (FixtureService.torneoEmpezado(torneoInstance)) {
+			def cantPartidos = FixtureService.getCantidadPartidos(torneoInstance)
+			def filas
+			filas = FixtureService.calcularTablaPosiciones(torneoInstance)
+			render(view: "tablaPosiciones",  model: [filas:filas, torneoInstance:torneoInstance])
+		} else {
+			flash.message = "El fixture no ha sido generado todavía"
+			redirect action:"show", id:torneoInstance.id
+		}		
+	}
 	
 	def crearFixture(Torneo torneoInstance){
-		def cantPartidos = torneoInstance.partidos.size()
-		def todosPartidos
-		if (cantPartidos == 0){
-			todosPartidos = FixtureService.sortearFixture(torneoInstance)
-			render(view: "mostrarFixture",  model: [todosPartidos:todosPartidos, torneoInstance:torneoInstance])
-		}else{
-			flash.message = "Ya generaste el fixture"
+		def cantEquipos = FixtureService.getCantidadEquipos(torneoInstance) //obtiene cantidad de equipos aceptados en el torneo
+		if (cantEquipos >= 2) { //para sortear el fixture tiene que haber minimo 2 equipos aceptados
+			if ( (FixtureService.torneoEmpezado(torneoInstance) == false ) ) { // y tambien el torneo no tiene que estar empezado
+				def todosPartidos = FixtureService.sortearFixture(torneoInstance)
+				render(view: "mostrarFixture",  model: [todosPartidos:todosPartidos, torneoInstance:torneoInstance])
+			} else {
+				flash.message = "El fxture ya esta generado"
+				redirect action:"listaEquipos", id:torneoInstance.id
+			}
+		} else {
+			flash.message = "La cantidad de equipos aceptados tiene que ser 2 como minimo"
 			redirect action:"listaEquipos", id:torneoInstance.id
-			//render "Ya generaste el Fixture"
 		}
 	}
 
+	def verTablaGoleadores(Torneo torneoInstance){                //TEMPORAL
+		if (FixtureService.torneoEmpezado(torneoInstance))		  //TEMPORAL
+			FixtureService.calcularTablaGoleadores(torneoInstance)//TEMPORAL
+		render "ahi paso algo"								      //TEMPORAL
+	}
+	
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Torneo.list(params), model:[torneoInstanceCount: Torneo.count()]
@@ -74,9 +84,8 @@ class TorneoController {
 		
 		if (torneoInstance.fechaInicio<=torneoInstance.fechaLimite){
 			flash.message = "La fecha de Inicio no puede ser anterior a la fecha Límite de inscripción"
-			redirect action:"create"
-			//render "La fecha de Inicio no puede ser anterior a la fecha Límite de inscripción"
-		}else{
+			redirect action:"create"	
+		} else {
 
 		if (torneoInstance == null) {
             notFound()

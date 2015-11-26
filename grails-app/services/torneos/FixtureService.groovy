@@ -14,7 +14,7 @@ class FixtureService {
 		def torneoo = torneoInstance	
 		println torneoo.nombre
 		
-		def todosEquipos = Equipo.where{torneo == torneoo}.list()
+		def todosEquipos = Equipo.where{ (torneo == torneoo) && (aceptado == true) }.list() //seleccionar todos los equipos aceptados del torneo a sortear
 		def equipoAuxi = new Equipo()
 		def cantEquipos = todosEquipos.size()
 		
@@ -71,16 +71,28 @@ class FixtureService {
 		}
 					
 		def todosPartidos = torneoo.partidos
-		return todosPartidos
-		
+		return todosPartidos		
 	}
 	
-	def calcularTabla(Torneo torneoInstance) {
+	def int getCantidadEquipos(torneoInstance) { //devuelve la cantidad de equipos aceptados cargados en el torneo 
+		def todosEquipos = Equipo.where{ (torneo == torneoInstance) && (aceptado == true) }.list() //seleccionar todos los equipos aceptados del torneo a sortear
+		return todosEquipos.size()
+	}
+	
+	def int getCantidadPartidos(torneoInstance) { //devuelve la cantidad de partidos cargados (jugados y no jugados) del torneo
+		return torneoInstance.partidos.size()
+	}
+	
+	def boolean torneoEmpezado(torneoInstance) { //devuelve true si el torneo esta empezado (si se sorteo el fixture o si hay algun partido cargado)
+		return (getCantidadPartidos(torneoInstance) > 0)
+	}
+	
+	def calcularTablaPosiciones(Torneo torneoInstance) {
 		
 		def torneoo = torneoInstance
 		println torneoo.nombre
 		
-		def todosEquipos = Equipo.where{torneo == torneoo}.list()
+		def todosEquipos = Equipo.where{ (torneo == torneoo) && (aceptado == true) }.list() //seleccionar todos los equipos aceptados del torneo
 		def todosPartidos = torneoo.partidos
 		def cantPartidos = todosPartidos.size()
 		def cantEquipos = todosEquipos.size()
@@ -147,6 +159,10 @@ class FixtureService {
 		println filas
 		filas.sort( {a, b -> b[1] <=> a[1] })
 		return filas
+	}
+	
+	def calcularTablaGoleadores(Torneo torneoInstance){                //TEMPORAL
+		def todosPartidosJugados = Partido.where{ ( fechaPartido != null)  }.list()
 	}
 	
     def serviceMethod() {

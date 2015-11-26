@@ -18,11 +18,11 @@ class EquipoController {
 		if (equipoInstance.jugadores.size() > torneo.nMaxJugadorXEquipo) {
 			flash.message = "El equipo tiene más jugadores de los que permite el torneo"
 			redirect controller:"torneo", action:"listaEquipos", id:torneo.id	
-		}else{
+		} else {
 			if (equipoInstance.jugadores.size()< torneo.nMinJugadorXEquipo){
 				flash.message = "El equipo tiene menos jugadores de los que permite el torneo"
 				redirect controller:"torneo", action:"listaEquipos", id:torneo.id
-			}else{
+			} else {
 				AdministrarService.aceptarEquipo(equipoInstance)
 				flash.message = "Equipo ${equipoInstance} aceptado en el torneo"
 				redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
