@@ -59,10 +59,14 @@ class TorneoController {
 		}
 	}
 
-	def verTablaGoleadores(Torneo torneoInstance){                //TEMPORAL
-		if (FixtureService.torneoEmpezado(torneoInstance))		  //TEMPORAL
-			FixtureService.calcularTablaGoleadores(torneoInstance)//TEMPORAL
-		render "ahi paso algo"								      //TEMPORAL
+	def verTablaGoleadores(Torneo torneoInstance){
+		if (FixtureService.torneoEmpezado(torneoInstance)) {
+			def resultado = FixtureService.calcularTablaGoleadores(torneoInstance)
+			render(view: "tablaPosiciones_test",  model: [filas: resultado, torneoInstance: torneoInstance])
+		} else {
+			flash.message = "El torneo no ha empezado"
+			redirect action:"show", id:torneoInstance.id 
+		}
 	}
 	
     def index(Integer max) {

@@ -2,12 +2,15 @@ package torneos
 
 import equipos.Equipo
 import grails.transaction.Transactional
+import groovy.sql.Sql
 import partidos.Partido
 
 @Transactional
 class FixtureService {
 	
 	//todos los println estan para testear algunas cosas
+	
+	def dataSource // the Spring-Bean "dataSource" is auto-injected
 	
 	def sortearFixture(Torneo torneoInstance) {
 				
@@ -161,8 +164,11 @@ class FixtureService {
 		return filas
 	}
 	
-	def calcularTablaGoleadores(Torneo torneoInstance){                //TEMPORAL
-		def todosPartidosJugados = Partido.where{ ( fechaPartido != null)  }.list()
+	def calcularTablaGoleadores(Torneo torneoInstance){
+		def db = new Sql(dataSource)
+		def result = db.rows("SELECT * FROM TABLA_GOLEADORES where TID= ${torneoInstance.id}")
+		
+		return result
 	}
 	
     def serviceMethod() {
