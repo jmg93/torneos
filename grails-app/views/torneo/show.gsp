@@ -49,7 +49,7 @@
 				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 				<li><g:link class="fixture" action="listaEquipos" resource="${torneoInstance}">Administrar</g:link></li>
-				<li><g:link class="fixture" action="mostrarFixture" resource="${torneoInstance}">Ver Fixture</g:link></li>
+				<li><g:link class="fixture" action="verTablaGoleadores" resource="${torneoInstance}">Tabla de Goleadores</g:link></li>
 				<li><g:link class="fixture" action="mostrarTabla" resource="${torneoInstance}">Tabla de Posiciones</g:link></li>
 			</ul>
 		</div>
@@ -86,6 +86,8 @@
 			<br/>
 			<br/>
 			<g:link action="mostrarFixture" resource="${torneoInstance}">Ver Fixture</g:link>
+			<br/>
+			<g:link action="verTablaGoleadores" resource="${torneoInstance}">Tabla de Goleadores</g:link>
 		</div>
 		
 		<div style="width: 65%; position: relative; left: 19em; top: -13.8em;">
@@ -216,7 +218,6 @@
 			
 			-->
 
-		</div>
 		<!--  
 		<g:form url="[resource:torneoInstance, action:'delete']" method="DELETE">
 			<fieldset class="buttons">
