@@ -90,9 +90,8 @@
 			<g:link action="verTablaGoleadores" resource="${torneoInstance}">Tabla de Goleadores</g:link>
 		</div>
 		
-		<div style="width: 65%; position: relative; left: 19em; top: -13.8em;">
-			<div id="tablaFixture" class="content scaffold-list">
-				<table class="table table-striped table-bordered table-hover table-condensed">
+
+				<table style="width: 65%; position: relative; top: 2.1em;" class="table table-striped table-bordered table-hover table-condensed">
 					<thead>
 						<g:sortableColumn property="posicion" defaultOrder="asc" title="Posición" />
 						<g:sortableColumn property="equipo" defaultOrder="asc" title="Equipo" />
@@ -114,8 +113,7 @@
 						</g:each>
 					</tbody>
 				</table>
-			</div>	
-		</div>
+
 			
 			
 			<!--<ol class="property-list torneo">
