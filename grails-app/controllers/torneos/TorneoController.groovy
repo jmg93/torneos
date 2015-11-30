@@ -4,9 +4,10 @@ package torneos
 
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
-import equipos.Equipo
 
 import org.springframework.transaction.annotation.Transactional
+
+import usuarios.User
 
 
 @Transactional(readOnly = true)
@@ -23,12 +24,13 @@ class TorneoController {
 			if(params.parametro){
 				ilike("nombre", "%${params.parametro}%")
 			}
+		
 		}
 		if(!listaFiltrada){
 			flash.message = "El torneo ${params.parametro} no existe"
 		}
 		render view:"index", model:[listaFiltrada:listaFiltrada]
-	}
+    }
 	
 	def listaEquipos(Torneo torneoInstance){
 		def equipos = torneoInstance.equipos
