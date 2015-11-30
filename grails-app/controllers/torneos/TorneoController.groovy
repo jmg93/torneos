@@ -17,6 +17,19 @@ class TorneoController {
 	def FixtureService
 	def springSecurityService
 	
+	
+	def busquedaTorneo(){
+		def listaFiltrada = Torneo.createCriteria().list(params) {
+			if(params.parametro){
+				ilike("nombre", "%${params.parametro}%")
+			}
+		}
+		if(!listaFiltrada){
+			flash.message = "El torneo ${params.parametro} no existe"
+		}
+		render view:"index", model:[listaFiltrada:listaFiltrada]
+	}
+	
 	def listaEquipos(Torneo torneoInstance){
 		def equipos = torneoInstance.equipos
 		render(view:"aceptarEquipos", model: [equipos:equipos, torneoInstance:torneoInstance])

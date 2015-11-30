@@ -1,11 +1,25 @@
-
 <%@ page import="torneos.Torneo" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'torneo.label', default: 'Torneo')}" />
-		<title><g:message code="default.list.label" args="[entityName]" /></title>
+		<title>Buscar torneos</title>
+		<style type="text/css" media="screen">
+			#busqueda {
+				background-color: #eee;
+				border: .2em solid #fff;
+				margin: 2em 2em 1em;
+				padding: 1em;
+				width:90%;
+				float: left;
+				box-shadow: 0px 0px 1.25em #ccc;
+				-moz-border-radius: 0.6em;
+				-webkit-border-radius: 0.6em;
+				border-radius: 0.6em;
+			}
+
+		</style>
 	</head>
 	<body>
 		<a href="#list-torneo" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -16,17 +30,29 @@
 			</ul>
 		</div>
 		<div id="list-torneo" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1>Torneos</h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
+			
+			<g:form action="busquedaTorneo" method="GET" style="padding: 1em; border-radius: 0.6em; margin: 2em 2em 1em; width: 90%; border: 0.2em solid rgb(238, 238, 238); height: 2em;">
+				<fieldset class="form" style="left: 7em; top: -0.75em;">
+					<div>
+						<label for="parametro">Buscar torneo:</label>
+						<g:textField name="parametro" maxlength="30" value="${params.parametro }"/>
+					</div>
+				</fieldset>
+				<g:submitButton name="buscar" class="save" value="Buscar" style="position: relative; left: 35em; top: -3.9em;" />
+				
+			</g:form>
+			
 			<table>
 				<thead>
 					<tr>
 					
 						<g:sortableColumn property="nombre" title="${message(code: 'torneo.nombre.label', default: 'Torneo')}" />
 					
-						<g:sortableColumn property="fechaInicio" title="${message(code: 'torneo.fechaInicio.label', default: 'Fecha Inicio')}" />
+						<g:sortableColumn property="fechaInicio" title="${message(code: 'torneo.fechaInicio.label', default: 'Fecha de inicio')}" />
 					
 						<g:sortableColumn property="fechaLimite" title="${message(code: 'torneo.fechaLimite.label', default: 'Límite de inscripción')}" />
 					
@@ -35,7 +61,10 @@
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${torneoInstanceList}" status="i" var="torneoInstance">
+				<g:if test="${!listaFiltrada }">
+					<g:set var="listaFiltrada" value="${Torneo.list()}"></g:set>
+				</g:if>
+				<g:each in="${listaFiltrada}" status="i" var="torneoInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${torneoInstance.id}">${fieldValue(bean: torneoInstance, field: "nombre")}</g:link></td>

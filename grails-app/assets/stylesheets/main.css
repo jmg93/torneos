@@ -198,7 +198,7 @@ img {
 	text-decoration: underline;
 }
 
-.nav a.home, .nav a.list, .nav a.create, .nav a.fixture {
+.nav a.home, .nav a.list, .nav a.create, .nav a.fixture, .nav a.boton-tabla{
 	background-position: 0.7em center;
 	background-repeat: no-repeat;
 	text-indent: 25px;
@@ -219,6 +219,10 @@ img {
 
 .nav a.fixture {
 	background-image: url(../images/skin/fixture.png);
+}
+
+.nav a.boton-tabla {
+	background-image: url(../images/skin/tabla1.png);
 }
 
 /* CREATE/EDIT FORMS AND SHOW PAGES */

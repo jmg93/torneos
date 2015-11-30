@@ -26,19 +26,7 @@
 				-webkit-border-radius: 0.6em;
 				border-radius: 0.6em;
 			}
-			@media screen and (max-width: 480px) {
-				#status {
-					display: none;
-				}
 
-				#page-body {
-					margin: 0 1em 1em;
-				}
-
-				#page-body h1 {
-					margin-top: 0;
-				}
-			}
 		</style>
 	</head>
 	<body>
@@ -49,8 +37,8 @@
 				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 				<li><g:link class="fixture" action="listaEquipos" resource="${torneoInstance}">Administrar</g:link></li>
-				<li><g:link class="fixture" action="verTablaGoleadores" resource="${torneoInstance}">Tabla de Goleadores</g:link></li>
-				<li><g:link class="fixture" action="mostrarTabla" resource="${torneoInstance}">Tabla de Posiciones</g:link></li>
+				<li><g:link class="boton-tabla" action="verTablaGoleadores" resource="${torneoInstance}">Goleadores</g:link></li>
+				<li><g:link class="boton-tabla" action="mostrarTabla" resource="${torneoInstance}">Posiciones</g:link></li>
 			</ul>
 		</div>
 		<div id="show-torneo" class="content scaffold-show" role="main">
@@ -90,29 +78,29 @@
 			<g:link action="verTablaGoleadores" resource="${torneoInstance}">Tabla de Goleadores</g:link>
 		</div>
 		
-
-				<table style="width: 65%; position: relative; top: 2.1em;" class="table table-striped table-bordered table-hover table-condensed">
-					<thead>
-						<g:sortableColumn property="posicion" defaultOrder="asc" title="Posición" />
-						<g:sortableColumn property="equipo" defaultOrder="asc" title="Equipo" />
-						<g:sortableColumn property="puntos" title="Puntos"/>
-					</thead>
-					<tbody>
-						<g:each in="${filas}" status="i" var="fila">
-							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-								<td style="width:8%">
-									${i+1}
-								</td>
-								<td> <g:link controller="equipo" action="show" id="${fila[0]}">
-									${equipos.Equipo.findById(fila[0])}
-								</g:link></td>
-								<td>
-									${fila[1]}
-								</td>
-							</tr>
-						</g:each>
-					</tbody>
-				</table>
+		
+		<table style="width: 65%; position: relative; top: 2.1em;" class="table table-striped table-bordered table-hover table-condensed">
+			<thead>
+				<th style="text-align:center">Posición</th>
+				<th>Equipo</th>
+				<th style="text-align:center; width:10%">Puntos</th>
+			</thead>
+			<tbody>
+				<g:each in="${filas}" status="i" var="fila">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+						<td style="width:8%; text-align:center">
+							${i+1}
+						</td>
+						<td> <g:link controller="equipo" action="show" id="${fila[0]}">
+							${equipos.Equipo.findById(fila[0])}
+						</g:link></td>
+						<td style="text-align:center">
+							${fila[1]}
+						</td>
+					</tr>
+				</g:each>
+			</tbody>
+		</table>
 
 			
 			
