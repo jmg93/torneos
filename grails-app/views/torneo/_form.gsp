@@ -23,7 +23,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'fechaLimite', 'error')} required">
 	<label for="fechaLimite">
-		<g:message code="torneo.fechaLimite.label" default="Fecha Limite" />
+		<g:message code="torneo.fechaLimite.label" default="Fecha límite de inscripción" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:datePicker name="fechaLimite" precision="day" relativeYears="[0..5]" value="${torneoInstance?.fechaLimite}"  />
@@ -32,7 +32,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'nMaxEquipos', 'error')} required">
 	<label for="nMaxEquipos">
-		<g:message code="torneo.nMaxEquipos.label" default="N Max Equipos" />
+		<g:message code="torneo.nMaxEquipos.label" default="Límite de equipos" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="nMaxEquipos" type="number" min="2" value="${torneoInstance.nMaxEquipos}" required=""/>

@@ -1,4 +1,5 @@
 <%@ page import="equipos.Jugador" %>
+<%@ page import="equipos.Equipo" %>
 
 
 
@@ -52,7 +53,7 @@
 		<g:message code="jugador.equipo.label" default="Equipo" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="equipo" name="equipo.id" from="${equipos.Equipo.list()}" optionKey="id" required="" value="${jugadorInstance?.equipo?.id}" class="many-to-one"/>
+	<g:select id="equipo" name="equipo.id" from="${Equipo.get(params.equipoId)}" optionKey="id" required="" value="${jugadorInstance?.equipo?.id}" class="many-to-one"/>
 
 </div>
 

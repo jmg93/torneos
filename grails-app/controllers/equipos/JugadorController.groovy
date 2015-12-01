@@ -25,6 +25,27 @@ class JugadorController {
 
     @Transactional
     def save(Jugador jugadorInstance) {
+		def equipoJ = jugadorInstance.equipo
+		
+		if (Jugador.where {(equipo==equipoJ) && (dni==jugadorInstance.dni)}) { //Si ya hay un jugador con el mismo DNI en el equipo no lo agrega
+			flash.message = "Ya hay un jugador con el mismo DNI en el equipo"
+			redirect controller:"equipo", action:"show", id:equipoJ.id
+			return
+		}
+		
+		if ((Jugador.where {(equipo==equipoJ) && (capitan==true)}) && jugadorInstance.capitan){ //Si ya hay un capitan en el equipo no lo agrega
+			flash.message = "El equipo ya tiene un capitán"
+			redirect controller:"equipo", action:"show", id:equipoJ.id
+			return
+		}		
+		
+		if (Jugador.findAllByNCamisetaAndEquipo(jugadorInstance.nCamiseta,equipoJ)){ //Si ya hay un jugador con el mismo número de camiseta no lo agrega
+			flash.message = "No puede haber dos jugadores con el mismo número de camiseta"
+			redirect controller:"equipo", action:"show", id:equipoJ.id
+			return
+		}
+		
+		
         if (jugadorInstance == null) {
             notFound()
             return
@@ -39,8 +60,8 @@ class JugadorController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'jugador.label', default: 'Jugador'), jugadorInstance.id])
-                redirect jugadorInstance
+                flash.message = "${jugadorInstance} agregado"
+                redirect controller:"equipo", action:"show", id:equipoJ.id
             }
             '*' { respond jugadorInstance, [status: CREATED] }
         }

@@ -7,8 +7,6 @@ import grails.plugin.springsecurity.annotation.Secured
 
 import org.springframework.transaction.annotation.Transactional
 
-import usuarios.User
-
 
 @Transactional(readOnly = true)
 class TorneoController {
@@ -17,7 +15,10 @@ class TorneoController {
 	
 	def FixtureService
 	def springSecurityService
-	
+
+	def inscripcion(Torneo torneoInstance){
+		forward controller:"equipo", action:"create", params:[torneoId:torneoInstance.id]
+	}
 	
 	def busquedaTorneo(){
 		def listaFiltrada = Torneo.createCriteria().list(params) {
@@ -32,9 +33,15 @@ class TorneoController {
 		render view:"index", model:[listaFiltrada:listaFiltrada]
     }
 	
+	@Secured(['ROLE_USER'])
 	def listaEquipos(Torneo torneoInstance){
-		def equipos = torneoInstance.equipos
-		render(view:"aceptarEquipos", model: [equipos:equipos, torneoInstance:torneoInstance])
+		if(torneoInstance.usuario == springSecurityService.currentUser){
+			def equipos = torneoInstance.equipos
+			render(view:"aceptarEquipos", model: [equipos:equipos, torneoInstance:torneoInstance])
+		}else{
+			flash.message = "Acceso denegado"
+			redirect action:"show", id:torneoInstance.id
+		}
 	}	
 	
 	def mostrarFixture(Torneo torneoInstance) {		

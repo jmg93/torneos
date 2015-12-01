@@ -4,7 +4,6 @@ package equipos
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
-import torneos.Torneo
 
 @Transactional(readOnly = true)
 class EquipoController {
@@ -13,6 +12,10 @@ class EquipoController {
 	
 	def AdministrarService
 	def FixtureService
+	
+	def agregarJugador(Equipo equipoInstance){
+		forward controller:"jugador", action:"create", params:[equipoId: equipoInstance.id]
+	}
 		
 	def aceptar(Equipo equipoInstance){
 		def torneo = equipoInstance.torneo
@@ -39,9 +42,10 @@ class EquipoController {
 	
 	def eliminar(Equipo equipoInstance){
 		def torneo = equipoInstance.torneo
+		def nombre = equipoInstance.nombre
+		flash.message = "${nombre} eliminado del torneo"
 		torneo.equipos.remove(equipoInstance)
 		equipoInstance.delete(flush:true)
-		flash.message = 'Equipo ${equipoInstance} eliminado del torneo'
 		redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
 	}
 

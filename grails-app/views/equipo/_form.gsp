@@ -1,4 +1,5 @@
 <%@ page import="equipos.Equipo" %>
+<%@ page import="torneos.Torneo" %>
 
 
 
@@ -20,12 +21,18 @@
 
 </div>
 
+<!-- <div class="fieldcontain ${hasErrors(bean: equipoInstance, field: 'torneo', 'error')} required">
+	<g:hiddenField name="torneo.id" value="${params.torneoId }"></g:hiddenField>
+</div>
+ -->
+
+
 <div class="fieldcontain ${hasErrors(bean: equipoInstance, field: 'torneo', 'error')} required">
 	<label for="torneo">
 		<g:message code="equipo.torneo.label" default="Torneo" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="torneo" name="torneo.id" from="${torneos.Torneo.list()}" optionKey="id" required="" value="${equipoInstance?.torneo?.id}" class="many-to-one"/>
+	<g:select id="torneo" name="torneo.id" from="${Torneo.get(params.torneoId)}" optionKey="id" required="" value="${equipoInstance?.torneo?.id}" class="many-to-one"/>
 
 </div>
 

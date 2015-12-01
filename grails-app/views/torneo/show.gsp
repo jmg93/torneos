@@ -39,6 +39,7 @@
 				<li><g:link class="admin" action="listaEquipos" resource="${torneoInstance}">Administrar</g:link></li>
 				<li><g:link class="boton-tabla" action="verTablaGoleadores" resource="${torneoInstance}">Goleadores</g:link></li>
 				<li><g:link class="boton-tabla" action="mostrarTabla" resource="${torneoInstance}">Posiciones</g:link></li>
+				<li><g:link class="create" action="inscripcion" resource="${torneoInstance}">Inscribí tu equipo</g:link></li>
 			</ul>
 		</div>
 		<div id="show-torneo" class="content scaffold-show" role="main">
@@ -68,6 +69,9 @@
 			<g:else>
 				En juego
 			</g:else>
+			<br/>
+			<br/>
+			Entre ${torneoInstance.nMinJugadorXEquipo} y ${torneoInstance.nMaxJugadorXEquipo} jugadores por equipo
 			<br/>
 			<br/>
 			Equipos: ${equiposAceptados} / ${torneoInstance.nMaxEquipos }
