@@ -42,13 +42,13 @@
 			</ul>
 		</div>
 		<div id="show-torneo" class="content scaffold-show" role="main">
-			<h1>${torneoInstance }</h1>
+			<h1>	${torneoInstance }</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			
 			<div id="status">
-			Creador: ${torneoInstance.usuario }
+			Creador: <g:link controller="user" action="show" id="${torneoInstance.usuario.id}"> ${torneoInstance.usuario } </g:link>
 			<br/>
 			<br/>
 			<g:if test="${torneoInstance.fechaInicio > new Date() }">
@@ -74,8 +74,6 @@
 			<br/>
 			<br/>
 			<g:link action="mostrarFixture" resource="${torneoInstance}">Ver Fixture</g:link>
-			<br/>
-			<g:link action="verTablaGoleadores" resource="${torneoInstance}">Tabla de Goleadores</g:link>
 		</div>
 		
 		

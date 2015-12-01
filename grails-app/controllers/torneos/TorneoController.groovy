@@ -77,7 +77,7 @@ class TorneoController {
 	def verTablaGoleadores(Torneo torneoInstance){
 		if (FixtureService.torneoEmpezado(torneoInstance)) {
 			def resultado = FixtureService.calcularTablaGoleadores(torneoInstance)
-			render(view: "tablaPosiciones_test",  model: [filas: resultado, torneoInstance: torneoInstance])
+			render(view: "tablaGoleadores",  model: [filas: resultado, torneoInstance: torneoInstance])
 		} else {
 			flash.message = "El torneo no ha empezado"
 			redirect action:"show", id:torneoInstance.id 
