@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Welcome to Grails</title>
+		<title>TorneosYa</title>
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
@@ -82,6 +82,24 @@
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		
+		<div style="margin: 2em; text-align: justify;">
+			<h1 style="font-size: 30px; text-align: center;">Bienvenidos</h1>
+			<p>
+			TorneosYa es una aplicación web que te permite crear y administrar torneos de fútbol. </br>
+			Te registrás y ya podés empezar: elegís un nombre para tu torneo, una fecha límite para la inscripción y una fecha de inicio.
+			Los demás usuarios pueden postularse para participar en tu torneo, una vez finalizado el plazo para la inscripción podés elegir qué 
+			equipos querés que participen del torneo y generar automáticamente el fixture.
+			Fecha a fecha vas cargando los resultados de los partidos y TorneosYa se encarga de generar la tabla de posiciones y la tabla de goleadores.
+			</p>
+		</div>
+		
+		<div style="width: 63%; position: relative; left: 19%;">
+			<g:link controller="torneo" action="create" ><g:img dir="images" file="nuevoTorneo1.png" width="300" height="300"></g:img></g:link>
+			<g:link controller="torneo" action="index"><g:img dir="images" file="buscarTorneo.png" width="300" height="300"></g:img></g:link>
+		</div>
+		
+		
 		<div id="status" role="complementary">
 			<h1>Application Status</h1>
 			<ul>

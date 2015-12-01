@@ -26,7 +26,7 @@
 		</sec:ifNotLoggedIn>
 		<sec:ifLoggedIn>
 				<span style="margin: 1%; position: relative; bottom: 2.8em; left: 27em;" >
-					Hola <sec:username/>  |  <g:link controller='logout' style="margin:0em">Salir</g:link>
+					Hola <g:link style="margin:0em" controller="user" action="show" id="${sec.loggedInUserInfo(field:"id")}"><sec:username/></g:link> |  <g:link controller='logout' style="margin:0em">Salir</g:link>
 				</span>
 		</sec:ifLoggedIn>
 		
