@@ -3,12 +3,15 @@ package partidos
 
 
 import static org.springframework.http.HttpStatus.*
+import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class PartidoController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	
+	def springSecurityService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -45,9 +48,15 @@ class PartidoController {
             '*' { respond partidoInstance, [status: CREATED] }
         }
     }
-
+	
+	@Secured(['ROLE_USER'])
     def edit(Partido partidoInstance) {
-        respond partidoInstance
+        if(partidoInstance.local.torneo.usuario == springSecurityService.currentUser){
+			respond partidoInstance
+		}else{
+			flash.message = "Acceso denegado"
+			redirect controller:"torneo", action:"show", id:partidoInstance.local.torneo.id
+		}
     }
 
     @Transactional

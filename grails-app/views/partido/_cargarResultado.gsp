@@ -24,7 +24,7 @@
 						<th style="text-align: center"><asset:image src="goles.png" width="20" height="20" alt="Goles"/></th>
 					</thead>
 					<tbody>
-						<g:each in="${partidoInstance.local.jugadores}" status="i" var="jugador">
+						<g:each in="${partidoInstance.local.jugadores.sort{it.nCamiseta}}" status="i" var="jugador">
 							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 								<td>
 									${jugador.nCamiseta}
@@ -91,7 +91,7 @@
 						<th style="text-align: center"><asset:image src="goles.png" width="20" height="20" alt="Goles"/></th>
 					</thead>
 					<tbody>
-						<g:each in="${partidoInstance.visitante.jugadores}" status="i" var="jugador">
+						<g:each in="${partidoInstance.visitante.jugadores.sort{it.nCamiseta}}" status="i" var="jugador">
 							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 								<td>
 									${jugador.nCamiseta}

@@ -19,7 +19,7 @@
 		<g:layoutHead/>
 	</head>
 	<body>
-		<div id="grailsLogo" role="banner"><a href="/TorneosYa/"><asset:image src="logo2_v1.png" width="300" height="100" alt="Grails"/></a>
+		<div id="grailsLogo" role="banner"><a href="${createLink(uri: '/')}"><asset:image src="logo2_v1.png" width="300" height="100" alt="Grails"/></a>
 		<sec:ifNotLoggedIn>
 					<g:link class="buttons" style="position: relative; left: 32em; bottom: 1.15em;" controller="login">Ingresá</g:link>
 					<g:link class="buttons" style="position: relative; left: 20em; bottom: 1.15em;" controller="register">Registrate</g:link>
