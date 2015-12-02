@@ -16,10 +16,21 @@ class EquipoController {
 	def agregarJugador(Equipo equipoInstance){
 		forward controller:"jugador", action:"create", params:[equipoId: equipoInstance.id]
 	}
-		
+	
+		/* Lo uso para cargar 10 jgadores de una en un equipo
+	def meterJugadores(Equipo equipoInstance) {
+		FixtureService.cargarJugadores(equipoInstance)
+		flash.message = "deberia haber hecho la magia"
+		redirect action:"show", id:equipoInstance.id
+	}*/
+	
 	def aceptar(Equipo equipoInstance){
 		def torneo = equipoInstance.torneo
 		
+		if (FixtureService.torneoEmpezado(torneo) ) {
+			flash.message = "El torneo ya esta empezado por lo que no se puede agregar el equipo"
+			redirect controller:"torneo", action:"listaEquipos", id:torneo.id
+		} else {
 		if (FixtureService.getCantidadEquipos(torneo) >= torneo.nMaxEquipos){
 			flash.message = "El torneo ya tiene los ${torneo.nMaxEquipos} equipos permitidos"
 			redirect controller:"torneo", action:"listaEquipos", id:torneo.id
@@ -38,6 +49,8 @@ class EquipoController {
 				}
 			}
 		}
+	}
+		
     }
 	
 	def eliminar(Equipo equipoInstance){

@@ -11,9 +11,8 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link controller="equipo" class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="home" action="show" id="${torneoInstance.id}">Volver al torneo</g:link></li>
 				<li><g:link class="fixture" action="crearFixture" resource="${torneoInstance}">Generar Fixture</g:link></li>
-				<li><g:link class="fixture" action="mostrarFixture" resource="${torneoInstance}">Ver Fixture</g:link></li>
 			</ul>
 		</div>
 		<div id="list-equipo" class="content scaffold-list" role="main">

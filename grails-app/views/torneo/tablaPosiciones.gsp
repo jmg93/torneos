@@ -3,7 +3,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'partido.label', default: 'Partido')}" />
-		<title><g:message code="default.show.label" args="[entityName]" /></title>
+		<title>Tabla Posiciones - ${torneoInstance.nombre}</title>
 	</head>
 	<body>
 			<div class="nav">

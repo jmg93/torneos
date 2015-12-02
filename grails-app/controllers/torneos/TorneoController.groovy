@@ -52,7 +52,7 @@ class TorneoController {
 		if (FixtureService.torneoEmpezado(torneoInstance))
 			render view:"mostrarFixture", model: [todosPartidos: torneoInstance.partidos, torneoInstance: torneoInstance]
 		else{
-			flash.message = "El fixture no ha sido generado todavía"
+			flash.message = "El torneo no ha empezado"
 			redirect action:"show", id:torneoInstance.id
 		}
 	}
@@ -64,7 +64,7 @@ class TorneoController {
 			filas = FixtureService.calcularTablaPosiciones(torneoInstance)
 			render(view: "tablaPosiciones",  model: [filas:filas, torneoInstance:torneoInstance])
 		} else {
-			flash.message = "El fixture no ha sido generado todavía"
+			flash.message = "El torneo no ha empezado"
 			redirect action:"show", id:torneoInstance.id
 		}		
 	}
@@ -189,6 +189,13 @@ class TorneoController {
             '*'{ render status: NO_CONTENT }
         }
     }
+	/* Lo uso para cargar muchos equipoos de una
+	def meterEquipos(Torneo torneoInstance) {
+		
+		FixtureService.crearEquipos(torneoInstance)
+		flash.message = "deberia haber hecho la magia"
+		redirect action:"show", id:torneoInstance.id		
+	}*/
 
     protected void notFound() {
         request.withFormat {

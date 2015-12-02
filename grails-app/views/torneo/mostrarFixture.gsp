@@ -5,7 +5,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'partido.label', default: 'Partido')}" />
-		<title>${torneoInstance} &nbsp;-&nbsp; Fixture</title>
+		<title>Fixture &nbsp;-&nbsp; ${torneoInstance}</title>
 	</head>
 	<body>
 			<div class="nav">

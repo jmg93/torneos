@@ -1,6 +1,7 @@
 package torneos
 
 import equipos.Equipo
+import equipos.Jugador
 import grails.transaction.Transactional
 import groovy.sql.Sql
 import partidos.Partido
@@ -163,6 +164,32 @@ class FixtureService {
 		filas.sort( {a, b -> b[1] <=> a[1] })
 		return filas
 	}
+	/* lo uso para cargar muchos equipos de una
+	def crearEquipos(Torneo torneoInstance) {
+		
+		def equipoAagregar
+		for (int i=0; i <=10; i++) {
+			equipoAagregar = new Equipo(nombre: "equipo" + i.toString(), contacto: "a@gmail.com", aceptado: false, torneo: torneoInstance)
+			torneoInstance.addToEquipos(equipoAagregar)
+		}
+
+		torneoInstance.save(flush: true)
+	}*/
+	/* NO se usa --> Solo para cargar 10 jugadores de una en un equipo
+	def cargarJugadores(Equipo equipoInstance) {
+		
+		def jugadorAagregar
+		def suma
+		boolean esCapi = true
+		for (int i=1; i <11; i++) {
+			suma = equipoInstance.id + i + 1000000
+			jugadorAagregar = new Jugador(nombre: "jugador" + i.toString(), apellido: equipoInstance.nombre, nCamiseta: i, dni: suma, capitan: esCapi)
+			equipoInstance.addToJugadores(jugadorAagregar)
+			esCapi = false
+		}
+
+		equipoInstance.save(flush: true)
+	}*/
 	
 	def calcularTablaGoleadores(Torneo torneoInstance){
 		def db = new Sql(dataSource)
