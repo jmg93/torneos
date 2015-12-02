@@ -64,7 +64,13 @@ class EquipoController {
 
     @Transactional
     def save(Equipo equipoInstance) {
-        if (equipoInstance == null) {
+		if (Equipo.where {(torneo==equipoInstance.torneo) && (nombre==equipoInstance.nombre)}) {
+			flash.message = "Ya hay un equipo con ese nombre"
+			redirect controller:"torneo", action:"show", id:equipoInstance.torneo.id
+			return		
+		}
+		
+		if (equipoInstance == null) {
             notFound()
             return
         }
@@ -80,7 +86,7 @@ class EquipoController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'equipo.label', default: 'Equipo'), equipoInstance.id])
+                flash.message = "${equipoInstance} creado"
                 redirect equipoInstance
             }
             '*' { respond equipoInstance, [status: CREATED] }

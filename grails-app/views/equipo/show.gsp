@@ -6,7 +6,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'equipo.label', default: 'Equipo')}" />
-		<title><g:message code="default.show.label" args="[entityName]" /></title>
+		<title>${equipoInstance } - ${equipoInstance.torneo }</title>
 	</head>
 	<body>
 		<a href="#show-equipo" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -18,7 +18,7 @@
 			</ul>
 		</div>
 		<div id="show-equipo" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			<h1>${equipoInstance }</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -43,24 +43,18 @@
 				</g:if>
 			
 				<g:if test="${equipoInstance?.aceptado}">
-				<li class="fieldcontain">
-					<span id="aceptado-label" class="property-label"><g:message code="equipo.aceptado.label" default="Aceptado" /></span>
-					
-						<span class="property-value" aria-labelledby="aceptado-label"><g:formatBoolean boolean="${equipoInstance?.aceptado}" /></span>
-					
-				</li>
+					<li class="fieldcontain">
+						<span id="aceptado-label" class="property-label">Estado</span>
+						<span class="property-value" aria-labelledby="aceptado-label">Aceptado</span>
+					</li>
 				</g:if>
-			
-				<g:if test="${equipoInstance?.jugadores}">
-				<li class="fieldcontain">
-					<span id="jugadores-label" class="property-label"><g:message code="equipo.jugadores.label" default="Jugadores" /></span>
+				<g:else>
+					<li class="fieldcontain">
+						<span id="aceptado-label" class="property-label">Estado</span>
+						<span class="property-value" aria-labelledby="aceptado-label">Pendiente</span>
+					</li>
 					
-						<g:each in="${equipoInstance.jugadores}" var="j">
-						<span class="property-value" aria-labelledby="jugadores-label"><g:link controller="jugador" action="show" id="${j.id}">${j?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
+				</g:else>
 			
 				<g:if test="${equipoInstance?.torneo}">
 				<li class="fieldcontain">
@@ -70,6 +64,36 @@
 					
 				</li>
 				</g:if>
+				
+				<h1 style="width: 65%; position: relative; left: 14%; margin-top: 2em;">Plantel</h1>
+				<table class="table table-striped table-bordered table-hover table-condensed" style="width: 65%; position: relative; left: 17%;">
+					<thead>
+						<th style="width:8%">Camiseta</th>
+						<th>Nombre</th>
+						<th style="width:8%">Capitan</th>
+					</thead>
+					<tbody>
+						<g:each in="${equipoInstance.jugadores.sort{it.nCamiseta}}" status="i" var="jugador">
+							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+								<td style="text-align:center">
+									${jugador.nCamiseta }
+								</td>
+								<td> <g:link controller="jugador" action="show" id="${jugador.id}">
+									${jugador}
+								</g:link></td>
+								<td style="text-align:center">
+									<g:if test="${jugador.capitan}">
+										(C)
+									</g:if>
+									<g:else>
+										-
+									</g:else>
+								</td>
+							</tr>
+						</g:each>
+					</tbody>
+				</table>
+				
 			
 			</ol>
 			<g:form url="[resource:equipoInstance, action:'delete']" method="DELETE">

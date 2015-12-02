@@ -16,6 +16,10 @@ class TorneoController {
 	def FixtureService
 	def springSecurityService
 
+	def mostrarReglamento(Torneo torneoInstance){
+		render view:"reglamento", model:[torneoInstance:torneoInstance]
+	}
+	
 	def inscripcion(Torneo torneoInstance){
 		forward controller:"equipo", action:"create", params:[torneoId:torneoInstance.id]
 	}
