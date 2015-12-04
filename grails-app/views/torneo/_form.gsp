@@ -17,7 +17,7 @@
 		<g:message code="torneo.fechaInicio.label" default="Fecha Inicio" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datepickerUI name="fechaInicio" locale="es_ES" required="true" value="${torneoInstance?.fechaInicio}" options="{minDate:'0', maxDate:'+1Y'}"/>
+	<g:datepickerUI name="fechaInicio" locale="es" required="true" value="${torneoInstance?.fechaInicio}" options="{minDate:'0', maxDate:'+1Y'}"/>
 
 </div>
 
@@ -26,7 +26,7 @@
 		<g:message code="torneo.fechaLimite.label" default="Fecha límite de inscripción" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datepickerUI name="fechaLimite" locale="${new Locale("es", "ES") }" required="true" value="${torneoInstance?.fechaLimite}" options="{minDate:'0', maxDate:'+1Y'}"/>
+	<g:datepickerUI name="fechaLimite" locale="es" required="true" value="${torneoInstance?.fechaLimite}" options="{minDate:'0', maxDate:'+1Y'}"/>
 
 </div>
 

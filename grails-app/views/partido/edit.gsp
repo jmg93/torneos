@@ -4,7 +4,10 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'partido.label', default: 'Partido')}" />
-		<title><g:message code="default.edit.label" args="[entityName]" /></title>
+		<title>Cargar resultado - ${partidoInstance }</title>
+				<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	</head>
 	<body>
 		<a href="#edit-partido" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

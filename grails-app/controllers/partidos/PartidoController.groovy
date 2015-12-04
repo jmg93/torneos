@@ -111,7 +111,7 @@ class PartidoController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Partido.label', default: 'Partido'), partidoInstance.id])
+                flash.message = "Partido actualizado"
                 redirect partidoInstance
             }
             '*'{ respond partidoInstance, [status: OK] }

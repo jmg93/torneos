@@ -58,30 +58,36 @@ class TorneoController {
 			render view:"mostrarFixture", model: [todosPartidos: torneoInstance.partidos, torneoInstance: torneoInstance]
 		else{
 			flash.message = "El torneo no ha empezado"
-			redirect action:"show", id:torneoInstance.id
+			render view:"mostrarFixture", model: [todosPartidos: torneoInstance.partidos, torneoInstance: torneoInstance]
 		}
 	}
 	
 	def mostrarTabla(Torneo torneoInstance) {
+		def cantPartidos = FixtureService.getCantidadPartidos(torneoInstance)
+		def filas
+		filas = FixtureService.calcularTablaPosiciones(torneoInstance)
 		if (FixtureService.torneoEmpezado(torneoInstance)) {
-			def cantPartidos = FixtureService.getCantidadPartidos(torneoInstance)
-			def filas
-			filas = FixtureService.calcularTablaPosiciones(torneoInstance)
 			render(view: "tablaPosiciones",  model: [filas:filas, torneoInstance:torneoInstance])
 		} else {
 			flash.message = "El torneo no ha empezado"
-			redirect action:"show", id:torneoInstance.id
+			render(view: "tablaPosiciones",  model: [filas:filas, torneoInstance:torneoInstance])
 		}		
 	}
 	
+	@Secured(['ROLE_USER'])
 	def crearFixture(Torneo torneoInstance){
+		if (torneoInstance.usuario == springSecurityService.currentUser){
+			flash.message = "Acceso denegado"
+			redirect action:"listaEquipos", id:torneoInstance.id
+			return
+		}
 		def cantEquipos = FixtureService.getCantidadEquipos(torneoInstance) //obtiene cantidad de equipos aceptados en el torneo
 		if (cantEquipos >= 2) { //para sortear el fixture tiene que haber minimo 2 equipos aceptados
 			if ( (FixtureService.torneoEmpezado(torneoInstance) == false ) ) { // y tambien el torneo no tiene que estar empezado
 				def todosPartidos = FixtureService.sortearFixture(torneoInstance)
 				render(view: "mostrarFixture",  model: [todosPartidos:todosPartidos, torneoInstance:torneoInstance])
 			} else {
-				flash.message = "El fxture ya esta generado"
+				flash.message = "El torneo ya empezo, no podés cambiar el fixture"
 				redirect action:"listaEquipos", id:torneoInstance.id
 			}
 		} else {
@@ -91,12 +97,12 @@ class TorneoController {
 	}
 
 	def verTablaGoleadores(Torneo torneoInstance){
+		def resultado = FixtureService.calcularTablaGoleadores(torneoInstance)
 		if (FixtureService.torneoEmpezado(torneoInstance)) {
-			def resultado = FixtureService.calcularTablaGoleadores(torneoInstance)
 			render(view: "tablaGoleadores",  model: [filas: resultado, torneoInstance: torneoInstance])
 		} else {
 			flash.message = "El torneo no ha empezado"
-			redirect action:"show", id:torneoInstance.id 
+			render(view: "tablaGoleadores",  model: [filas: resultado, torneoInstance: torneoInstance])
 		}
 	}
 	
@@ -107,8 +113,7 @@ class TorneoController {
 
     def show(Torneo torneoInstance) {
 		def filas = FixtureService.calcularTablaPosiciones(torneoInstance)
-		def equiposAceptados = FixtureService.getCantidadEquipos(torneoInstance)
-		
+		def equiposAceptados = FixtureService.getCantidadEquipos(torneoInstance)		
         respond torneoInstance, model: [filas:filas, equiposAceptados:equiposAceptados]
     }
 

@@ -6,8 +6,7 @@
 			<g:message code="partido.fechaPartido.label" default="Fecha" />
 			
 		</label>
-		<g:datePicker name="fechaPartido" precision="day" value="${new Date()}" relativeYears="[-4..0]"/>
-			
+		<g:datepickerUI name="fechaPartido" locale="es" value="${partidoInstance?.fechaPartido}" options="{minDate:'-2Y', maxDate:'0'}"/>	
 	</div>
 </div>
 

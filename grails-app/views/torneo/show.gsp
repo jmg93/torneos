@@ -33,7 +33,6 @@
 		<a href="#show-torneo" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}">Inicio</a></li>
 				<li><g:link class="list" action="index">Buscar torneos</g:link></li>
 				<li><g:link class="create" action="inscripcion" resource="${torneoInstance}">Inscribí tu equipo</g:link></li>
 				<li><g:link class="admin" action="listaEquipos" resource="${torneoInstance}">Administrar</g:link></li>
@@ -49,7 +48,7 @@
 		</div>
 		
 		<div id="show-torneo" class="content scaffold-show" role="main">
-			<h1>	${torneoInstance }</h1>
+			<h1>${torneoInstance }</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
