@@ -12,10 +12,9 @@
 		<a href="#show-equipo" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" controller="torneo" action="show" id="${equipoInstance.torneo.id }">Volver al torneo</g:link></li>
-				<li><g:link class="boton-tabla" action="partidosEquipo" resource="${equipoInstance }">Partidos en el torneo</g:link></li>
+				<li><g:link class="atras" controller="torneo" action="show" id="${equipoInstance.torneo.id }">Volver al torneo</g:link></li>
 				<li><g:link class="create" action="agregarJugador" resource="${equipoInstance }">Agregar jugador</g:link></li>
+				<li><g:link class="boton-tabla" action="partidosEquipo" resource="${equipoInstance }">Partidos en el torneo</g:link></li>
 			</ul>
 		</div>
 		<div id="show-equipo" class="content scaffold-show" role="main">
@@ -46,7 +45,7 @@
 				<g:if test="${equipoInstance?.aceptado}">
 					<li class="fieldcontain">
 						<span id="aceptado-label" class="property-label">Estado</span>
-						<span class="property-value" aria-labelledby="aceptado-label">Aceptado</span>
+						<span class="property-value" aria-labelledby="aceptado-label">Inscripto</span>
 					</li>
 				</g:if>
 				<g:else>
@@ -99,5 +98,6 @@
 			</ol>
 						
 		</div>
+		
 	</body>
 </html>
