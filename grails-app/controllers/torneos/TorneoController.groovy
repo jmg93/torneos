@@ -4,7 +4,6 @@ package torneos
 
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
-
 import org.springframework.transaction.annotation.Transactional
 
 
@@ -48,7 +47,7 @@ class TorneoController {
 			def equipos = torneoInstance.equipos
 			render(view:"aceptarEquipos", model: [equipos:equipos, torneoInstance:torneoInstance])
 		}else{
-			flash.message = "Acceso denegado"
+			flash.message = "Acceso denegado (Sólo disponible para el administrador del torneo)"
 			redirect action:"show", id:torneoInstance.id
 		}
 	}	
@@ -63,46 +62,45 @@ class TorneoController {
 	}
 	
 	def mostrarTabla(Torneo torneoInstance) {
-		def cantPartidos = FixtureService.getCantidadPartidos(torneoInstance)
-		def filas
-		filas = FixtureService.calcularTablaPosiciones(torneoInstance)
 		if (FixtureService.torneoEmpezado(torneoInstance)) {
+			def filas
+			filas = FixtureService.calcularTablaPosiciones(torneoInstance)
 			render(view: "tablaPosiciones",  model: [filas:filas, torneoInstance:torneoInstance])
 		} else {
 			flash.message = "El torneo no ha empezado"
-			render(view: "tablaPosiciones",  model: [filas:filas, torneoInstance:torneoInstance])
+			redirect action:"show", id:torneoInstance.id
 		}		
 	}
 	
 	@Secured(['ROLE_USER'])
 	def crearFixture(Torneo torneoInstance){
-		if (torneoInstance.usuario == springSecurityService.currentUser){
-			flash.message = "Acceso denegado"
-			redirect action:"listaEquipos", id:torneoInstance.id
+		if (torneoInstance.usuario != springSecurityService.currentUser){
+			flash.message = "Acceso denegado (Sólo disponible para el administrador del torneo)"
+			redirect action:"show", id:torneoInstance.id
 			return
 		}
 		def cantEquipos = FixtureService.getCantidadEquipos(torneoInstance) //obtiene cantidad de equipos aceptados en el torneo
 		if (cantEquipos >= 2) { //para sortear el fixture tiene que haber minimo 2 equipos aceptados
-			if ( (FixtureService.torneoEmpezado(torneoInstance) == false ) ) { // y tambien el torneo no tiene que estar empezado
+			if ( (FixtureService.torneoEmpezado(torneoInstance) == false ) && (FixtureService.getCantidadPartidos(torneoInstance) == 0) ) { // y tambien el torneo no tiene que estar empezado
 				def todosPartidos = FixtureService.sortearFixture(torneoInstance)
 				render(view: "mostrarFixture",  model: [todosPartidos:todosPartidos, torneoInstance:torneoInstance])
 			} else {
-				flash.message = "El torneo ya empezo, no podés cambiar el fixture"
+				flash.message = "El torneo ya empezó, no podés generar otro fixture"
 				redirect action:"listaEquipos", id:torneoInstance.id
 			}
 		} else {
-			flash.message = "La cantidad de equipos aceptados tiene que ser 2 como minimo"
+			flash.message = "La cantidad de equipos aceptados tiene que ser 2 como mínimo"
 			redirect action:"listaEquipos", id:torneoInstance.id
 		}
 	}
 
 	def verTablaGoleadores(Torneo torneoInstance){
-		def resultado = FixtureService.calcularTablaGoleadores(torneoInstance)
 		if (FixtureService.torneoEmpezado(torneoInstance)) {
+			def resultado = FixtureService.calcularTablaGoleadores(torneoInstance)
 			render(view: "tablaGoleadores",  model: [filas: resultado, torneoInstance: torneoInstance])
 		} else {
+			redirect action:"show", id:torneoInstance.id
 			flash.message = "El torneo no ha empezado"
-			render(view: "tablaGoleadores",  model: [filas: resultado, torneoInstance: torneoInstance])
 		}
 	}
 	
@@ -190,29 +188,35 @@ class TorneoController {
 
     @Transactional
     def delete(Torneo torneoInstance) {
-
-        if (torneoInstance == null) {
-            notFound()
-            return
-        }
-
-        torneoInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Torneo.label', default: 'Torneo'), torneoInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+		//si se borra un torneo que tiene partidos cargados, te tira un error de PK y FK por las tablas de los partidos.
+		if (FixtureService.getCantidadPartidos(torneoInstance) == 0) {		 //todo lo siguiente es el metodo normal para borrar el torneo	
+	        if (torneoInstance == null) {
+	            notFound()
+	            return
+	        }
+	
+	        torneoInstance.delete flush:true
+	
+	        request.withFormat {
+	            form multipartForm {
+	                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Torneo.label', default: 'Torneo'), torneoInstance.id])
+	                redirect action:"index", method:"GET"
+	            }
+	            '*'{ render status: NO_CONTENT }
+	        }
+		} else {
+			flash.message = "No se puede borrar el torneo porque hay partidos cargados"
+			redirect action:"listaEquipos", id:torneoInstance.id
+			}
     }
-	/* Lo uso para cargar muchos equipoos de una
+	
+	// Se usa para cargar 10 equipoos de una
 	def meterEquipos(Torneo torneoInstance) {
 		
 		FixtureService.crearEquipos(torneoInstance)
-		flash.message = "deberia haber hecho la magia"
+		flash.message = "ahi deberia haber hecho la magia"
 		redirect action:"show", id:torneoInstance.id		
-	}*/
+	}
 
     protected void notFound() {
         request.withFormat {

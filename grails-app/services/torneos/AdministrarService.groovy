@@ -11,8 +11,6 @@ class AdministrarService {
 		equipoInstance.save(flush: true)		//Guarda el equipo aceptado
 	}
 	
-	
-
     def serviceMethod() {
 
     }

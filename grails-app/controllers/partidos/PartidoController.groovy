@@ -54,7 +54,7 @@ class PartidoController {
         if(partidoInstance.local.torneo.usuario == springSecurityService.currentUser){
 			respond partidoInstance
 		}else{
-			flash.message = "Acceso denegado"
+			flash.message = "Acceso denegado (Sólo disponible para el administrador del torneo)"
 			redirect controller:"torneo", action:"show", id:partidoInstance.local.torneo.id
 		}
     }

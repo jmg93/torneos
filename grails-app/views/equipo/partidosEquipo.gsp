@@ -9,6 +9,9 @@
 			<div class="nav">
 				<g:link class="atras" style="width: 16%;" action="show" id="${equipoInstance.id}">Volver al equipo</g:link>
 			</div>
+			<g:if test="${flash.message}">
+  				<div class="message" style="display: block">${flash.message}</div>
+			</g:if>
 			<div id="tablaFixture" class="content scaffold-list">
 				<table class="table table-striped table-bordered table-hover table-condensed">
 					<thead>

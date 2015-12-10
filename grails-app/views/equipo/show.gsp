@@ -73,23 +73,25 @@
 						<th style="width:8%">Capitan</th>
 					</thead>
 					<tbody>
-						<g:each in="${equipoInstance.jugadores.sort{it.nCamiseta}}" status="i" var="jugador">
-							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-								<td style="text-align:center">
-									${jugador.nCamiseta }
-								</td>
-								<td> <g:link controller="jugador" action="show" id="${jugador.id}">
-									${jugador}
-								</g:link></td>
-								<td style="text-align:center">
-									<g:if test="${jugador.capitan}">
-										(C)
-									</g:if>
-									<g:else>
-										-
-									</g:else>
-								</td>
-							</tr>
+						<g:each in="${equipoInstance.jugadores}" status="i" var="jugador">
+						 <g:if test="${jugador}">  
+								<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+									<td style="text-align:center">
+										${jugador.nCamiseta}
+									</td>
+									<td> <g:link controller="jugador" action="show" id="${jugador.id}">
+										${jugador}
+									</g:link></td>
+									<td style="text-align:center">
+										<g:if test="${jugador.capitan}">
+											(C)
+										</g:if>
+										<g:else>
+											-
+										</g:else>
+									</td>
+								</tr>
+							</g:if>
 						</g:each>
 					</tbody>
 				</table>

@@ -75,7 +75,7 @@ class JugadorController {
         if(jugadorInstance.equipo.torneo.usuario == springSecurityService.currentUser){
 			respond jugadorInstance
 		}else{
-			flash.message = "Acceso denegado"
+			flash.message = "Acceso denegado (Sólo disponible para el administrador del torneo)"
 			redirect action:"show", id:jugadorInstance.id
 		}
     }
@@ -107,7 +107,7 @@ class JugadorController {
 	@Secured(['ROLE_USER'])
     def delete(Jugador jugadorInstance) {
 		if(jugadorInstance.equipo.torneo.usuario != springSecurityService.currentUser){
-			flash.message = "Acceso denegado"
+			flash.message = "Acceso denegado (Sólo disponible para el administrador del torneo)"
 			redirect action:"show", id:jugadorInstance.id
 			return
 		}

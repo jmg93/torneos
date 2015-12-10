@@ -11,6 +11,9 @@
 			<div class="nav">
 				<g:link class="home" style="width: 15%;" action="show" id="${torneoInstance.id}">Volver al torneo</g:link>
 			</div>
+			<g:if test="${flash.message}">
+  				<div class="message" style="display: block">${flash.message}</div>
+			</g:if>
 			<div id="tablaFixture" class="content scaffold-list">
 				<table class="table table-striped table-bordered table-hover table-condensed">
 					<thead>

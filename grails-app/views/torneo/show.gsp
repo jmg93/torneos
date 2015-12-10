@@ -54,7 +54,7 @@
 			</g:if>
 			
 			<div id="status">
-			Creador: <g:link controller="user" action="show" id="${torneoInstance.usuario.id}"> ${torneoInstance.usuario } </g:link>
+			Creador: <g:link controller="user" action="show" id="${torneoInstance.usuario.id}">${torneoInstance.usuario}</g:link>
 			<br/>
 			<br/>
 			<g:if test="${torneoInstance.fechaInicio > new Date() }">
@@ -86,7 +86,7 @@
 		</div>
 		
 
-		
+
 		<table style="width: 65%; position: relative; top: 2.1em;" class="table table-striped table-bordered table-hover table-condensed">
 			<thead>
 				<th style="text-align:center">Posición</th>
@@ -109,8 +109,7 @@
 				</g:each>
 			</tbody>
 		</table>
-
-			
+		
 			
 			<!--<ol class="property-list torneo">
 			

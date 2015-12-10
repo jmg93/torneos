@@ -21,23 +21,28 @@ class EquipoController {
 			if(equipoInstance.torneo.usuario == springSecurityService.currentUser){
 				forward controller:"jugador", action:"create", params:[equipoId: equipoInstance.id]
 				return
+			} else {
+				flash.message = "Como el torneo ya empezó, sólo el administrador del torneo puede agregar jugadores al equipo"
+				redirect action:"show", id:equipoInstance.id
+				return
 			}
-			flash.message = "El torneo ya empezó, solo el administrador del torneo puede agregar jugadores al equipo"
-			redirect action:"show", id:equipoInstance.id
+		} else {
+			forward controller:"jugador", action:"create", params:[equipoId: equipoInstance.id]
 			return
 		}
-		
-	}
+    }
 	
-		/* Lo uso para cargar 10 jgadores de una en un equipo
+		// Se usa para cargar 10 jgadores de una en un equipo
 	def meterJugadores(Equipo equipoInstance) {
 		FixtureService.cargarJugadores(equipoInstance)
-		flash.message = "deberia haber hecho la magia"
+		flash.message = " ya deberia haber hecho la magia"
 		redirect action:"show", id:equipoInstance.id
-	}*/
+	}
 	
 	def partidosEquipo(Equipo equipoInstance){
 		def partidosEquipo = Partido.where {((local==equipoInstance) || (visitante==equipoInstance)) && (torneo==equipoInstance.torneo)}
+		if (partidosEquipo.size() == 0)
+			flash.message = "El equipo no ha jugado ningún partido todav�*a"
 		render view:"partidosEquipo", model:[equipoInstance: equipoInstance, partidosEquipo: partidosEquipo]		
 	}
 	
@@ -45,7 +50,7 @@ class EquipoController {
 		def torneo = equipoInstance.torneo
 		
 		if (FixtureService.torneoEmpezado(torneo) ) {
-			flash.message = "El torneo ya esta empezado por lo que no se puede agregar el equipo"
+			flash.message = "El torneo ya está empezado por lo que no se puede agregar el equipo"
 			redirect controller:"torneo", action:"listaEquipos", id:torneo.id
 		} else {
 		if (FixtureService.getCantidadEquipos(torneo) >= torneo.nMaxEquipos){
@@ -85,6 +90,7 @@ class EquipoController {
     }
 
     def show(Equipo equipoInstance) {
+		equipoInstance.jugadores.sort{it?.nCamiseta}
         respond equipoInstance
     }
 

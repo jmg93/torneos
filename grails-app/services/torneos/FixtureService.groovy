@@ -88,7 +88,7 @@ class FixtureService {
 	}
 	
 	def boolean torneoEmpezado(Torneo torneoInstance) { //devuelve true si el torneo esta empezado (si ya paso la fecha de inicio)
-		return (new Date()>torneoInstance.fechaInicio)
+		return (new Date() > torneoInstance.fechaInicio)
 	}
 	
 	def calcularTablaPosiciones(Torneo torneoInstance) {
@@ -164,7 +164,8 @@ class FixtureService {
 		filas.sort( {a, b -> b[1] <=> a[1] })
 		return filas
 	}
-	/* lo uso para cargar muchos equipos de una
+	
+	// solo se usa para cargar muchos equipos de una
 	def crearEquipos(Torneo torneoInstance) {
 		
 		def equipoAagregar
@@ -174,8 +175,9 @@ class FixtureService {
 		}
 
 		torneoInstance.save(flush: true)
-	}*/
-	/* NO se usa --> Solo para cargar 10 jugadores de una en un equipo
+	}
+	
+	// NO se usa --> Solo para cargar 10 jugadores de una en un equipo
 	def cargarJugadores(Equipo equipoInstance) {
 		
 		def jugadorAagregar
@@ -189,7 +191,7 @@ class FixtureService {
 		}
 
 		equipoInstance.save(flush: true)
-	}*/
+	}
 	
 	def calcularTablaGoleadores(Torneo torneoInstance){
 		def db = new Sql(dataSource)
