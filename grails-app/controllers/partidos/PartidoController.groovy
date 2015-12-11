@@ -119,22 +119,27 @@ class PartidoController {
     }
 
     @Transactional
+	@Secured(['ROLE_USER'])
     def delete(Partido partidoInstance) {
-
-        if (partidoInstance == null) {
-            notFound()
-            return
-        }
-
-        partidoInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Partido.label', default: 'Partido'), partidoInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+		if(partidoInstance.local.torneo.usuario == springSecurityService.currentUser){
+	        if (partidoInstance == null) {
+	            notFound()
+	            return
+	        }
+	
+	        partidoInstance.delete flush:true
+	
+	        request.withFormat {
+	            form multipartForm {
+	                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Partido.label', default: 'Partido'), partidoInstance.id])
+	                redirect action:"index", method:"GET"
+	            }
+	            '*'{ render status: NO_CONTENT }
+	        }
+		} else { 
+			flash.message = "Acceso denegado (Sólo disponible para el administrador del torneo)"
+			redirect controller:"torneo", action:"show", id:partidoInstance.local.torneo.id
+		}
     }
 
     protected void notFound() {

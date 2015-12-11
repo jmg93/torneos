@@ -78,10 +78,15 @@ class EquipoController {
 	def eliminar(Equipo equipoInstance){
 		def torneo = equipoInstance.torneo
 		def nombre = equipoInstance.nombre
-		flash.message = "${nombre} eliminado del torneo"
-		torneo.equipos.remove(equipoInstance)
-		equipoInstance.delete(flush:true)
-		redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
+		if ((FixtureService.getCantidadPartidos(torneo) > 0) && equipoInstance.aceptado) { //no se pueden borrar equipos aceptados cuando hay partidos generados en la BD porque tira error 
+			flash.message = "No se pueden borrar equipos aceptados cuando ya empezó el torneo"
+			redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
+		} else {
+			flash.message = "${nombre} eliminado del torneo"
+			torneo.equipos.remove(equipoInstance)
+			equipoInstance.delete(flush:true)
+			redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
+		}
 	}
 
     def index(Integer max) {

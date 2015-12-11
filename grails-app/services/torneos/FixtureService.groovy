@@ -16,7 +16,7 @@ class FixtureService {
 	def sortearFixture(Torneo torneoInstance) {
 				
 		def torneoo = torneoInstance	
-		println torneoo.nombre
+		//println torneoo.nombre
 		
 		def todosEquipos = Equipo.where{ (torneo == torneoo) && (aceptado == true) }.list() //seleccionar todos los equipos aceptados del torneo a sortear
 		def equipoAuxi = new Equipo()
@@ -94,7 +94,7 @@ class FixtureService {
 	def calcularTablaPosiciones(Torneo torneoInstance) {
 		
 		def torneoo = torneoInstance
-		println torneoo.nombre
+		//println torneoo.nombre
 		
 		def todosEquipos = Equipo.where{ (torneo == torneoo) && (aceptado == true) }.list() //seleccionar todos los equipos aceptados del torneo
 		def todosPartidos = torneoo.partidos
@@ -106,8 +106,8 @@ class FixtureService {
 		int perdidos = 0
 		def filas = []
 		
-		println cantEquipos
-		println cantPartidos
+		//println cantEquipos
+		//println cantPartidos
 		
 		for (equipo in todosEquipos) {
 			def partidosDelEquipo = Partido.where{ ( (local == equipo) || (visitante == equipo) ) && (fechaPartido != null)  }				
@@ -151,16 +151,16 @@ class FixtureService {
 			
 			filas.add(fila)
 						
-			print equipo.toString()
-			print fila[1]
-			print fila[2]
-			print fila[3]
-			print fila[4]
-			println " "
+			//print equipo.toString()
+			//print fila[1]
+			//print fila[2]
+			//print fila[3]
+			//print fila[4]
+			//println " "
 			
 			
 		}
-		println filas
+		//println filas
 		filas.sort( {a, b -> b[1] <=> a[1] })
 		return filas
 	}
