@@ -9,6 +9,10 @@
 
 <p/>
 
+	<g:if test="${flash.message}">
+		<div class="message" role="status">${flash.message}</div>
+	</g:if>
+
 <div class="login s2ui_center ui-corner-all" style='text-align:center;'>
 	<div class="login-inner">
 	<form action='${postUrl}' method='POST' id="loginForm" name="loginForm" autocomplete='off'>

@@ -7,6 +7,17 @@
 
 <body>
 
+	<g:if test="${flash.message}">
+		<div class="message" role="status">${flash.message}</div>
+	</g:if>
+	
+	<g:hasErrors>
+    	<g:eachError>
+    		<div class="error" role="status"><g:message error="${it}"/></div>
+        	<li style="position: relative; left: 29%; margin: 1em;"><g:message error="${it}"/></li>
+    	</g:eachError>
+	</g:hasErrors>
+
 <p/>
 <div style="width: 475px; height: 250px; text-align: center; position: relative; left: 25%;">
 	<s2ui:form width='475' height='250' elementId='resetPasswordFormContainer'

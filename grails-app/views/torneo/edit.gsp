@@ -5,14 +5,15 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'torneo.label', default: 'Torneo')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	</head>
 	<body>
 		<a href="#edit-torneo" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<g:link class="atras" action="show" style="width: 15%;" id="${torneoInstance.id}">Volver al torneo</g:link>
 			</ul>
 		</div>
 		<div id="edit-torneo" class="content scaffold-edit" role="main">

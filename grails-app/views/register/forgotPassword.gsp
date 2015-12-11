@@ -7,6 +7,10 @@
 
 <body>
 
+	<g:if test="${flash.error}">
+		<div class="message" role="status">${flash.error}</div>
+	</g:if>
+
 <p/>
 <div style="width: 400px; position: relative; left: 27%;">
 	<s2ui:form width='400' height='220' elementId='forgotPasswordFormContainer' titleCode="" center='true' >

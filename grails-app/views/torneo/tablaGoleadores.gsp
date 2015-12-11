@@ -7,7 +7,7 @@
 	</head>
 	<body>
 			<div class="nav">
-				<g:link class="home" action="show" style="width: 15%;" id="${torneoInstance.id}">Volver al torneo</g:link>
+				<g:link class="atras" action="show" style="width: 15%;" id="${torneoInstance.id}">Volver al torneo</g:link>
 			</div>
 			<div id="tablaFixture" class="content scaffold-list">
 				<table class="table table-striped table-bordered table-hover table-condensed">

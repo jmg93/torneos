@@ -137,7 +137,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 ]
 
 //password validation of RegisterController.groovy
-grails.plugin.springsecurity.ui.password.validationRegex='^([a-zA-Z0-9!@#$%^&]{6,20})$'
+grails.plugin.springsecurity.ui.password.validationRegex='^([a-zA-Z0-9!@#ñ$%^&]{6,20})$'
 grails.plugin.springsecurity.ui.password.minLength=6
 grails.plugin.springsecurity.ui.password.maxLength=20
 
