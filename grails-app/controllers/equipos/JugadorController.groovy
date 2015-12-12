@@ -23,7 +23,7 @@ class JugadorController {
     }
 
     def create() {
-        respond new Jugador(params)
+        respond new Jugador(params), model:[equipoId: params.equipoId]
     }
 
     @Transactional
@@ -117,12 +117,13 @@ class JugadorController {
             return
         }
 
+		def equipo = jugadorInstance.equipo
         jugadorInstance.delete flush:true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Jugador.label', default: 'Jugador'), jugadorInstance.id])
-                redirect action:"index", method:"GET"
+                redirect controller:"equipo", action:"show", id:equipo.id
             }
             '*'{ render status: NO_CONTENT }
         }

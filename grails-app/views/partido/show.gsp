@@ -5,7 +5,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'partido.label', default: 'Partido')}" />
-		<title><g:message code="default.show.label" args="[entityName]" /></title>
+		<title>Partido: ${partidoInstance.local} vs ${partidoInstance.visitante}</title>
 	</head>
 	<body>
 		<a href="#show-partido" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -142,7 +142,7 @@
 									<td style="text-align:center">
 										${jugador.nCamiseta}
 									</td>
-									<td> <g:link action="show" id="${jugador.id}">
+									<td> <g:link controller="jugador" action="show" id="${jugador.id}">
 										${jugador}
 									</g:link></td>
 									<td>
@@ -221,7 +221,7 @@
 		<g:form url="[resource:partidoInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons" style="width: 950px; position: relative; top: 1.2em;">
 					<g:link class="edit" action="edit" resource="${partidoInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+			   <!-- <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /> -->
 				</fieldset>
 		</g:form>
 	

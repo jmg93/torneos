@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<title>Restablecer contraseña</title>
+<title>Reestablecer contraseña</title>
 <meta name='layout' content='main'/>
 </head>
 

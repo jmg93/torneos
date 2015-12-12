@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<title><g:message code='spring.security.ui.forgotPassword.title'/></title>
+<title>Reestablecer Contraseña</title>
 <meta name='layout' content='main'/>
 </head>
 

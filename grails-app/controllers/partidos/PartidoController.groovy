@@ -127,12 +127,13 @@ class PartidoController {
 	            return
 	        }
 	
-	        partidoInstance.delete flush:true
+	        def torneo = partidoInstance.torneo
+			partidoInstance.delete flush:true
 	
 	        request.withFormat {
 	            form multipartForm {
 	                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Partido.label', default: 'Partido'), partidoInstance.id])
-	                redirect action:"index", method:"GET"
+	                redirect controller:"torneo", action:"listaEquipos", id:torneo.id
 	            }
 	            '*'{ render status: NO_CONTENT }
 	        }
