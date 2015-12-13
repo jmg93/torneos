@@ -9,7 +9,7 @@
 	</head>
 	<body>
 			<div class="nav">
-				<g:link class="home" style="width: 15%;" action="show" id="${torneoInstance.id}">Volver al torneo</g:link>
+				<g:link class="atras" style="width: 15%;" action="show" id="${torneoInstance.id}">Volver al torneo</g:link>
 			</div>
 			<g:if test="${flash.message}">
   				<div class="message" style="display: block">${flash.message}</div>

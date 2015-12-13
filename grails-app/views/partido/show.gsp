@@ -11,7 +11,8 @@
 		<a href="#show-partido" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><g:link class="list" controller="torneo" action="show" id="${partidoInstance.local.torneo.id }">Volver al torneo</g:link></li>
+				<li><g:link class="atras" controller="torneo" action="show" id="${partidoInstance.local.torneo.id }">Volver al torneo</g:link></li>
+				<li><g:link class="list" controller="torneo" action="mostrarFixture" id="${partidoInstance.local.torneo.id }">Fixture</g:link></li>
 			</ul>
 		</div>
 	<div id="show-partido" class="content scaffold-show" role="main">
@@ -220,7 +221,8 @@
 	</div>	
 		<g:form url="[resource:partidoInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons" style="width: 950px; position: relative; top: 1.2em;">
-					<g:link class="edit" action="edit" resource="${partidoInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:if test="${partidoInstance.fechaPartido != NULL}"> <g:link class="edit" action="edit" resource="${partidoInstance}"> Editar Resultado</g:link> </g:if>
+					<g:else> <g:link class="edit" action="edit" resource="${partidoInstance}">Cargar Resultado</g:link> </g:else>
 			   <!-- <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /> -->
 				</fieldset>
 		</g:form>
