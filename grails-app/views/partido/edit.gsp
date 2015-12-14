@@ -5,7 +5,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'partido.label', default: 'Partido')}" />
 		<title>Cargar resultado - ${partidoInstance }</title>
-				<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	</head>
@@ -23,6 +23,7 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
+			<div class="message" role="status">Recordá que el partido se considera como jugado y empieza a sumar en la tabla una vez que cargas la fecha y el resultado</div>
 			<g:hasErrors bean="${partidoInstance}">
 			<ul class="errors" role="alert">
 				<g:eachError bean="${partidoInstance}" var="error">

@@ -31,10 +31,10 @@
 		<h4>Ingresá tu nueva contraseña</h4>
 	
 		<table>
-			<s2ui:passwordFieldRow name='password' labelCode='resetPasswordCommand.password.label' bean="${command}"
+			<s2ui:passwordFieldRow name='password' placeholder="Entre 6 y 20 caracteres" labelCode='resetPasswordCommand.password.label' bean="${command}"
 	                             labelCodeDefault='Contraseña' value="${command?.password}"/>
 	
-			<s2ui:passwordFieldRow name='password2' labelCode='resetPasswordCommand.password2.label' bean="${command}"
+			<s2ui:passwordFieldRow name='password2' placeholder="Entre 6 y 20 caracteres" labelCode='resetPasswordCommand.password2.label' bean="${command}"
 	                             labelCodeDefault='Repetir contraseña' value="${command?.password2}"/>
 		</table>
 	

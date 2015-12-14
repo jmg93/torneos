@@ -8,7 +8,7 @@
 		<g:message code="equipo.nombre.label" default="Nombre" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="nombre" maxlength="20" required="" value="${equipoInstance?.nombre}"/>
+	<g:textField name="nombre" placeholder="Entre 2 y 20 caracteres" maxlength="20" required="" value="${equipoInstance?.nombre}"/>
 
 </div>
 
@@ -17,7 +17,7 @@
 		<g:message code="equipo.contacto.label" default="Contacto" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field type="email" name="contacto" required="" value="${equipoInstance?.contacto}"/>
+	<g:field type="email" placeholder="E-mail de contacto" name="contacto" required="" value="${equipoInstance?.contacto}"/>
 
 </div>
 

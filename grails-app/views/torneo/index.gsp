@@ -31,7 +31,7 @@
 			</ul>
 		</div>
 		<div id="list-torneo" class="content scaffold-list" role="main">
-			<h1>Torneos</h1>
+			<h1>Todos los torneos</h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -39,11 +39,10 @@
 			<g:form action="busquedaTorneo" method="GET" style="padding: 1em; border-radius: 0.6em; margin: 2em 2em 1em; width: 90%; border: 0.2em solid rgb(238, 238, 238); height: 2em;">
 				<fieldset class="form" style="left: 7em; top: -0.75em;">
 					<div>
-						<label for="parametro">Buscar torneo:</label>
-						<g:textField name="parametro" maxlength="30" value="${params.parametro }"/>
+						<g:textField name="parametro" placeholder="Buscá un torneo..." maxlength="30" value="${params.parametro }" style="width: 52%;"/>
 					</div>
 				</fieldset>
-				<g:submitButton name="buscar" class="save" value="Buscar" style="position: relative; left: 35em; top: -3.9em;" />
+				<g:submitButton name="buscar" class="save" value="Buscar" style="position: relative; left: 37em; top: -3.9em;" />
 				
 			</g:form>
 			
