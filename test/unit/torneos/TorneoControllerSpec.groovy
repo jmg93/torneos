@@ -2,17 +2,25 @@ package torneos
 
 
 
+import equipos.Equipo
 import grails.test.mixin.*
 import spock.lang.*
+import usuarios.User
 
 @TestFor(TorneoController)
-@Mock(Torneo)
+@Mock([Torneo, User, Equipo])
 class TorneoControllerSpec extends Specification {
-
-    def populateValidParams(params) {
+	
+	    def populateValidParams(params) {
         assert params != null
         // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+        params["nombre"] = 'Torneo de 30'
+		params["fechaLimite"] = new Date(2016,12,25)
+		params["fechaInicio"] = new Date(2016,12,30)
+		params["nMaxJugadorXEquipo"] = '12'
+		params["nMinJugadorXEquipo"] = '5'
+		params["nMaxEquipos"] = '10'
+		params["usuario"] = new User(username:"pepe123",password:"123456")
     }
 
     void "Test the index action returns the correct model"() {
@@ -149,4 +157,5 @@ class TorneoControllerSpec extends Specification {
             response.redirectedUrl == '/torneo/index'
             flash.message != null
     }
+	
 }

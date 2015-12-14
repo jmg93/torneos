@@ -3,7 +3,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'partido.label', default: 'Partido')}" />
-		<title>Partidos de ${equipoInstance} en ${equipoInstance.torneo}</title>
+		<title>${equipoInstance} - ${equipoInstance.torneo}</title>
 	</head>
 	<body>
 			<div class="nav">
@@ -13,7 +13,7 @@
   				<div class="message" style="display: block">${flash.message}</div>
 			</g:if>
 			<div id="show-torneo" class="content scaffold-show" role="main">
-				<h1>Partidos jugados de ${equipoInstance} en ${equipoInstance.torneo}</h1>
+				<h1>Partidos de ${equipoInstance} en ${equipoInstance.torneo}</h1>
 			</div>
 			<div id="tablaFixture" class="content scaffold-list">
 				<table class="table table-striped table-bordered table-hover table-condensed">
@@ -29,7 +29,7 @@
 									${partido.nFecha}
 								</g:link></td>
 								<td style="text-align: right;">
-									<g:if test="${partido.local.id == equipoInstance.id}">	<font style="color: red"> ${partido.local} </font></g:if>
+									<g:if test="${partido.local.id == equipoInstance.id}">	<font style="color:#48802C"><b> ${partido.local} </b></font></g:if>
 									<g:else>${partido.local}</g:else>
 									<g:if test="${partido.fechaPartido == null }">
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
@@ -45,7 +45,7 @@
 									<g:else>
 										${partido.goleadoresVisitante.size() }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									</g:else>
-									<g:if test="${partido.visitante.id == equipoInstance.id}">	<font style="color: red"> ${partido.visitante} </font></g:if>
+									<g:if test="${partido.visitante.id == equipoInstance.id}">	<font style="color:#48802C"><b> ${partido.visitante} </b></font></g:if>
 									<g:else>${partido.visitante}</g:else>
 								</td>
 							</tr>

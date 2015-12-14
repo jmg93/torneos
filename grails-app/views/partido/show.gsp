@@ -189,7 +189,7 @@
 									<td style="text-align:center">
 										${jugador.nCamiseta}
 									</td>
-									<td> <g:link action="show" id="${jugador.id}">
+									<td> <g:link controller="jugador" action="show" id="${jugador.id}">
 										${jugador}
 									</g:link></td>
 									<td>
