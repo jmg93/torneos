@@ -42,7 +42,7 @@
 						<g:textField name="parametro" placeholder="Buscá un torneo..." maxlength="30" value="${params.parametro }" style="width: 52%;"/>
 					</div>
 				</fieldset>
-				<g:submitButton name="buscar" class="save" value="Buscar" style="position: relative; left: 37em; top: -3.9em;" />
+				<g:submitButton name="buscar" class="save" value="Buscar" style="position: relative; left: 37em; top: -3.65em;" />
 				
 			</g:form>
 			
