@@ -135,11 +135,9 @@ class EquipoController {
     }
 	
     def edit(Equipo equipoInstance) {
-		if(1){
-			flash.message = "Los equipos no se pueden editar"
-			redirect action:"show", id:equipoInstance.id
-			return
-		}
+		flash.message = "Los equipos no se pueden editar"
+		redirect action:"show", id:equipoInstance.id
+		return
         respond equipoInstance
     }
 

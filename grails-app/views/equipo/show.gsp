@@ -13,7 +13,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><g:link class="atras" controller="torneo" action="show" id="${equipoInstance.torneo.id }">Volver al torneo</g:link></li>
-				<g:if test="${equipoInstance.aceptado }">
+				<g:if test="${!equipoInstance.aceptado }">
 					<li><g:link class="create" action="agregarJugador" resource="${equipoInstance }">Agregar jugador</g:link></li>
 				</g:if>
 				<li><g:link class="boton-tabla" action="partidosEquipo" resource="${equipoInstance }">Partidos en el torneo</g:link></li>

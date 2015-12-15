@@ -73,7 +73,7 @@ class JugadorController {
 	@Secured(['ROLE_USER'])
     def edit(Jugador jugadorInstance) {
         if(jugadorInstance.equipo.torneo.usuario == springSecurityService.currentUser){
-			respond jugadorInstance
+			respond jugadorInstance, model:[equipoId: params.equipoId]
 		}else{
 			flash.message = "Acceso denegado (Sólo disponible para el administrador del torneo)"
 			redirect action:"show", id:jugadorInstance.id

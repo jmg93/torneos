@@ -100,7 +100,7 @@
 		</div>
 		
 		
-		<div id="status" role="complementary">
+	<!-- <div id="status" role="complementary">
 			<h1>Application Status</h1>
 			<ul>
 				<li>App version: <g:meta name="app.version"/></li>
@@ -135,6 +135,6 @@
 					</g:each>
 				</ul>
 			</div>
-		</div>
+		</div> -->
 	</body>
 </html>

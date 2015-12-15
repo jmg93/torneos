@@ -52,7 +52,7 @@
 		<g:message code="torneo.nMaxJugadorXEquipo.label" default="Máximo de jugadores por equipo" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="nMaxJugadorXEquipo" placeholder="Máximo 99" type="number" min="5" max="99" value="${torneoInstance.nMaxJugadorXEquipo}" required=""/>
+	<g:field name="nMaxJugadorXEquipo" placeholder="Máximo 99" type="number" min="5" max="99" value="${torneoInstance.nMaxJugadorXEquipo}" required="" style="width:195px"/>
 
 </div>
 

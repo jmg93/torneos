@@ -13,7 +13,7 @@
 		<a href="#edit-torneo" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<g:link class="atras" action="show" style="width: 15%;" id="${torneoInstance.id}">Volver al torneo</g:link>
+				<li><g:link class="atras" action="show" id="${torneoInstance.id}">Cancelar</g:link></li>
 			</ul>
 		</div>
 		<div id="edit-torneo" class="content scaffold-edit" role="main">
