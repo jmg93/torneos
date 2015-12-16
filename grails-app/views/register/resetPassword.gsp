@@ -7,23 +7,26 @@
 
 <body>
 
-	<g:if test="${flash.message}">
-		<div class="message" role="status">${flash.message}</div>
-	</g:if>
-	
+<div class="nav" role="navigation">
+	<ul>
+		<li><a class="home" href="${createLink(uri: '/')}">Inicio</a></li>
+	</ul>
+</div>
+
+<div role="main">
 	<g:hasErrors>
     	<g:eachError>
-    		<div class="error" role="status"><g:message error="${it}"/></div>
-        	<li style="position: relative; left: 29%; margin: 1em;"><g:message error="${it}"/></li>
+    		<div class="message" role="status"><g:message error="${it}"/></div>
     	</g:eachError>
 	</g:hasErrors>
+</div>	
 
 <p/>
 <div style="width: 475px; height: 250px; text-align: center; position: relative; left: 25%;">
 	<s2ui:form width='475' height='250' elementId='resetPasswordFormContainer'
 	           titleCode='' center='true'>
 		<h1>Restablecer contraseña</h1>
-		<g:form action='resetPassword' name='resetPasswordForm' autocomplete='off'>
+		<g:form action='resetPassword' name='resetPasswordForm' autocomplete='off' style="float: right; position: relative; right: 7%;">
 		<g:hiddenField name='t' value='${token}'/>
 		<div class="sign-in">
 	
@@ -38,7 +41,7 @@
 	                             labelCodeDefault='Repetir contraseña' value="${command?.password2}"/>
 		</table>
 	
-		<g:submitButton name="reset" value="Restablecer"/>
+		<g:submitButton style="margin-bottom: 2em;" name="reset" value="Restablecer"/>
 	
 		</div>
 		</g:form>

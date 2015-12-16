@@ -26,7 +26,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}">Inicio</a></li>
-				<li><g:link class="create" action="create">Creá un torneo</g:link></li>
+				<li><g:link class="create" action="create">Creá tu torneo</g:link></li>
 				<g:if test="${params.parametro}"><li><g:link class="list" action="index">Listar todos</g:link></li></g:if>
 			</ul>
 		</div>

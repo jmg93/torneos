@@ -61,7 +61,7 @@
 		<g:message code="torneo.reglamento.label" default="Reglamento" />
 		
 	</label>
-	<g:textArea name="reglamento" placeholder="Opcional" cols="500" rows="500" maxlength="2000" value="${torneoInstance?.reglamento}"/>
+	<g:textArea name="reglamento" placeholder="Opcional" style="height: 10em; width: 35em;" cols="500" rows="500" maxlength="2000" value="${torneoInstance?.reglamento}"/>
 
 </div>
 

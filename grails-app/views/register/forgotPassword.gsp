@@ -6,13 +6,19 @@
 </head>
 
 <body>
-
-	<g:if test="${flash.error}">
+<div class="nav" role="navigation">
+	<ul>
+		<li><a class="home" href="${createLink(uri: '/')}">Inicio</a></li>
+	</ul>
+</div>
+<div role="main">
+<g:if test="${flash.error}">
 		<div class="message" role="status">${flash.error}</div>
-	</g:if>
-
+</g:if>
+</div>
 <p/>
-<div style="width: 400px; position: relative; left: 27%;">
+<div style="width: 400px; position: relative; left: 28%;">
+
 	<s2ui:form width='400' height='220' elementId='forgotPasswordFormContainer' titleCode="" center='true' >
 	          
 	    <h1>Restablecer contraseña</h1>

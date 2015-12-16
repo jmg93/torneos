@@ -51,12 +51,19 @@ class PartidoController {
 	
 	@Secured(['ROLE_USER'])
     def edit(Partido partidoInstance) {
-        if(partidoInstance.local.torneo.usuario == springSecurityService.currentUser){
-			respond partidoInstance
-		}else{
+		if(partidoInstance.local.torneo.usuario != springSecurityService.currentUser){
 			flash.message = "Acceso denegado (Sólo disponible para el administrador del torneo)"
 			redirect controller:"torneo", action:"show", id:partidoInstance.local.torneo.id
+			return
 		}
+		
+		if(partidoInstance.local.torneo.fechaInicio > new Date()){
+			flash.message = "No podés cargar resultados hasta que empiece el torneo"
+			redirect controller:"torneo", action:"show", id:partidoInstance.local.torneo.id
+			return
+		}
+		
+		respond partidoInstance
     }
 
     @Transactional
