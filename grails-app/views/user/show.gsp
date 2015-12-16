@@ -17,7 +17,12 @@
 				 </ul>
 			</div>
 			<div id="show-torneo" class="content scaffold-show" role="main">
+
 			<h1>Torneos de ${userInstance}</h1>
+				<g:if test="${flash.message}">
+					<div class="message" role="status">${flash.message}</div>
+				</g:if>
+			
 				<div id="tablaFixture" class="content scaffold-list">
 					<table style="width: 100%; position: relative; margin: auto; top: 1.1em;" class="table table-striped table-bordered table-hover table-condensed">
 						<thead>

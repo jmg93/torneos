@@ -5,6 +5,8 @@ package torneos
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.transaction.annotation.Transactional
+import partidos.Partido
+import equipos.Equipo
 
 
 @Transactional(readOnly = true)
@@ -232,29 +234,32 @@ class TorneoController {
             '*'{ respond torneoInstance, [status: OK] }
         }
     }
-
+	
+	@Secured(['ROLE_USER'])
     @Transactional
-    def delete(Torneo torneoInstance) {
+    def delete(Torneo torneoInstance) {		
 		//si se borra un torneo que tiene partidos cargados, te tira un error de PK y FK por las tablas de los partidos.
-		if (FixtureService.getCantidadPartidos(torneoInstance) == 0) {		 //todo lo siguiente es el metodo normal para borrar el torneo	
-	        if (torneoInstance == null) {
-	            notFound()
-	            return
-	        }
-	
-	        torneoInstance.delete flush:true
-	
-	        request.withFormat {
-	            form multipartForm {
-	                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Torneo.label', default: 'Torneo'), torneoInstance.id])
-	                redirect action:"index", method:"GET"
-	            }
-	            '*'{ render status: NO_CONTENT }
-	        }
-		} else {
-			flash.message = "No se puede borrar el torneo porque hay partidos cargados"
-			redirect action:"listaEquipos", id:torneoInstance.id
-			}
+		if(1){//Hay que ver como solucionar esto
+			flash.message = "Funcionalidad no disponible por el momento"
+			redirect action:"show", id:torneoInstance.id
+			return
+		}
+		
+		if (torneoInstance == null) {
+            notFound()
+            return
+        }
+
+        torneoInstance.delete flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = "${torneoInstance} eliminado"
+                redirect controller:"user", action:"show", id:torneoInstance.usuario.id
+            }
+            '*'{ render status: NO_CONTENT }
+        }
+
     }
 	
 	// Se usa para cargar 10 equipoos de una
