@@ -8,17 +8,7 @@
 		<g:message code="torneo.nombre.label" default="Nombre" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="nombre" maxlength="20" required="" value="${torneoInstance?.nombre}"/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'fechaInicio', 'error')} required">
-	<label for="fechaInicio" style="width: 250px;">
-		<g:message code="torneo.fechaInicio.label" default="Fecha Inicio" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:datepickerUI name="fechaInicio" locale="es" required="true" value="${torneoInstance?.fechaInicio}" options="{minDate:'0', maxDate:'+1Y'}"/>
-
+	<g:textField placeholder="Entre 2 y 20 caracteres" name="nombre" maxlength="20" required="" value="${torneoInstance?.nombre}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'fechaLimite', 'error')} required">
@@ -30,12 +20,21 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'fechaInicio', 'error')} required">
+	<label for="fechaInicio" style="width: 250px;">
+		<g:message code="torneo.fechaInicio.label" default="Fecha de inicio" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:datepickerUI name="fechaInicio" locale="es" required="true" value="${torneoInstance?.fechaInicio}" options="{minDate:'0', maxDate:'+1Y'}"/>
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'nMaxEquipos', 'error')} required">
 	<label for="nMaxEquipos" style="width: 250px;">
 		<g:message code="torneo.nMaxEquipos.label" default="Límite de equipos" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="nMaxEquipos" type="number" min="2" value="${torneoInstance.nMaxEquipos}" required=""/>
+	<g:field name="nMaxEquipos" placeholder="Mínimo 2" type="number" min="2" value="${torneoInstance.nMaxEquipos}" required=""/>
 
 </div>
 
@@ -44,7 +43,7 @@
 		<g:message code="torneo.nMinJugadorXEquipo.label" default="Mínimo de jugadores por equipo" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="nMinJugadorXEquipo" type="number" min="5" value="${torneoInstance.nMinJugadorXEquipo}" required=""/>
+	<g:field name="nMinJugadorXEquipo" placeholder="Mínimo 5" type="number" min="5" value="${torneoInstance.nMinJugadorXEquipo}" required=""/>
 
 </div>
 
@@ -53,7 +52,7 @@
 		<g:message code="torneo.nMaxJugadorXEquipo.label" default="Máximo de jugadores por equipo" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="nMaxJugadorXEquipo" type="number" max="99" value="${torneoInstance.nMaxJugadorXEquipo}" required=""/>
+	<g:field name="nMaxJugadorXEquipo" placeholder="Máximo 99" type="number" min="5" max="99" value="${torneoInstance.nMaxJugadorXEquipo}" required="" style="width:195px"/>
 
 </div>
 
@@ -62,7 +61,7 @@
 		<g:message code="torneo.reglamento.label" default="Reglamento" />
 		
 	</label>
-	<g:textArea name="reglamento" cols="500" rows="500" maxlength="2000" value="${torneoInstance?.reglamento}"/>
+	<g:textArea name="reglamento" placeholder="Opcional" style="height: 10em; width: 35em;" cols="500" rows="500" maxlength="2000" value="${torneoInstance?.reglamento}"/>
 
 </div>
 

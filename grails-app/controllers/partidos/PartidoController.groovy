@@ -51,12 +51,19 @@ class PartidoController {
 	
 	@Secured(['ROLE_USER'])
     def edit(Partido partidoInstance) {
-        if(partidoInstance.local.torneo.usuario == springSecurityService.currentUser){
-			respond partidoInstance
-		}else{
+		if(partidoInstance.local.torneo.usuario != springSecurityService.currentUser){
 			flash.message = "Acceso denegado (Sólo disponible para el administrador del torneo)"
 			redirect controller:"torneo", action:"show", id:partidoInstance.local.torneo.id
+			return
 		}
+		
+		if(partidoInstance.local.torneo.fechaInicio > new Date()){
+			flash.message = "No podés cargar resultados hasta que empiece el torneo"
+			redirect controller:"torneo", action:"show", id:partidoInstance.local.torneo.id
+			return
+		}
+		
+		respond partidoInstance
     }
 
     @Transactional
@@ -127,12 +134,13 @@ class PartidoController {
 	            return
 	        }
 	
-	        partidoInstance.delete flush:true
+	        def torneo = partidoInstance.torneo
+			partidoInstance.delete flush:true
 	
 	        request.withFormat {
 	            form multipartForm {
 	                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Partido.label', default: 'Partido'), partidoInstance.id])
-	                redirect action:"index", method:"GET"
+	                redirect controller:"torneo", action:"listaEquipos", id:torneo.id
 	            }
 	            '*'{ render status: NO_CONTENT }
 	        }

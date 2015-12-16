@@ -9,7 +9,7 @@
 	</head>
 	<body>
 			<div class="nav">
-				<g:link class="home" style="width: 15%;" action="show" id="${torneoInstance.id}">Volver al torneo</g:link>
+				<g:link class="atras" style="width: 15%;" action="show" id="${torneoInstance.id}">Volver al torneo</g:link>
 			</div>
 			<g:if test="${flash.message}">
   				<div class="message" style="display: block">${flash.message}</div>
@@ -20,13 +20,14 @@
 						<g:sortableColumn property="nFecha" defaultOrder="asc" title="Fecha" style= "width:16%; text-align: center;" />
 						<th style="text-align: right;">Local</th>
 						<th>Visitante</th>
+						<th></th>
 					</thead>
 					<tbody>
 						<g:each in="${todosPartidos}" status="i" var="partido">
 							<tr class="${(partido.nFecha % 2) == 0 ? 'even' : 'odd'}">
-								<td style="text-align:center"> <g:link controller="partido" action="show" id="${partido.id}">
+								<td style="text-align:center">
 									${partido.nFecha}
-								</g:link></td>
+								</td>
 								<td style="text-align: right;">
 									${partido.local}
 									<g:if test="${partido.fechaPartido == null }">
@@ -45,6 +46,9 @@
 									</g:else>
 									${partido.visitante}
 								</td>
+								<td><g:link controller="partido" action="show" id="${partido.id}">
+									Ver
+								</g:link></td>
 							</tr>
 						</g:each>
 					</tbody>

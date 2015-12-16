@@ -5,32 +5,21 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'jugador.label', default: 'Jugador')}" />
-		<title><g:message code="default.show.label" args="[entityName]" /></title>
+		<title>${jugadorInstance } - ${jugadorInstance.equipo }</title>
 	</head>
 	<body>
 		<a href="#show-jugador" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="atras" controller="equipo" action="show" id="${jugadorInstance.equipo.id}">Volver al equipo</g:link></li>
 			</ul>
 		</div>
 		<div id="show-jugador" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			<h1>${jugadorInstance } - ${jugadorInstance.equipo }</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list jugador">
-			
-				<g:if test="${jugadorInstance?.apellido}">
-				<li class="fieldcontain">
-					<span id="apellido-label" class="property-label"><g:message code="jugador.apellido.label" default="Apellido" /></span>
-					
-						<span class="property-value" aria-labelledby="apellido-label"><g:fieldValue bean="${jugadorInstance}" field="apellido"/></span>
-					
-				</li>
-				</g:if>
 			
 				<g:if test="${jugadorInstance?.nombre}">
 				<li class="fieldcontain">
@@ -41,9 +30,18 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${jugadorInstance?.apellido}">
+				<li class="fieldcontain">
+					<span id="apellido-label" class="property-label"><g:message code="jugador.apellido.label" default="Apellido" /></span>
+					
+						<span class="property-value" aria-labelledby="apellido-label"><g:fieldValue bean="${jugadorInstance}" field="apellido"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${jugadorInstance?.nCamiseta}">
 				<li class="fieldcontain">
-					<span id="nCamiseta-label" class="property-label"><g:message code="jugador.nCamiseta.label" default="N Camiseta" /></span>
+					<span id="nCamiseta-label" class="property-label">Camiseta</span>
 					
 						<span class="property-value" aria-labelledby="nCamiseta-label"><g:fieldValue bean="${jugadorInstance}" field="nCamiseta"/></span>
 					
@@ -63,7 +61,7 @@
 				<li class="fieldcontain">
 					<span id="capitan-label" class="property-label"><g:message code="jugador.capitan.label" default="Capitan" /></span>
 					
-						<span class="property-value" aria-labelledby="capitan-label"><g:formatBoolean boolean="${jugadorInstance?.capitan}" /></span>
+						<span class="property-value" aria-labelledby="capitan-label">(C)</span>
 					
 				</li>
 				</g:if>

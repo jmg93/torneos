@@ -2,11 +2,16 @@
 
 <head>
 	<meta name="layout" content="main">
-	<title><g:message code='spring.security.ui.register.title'/></title>
+	<title>Registrate</title>
 </head>
 
 <body>
 
+<div class="nav" role="navigation">
+	<ul>
+		<li><a class="home" href="${createLink(uri: '/')}">Inicio</a></li>
+	</ul>
+</div>
 <h1 style="margin-left: 2.2%;">Creá tu usuario</h1>
 
 <p/>
@@ -35,7 +40,7 @@
 					<g:message code="user.username.label" default="Username" />
 					<span class="required-indicator">*</span>
 				</label>
-				<g:textField name="username" maxlength="40" required="" value="${command.username}" style="width:35%"/>
+				<g:textField name="username" placeholder="Hasta 20 caracteres" maxlength="20" required="" value="${command.username}" style="width:35%"/>
 			</div>
 			
 			<div class="fieldcontain ${hasErrors(bean: command, field: 'email', 'error')} required">
@@ -43,7 +48,7 @@
 					<g:message code="user.email.label" default="Email" />
 					<span class="required-indicator">*</span>
 				</label>
-				<g:textField name="email" maxlength="40" required="" value="${command.email}" style="width:35%"/>
+				<g:textField name="email" placeholder="E-mail válido" maxlength="40" palceholder="E-mail válido" required="" value="${command.email}" style="width:35%"/>
 			</div>
 			
 			<div class="fieldcontain ${hasErrors(bean: command, field: 'password', 'error')} required">
@@ -51,7 +56,7 @@
 					<g:message code="user.password.label" default="Contraseña" />
 					<span class="required-indicator">*</span>
 				</label>
-				<g:field type="password" name="password" maxlength="40" required="" value="${command.password}" style="width:35%"/>
+				<g:field type="password" name="password" placeholder="Entre 6 y 20 caracteres" maxlength="40" required="" value="${command.password}" style="width:35%"/>
 			</div>
 						
 			<div class="fieldcontain ${hasErrors(bean: command, field: 'password2', 'error')} required">
@@ -59,7 +64,7 @@
 					<g:message code="user.password2.label" default="Repetir contraseña" />
 					<span class="required-indicator">*</span>
 				</label>
-				<g:field type="password" name="password2" maxlength="40" required="" value="${command.password2}" style="width:35%"/>
+				<g:field type="password" name="password2" placeholder="Entre 6 y 20 caracteres" maxlength="40" required="" value="${command.password2}" style="width:35%"/>
 			</div>
 			
 		</fieldset>

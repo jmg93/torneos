@@ -25,9 +25,9 @@
 		<a href="#list-torneo" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-				<g:if test="${params.parametro}"><li><g:link class="home" action="index">Listar todos</g:link></li></g:if>
+				<li><a class="home" href="${createLink(uri: '/')}">Inicio</a></li>
+				<li><g:link class="create" action="create">Creá tu torneo</g:link></li>
+				<g:if test="${params.parametro}"><li><g:link class="list" action="index">Listar todos</g:link></li></g:if>
 			</ul>
 		</div>
 		<div id="list-torneo" class="content scaffold-list" role="main">
@@ -39,11 +39,10 @@
 			<g:form action="busquedaTorneo" method="GET" style="padding: 1em; border-radius: 0.6em; margin: 2em 2em 1em; width: 90%; border: 0.2em solid rgb(238, 238, 238); height: 2em;">
 				<fieldset class="form" style="left: 7em; top: -0.75em;">
 					<div>
-						<label for="parametro">Buscar torneo:</label>
-						<g:textField name="parametro" maxlength="30" value="${params.parametro }"/>
+						<g:textField name="parametro" placeholder="Buscá un torneo..." maxlength="30" value="${params.parametro }" style="width: 52%;"/>
 					</div>
 				</fieldset>
-				<g:submitButton name="buscar" class="save" value="Buscar" style="position: relative; left: 35em; top: -3.9em;" />
+				<g:submitButton name="buscar" class="save" value="Buscar" style="position: relative; left: 37em; top: -3.65em;" />
 				
 			</g:form>
 			

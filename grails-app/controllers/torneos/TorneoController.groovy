@@ -80,18 +80,51 @@ class TorneoController {
 			return
 		}
 		def cantEquipos = FixtureService.getCantidadEquipos(torneoInstance) //obtiene cantidad de equipos aceptados en el torneo
-		if (cantEquipos >= 2) { //para sortear el fixture tiene que haber minimo 2 equipos aceptados
-			if ( (FixtureService.torneoEmpezado(torneoInstance) == false ) && (FixtureService.getCantidadPartidos(torneoInstance) == 0) ) { // y tambien el torneo no tiene que estar empezado
+		
+		if(cantEquipos < 2){ //Si hay menos de dos equipos no tiene sentido
+			flash.message = "La cantidad de equipos aceptados tiene que ser 2 como mínimo"
+			redirect action:"listaEquipos", id:torneoInstance.id
+			return
+		}
+		
+		if (FixtureService.torneoEmpezado(torneoInstance)){ //Si el torneo ya empezo no se puede generar el fixture
+			flash.message = "El torneo ya empezó, no podés generar otro fixture"
+			redirect action:"listaEquipos", id:torneoInstance.id
+			return
+		}
+		
+		if(torneoInstance.fechaLimite > new Date()){ //Si la inscripción está abierta no se puede generar el fixture
+			flash.message = "La inscripción todavía está abierta"
+			redirect action:"listaEquipos", id:torneoInstance.id
+			return
+		}
+		
+		if(FixtureService.getCantidadPartidos(torneoInstance)>0){ //Si ya hay partidos significa que ya fue generado
+			flash.message = "Ya generaste el fixture"
+			redirect action:"listaEquipos", id:torneoInstance.id
+			return
+		}
+		
+		def todosPartidos = FixtureService.sortearFixture(torneoInstance)
+		render(view: "mostrarFixture",  model: [todosPartidos:todosPartidos, torneoInstance:torneoInstance])
+		
+		/*if (cantEquipos >= 2) { //para sortear el fixture tiene que haber minimo 2 equipos aceptados
+			if ( (FixtureService.torneoEmpezado(torneoInstance) == false ) && (torneoInstance.fechaLimite < new Date())) { // y tambien el torneo no tiene que estar empezado
 				def todosPartidos = FixtureService.sortearFixture(torneoInstance)
 				render(view: "mostrarFixture",  model: [todosPartidos:todosPartidos, torneoInstance:torneoInstance])
 			} else {
-				flash.message = "El torneo ya empezó, no podés generar otro fixture"
-				redirect action:"listaEquipos", id:torneoInstance.id
+				if((FixtureService.getCantidadPartidos(torneoInstance) == 0)){ //si ya se creo el fixture no se puede cambiar
+					flash.message = "Ya generaste el fixture"
+					redirect action:"listaEquipos", id:torneoInstance.id
+				}else{
+					flash.message = "El torneo ya empezó, no podés generar otro fixture"
+					redirect action:"listaEquipos", id:torneoInstance.id
+				}
 			}
 		} else {
 			flash.message = "La cantidad de equipos aceptados tiene que ser 2 como mínimo"
 			redirect action:"listaEquipos", id:torneoInstance.id
-		}
+		}*/
 	}
 
 	def verTablaGoleadores(Torneo torneoInstance){
@@ -132,9 +165,10 @@ class TorneoController {
 		}
 		
 		if (torneoInstance.fechaInicio<=torneoInstance.fechaLimite){
-			flash.message = "La fecha de Inicio no puede ser anterior a la fecha Límite de inscripción"
-			redirect action:"create"	
-		} else {
+			flash.message = "El límite de inscripción debe ser anterior a la fecha de inicio del torneo"
+			redirect action:"create"
+			return	
+		}
 
 		if (torneoInstance == null) {
             notFound()
@@ -151,20 +185,33 @@ class TorneoController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'torneo.label', default: 'Torneo'), torneoInstance.id])
+                flash.message = "${torneoInstance} creado"
                 redirect torneoInstance
             }
             '*' { respond torneoInstance, [status: CREATED] }
         }
-		}
+	
     }
-
+	
+	@Secured(['ROLE_USER'])
     def edit(Torneo torneoInstance) {
         respond torneoInstance
     }
 
     @Transactional
     def update(Torneo torneoInstance) {
+		if (torneoInstance.nMaxJugadorXEquipo < torneoInstance.nMinJugadorXEquipo){
+			flash.message = "El número máximo de jugadores por equipo debe ser mayor o igual al mínimo"
+			redirect action:"edit", id:torneoInstance.id
+			return
+		}
+		
+		if (torneoInstance.fechaInicio<=torneoInstance.fechaLimite){
+			flash.message = "El límite de inscripción debe ser anterior a la fecha de inicio del torneo"
+			redirect action:"edit", id:torneoInstance.id
+			return
+		}
+		
         if (torneoInstance == null) {
             notFound()
             return
@@ -179,7 +226,7 @@ class TorneoController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Torneo.label', default: 'Torneo'), torneoInstance.id])
+                flash.message = "${torneoInstance} actualizado"
                 redirect torneoInstance
             }
             '*'{ respond torneoInstance, [status: OK] }

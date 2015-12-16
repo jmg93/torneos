@@ -8,7 +8,7 @@ class User implements Serializable {
 
 	String username
 	String password
-	//String email
+	String email
 	List torneos
 	boolean enabled = true
 	boolean accountExpired

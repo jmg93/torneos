@@ -195,7 +195,20 @@ class FixtureService {
 	
 	def calcularTablaGoleadores(Torneo torneoInstance){
 		def db = new Sql(dataSource)
-		def result = db.rows("SELECT * FROM TABLA_GOLEADORES where TID= ${torneoInstance.id}")
+		def result = db.rows("select * from (select jugador_id , count(0) as cantidad_goles, alias.ID as TID, j.equipo_id from (select p.jugador_id,t.id  from "
+	+ "torneo t inner join partido pa on t.ID = pa.TORNEO_ID "
+	+ "inner join partido_jugador p on pa.id =  p.partido_goleadores_local_id "
+	+ "where p.partido_goleadores_local_id is not null AND pa.fecha_partido is not null "
+	
+	+ "union all "
+	
+	+ "select p.jugador_id,t.id from "
+	+ "torneo t inner join partido pa on t.ID = pa.TORNEO_ID "
+	+ "inner join partido_jugador p on pa.id =  p.partido_goleadores_visitante_id "
+	+ "where p.partido_goleadores_visitante_id is not null AND pa.fecha_partido is not null) as alias "
+	+ "left join jugador j on alias.jugador_id = j.id "
+	+ "group by jugador_id,TID "
+	+ "order by cantidad_goles desc) where TID=${torneoInstance.id}")
 		
 		return result
 	}

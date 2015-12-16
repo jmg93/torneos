@@ -42,7 +42,7 @@ class EquipoController {
 	def partidosEquipo(Equipo equipoInstance){
 		def partidosEquipo = Partido.where {((local==equipoInstance) || (visitante==equipoInstance)) && (torneo==equipoInstance.torneo)}
 		if (partidosEquipo.size() == 0)
-			flash.message = "El equipo no ha jugado ningún partido todav�*a"
+			flash.message = "El equipo no ha jugado ningún partido todav�*a"
 		render view:"partidosEquipo", model:[equipoInstance: equipoInstance, partidosEquipo: partidosEquipo]		
 	}
 	
@@ -66,7 +66,7 @@ class EquipoController {
 					redirect controller:"torneo", action:"listaEquipos", id:torneo.id
 				} else {
 					AdministrarService.aceptarEquipo(equipoInstance)
-					flash.message = "Equipo ${equipoInstance} aceptado en el torneo"
+					flash.message = "${equipoInstance} aceptado en el torneo"
 					redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
 				}
 			}
@@ -78,8 +78,8 @@ class EquipoController {
 	def eliminar(Equipo equipoInstance){
 		def torneo = equipoInstance.torneo
 		def nombre = equipoInstance.nombre
-		if ((FixtureService.getCantidadPartidos(torneo) > 0) && equipoInstance.aceptado) { //no se pueden borrar equipos aceptados cuando hay partidos generados en la BD porque tira error 
-			flash.message = "No se pueden borrar equipos aceptados cuando ya empezó el torneo"
+		if (equipoInstance.torneo.fechaLimite > new Date() && equipoInstance.aceptado) { //no se pueden borrar equipos aceptados cuando la inscripcion ya cerro 
+			flash.message = "No se pueden borrar equipos aceptados cuando cerró la inscripción"
 			redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
 		} else {
 			flash.message = "${nombre} eliminado del torneo"
@@ -135,11 +135,9 @@ class EquipoController {
     }
 	
     def edit(Equipo equipoInstance) {
-		if(1){
-			flash.message = "Los equipos no se pueden editar"
-			redirect action:"show", id:equipoInstance.id
-			return
-		}
+		flash.message = "Los equipos no se pueden editar"
+		redirect action:"show", id:equipoInstance.id
+		return
         respond equipoInstance
     }
 

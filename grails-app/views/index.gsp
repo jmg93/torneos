@@ -84,7 +84,7 @@
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		
 		<div style="margin: 2em; text-align: justify;">
-			<h1 style="font-size: 30px; text-align: center;">Bienvenidos</h1>
+			<h1 style="font-size: 30px; text-align: center;">Bienvenido</h1>
 			<p>
 			TorneosYa es una aplicación web que te permite crear y administrar torneos de fútbol. </br>
 			Te registrás y ya podés empezar: elegís un nombre para tu torneo, una fecha límite para la inscripción y una fecha de inicio.
@@ -100,7 +100,7 @@
 		</div>
 		
 		
-		<div id="status" role="complementary">
+	<!-- <div id="status" role="complementary">
 			<h1>Application Status</h1>
 			<ul>
 				<li>App version: <g:meta name="app.version"/></li>
@@ -135,6 +135,6 @@
 					</g:each>
 				</ul>
 			</div>
-		</div>
+		</div> -->
 	</body>
 </html>

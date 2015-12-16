@@ -32,7 +32,7 @@
 		
 		</div>		
 		<g:layoutBody/>
-		<div class="footer" role="contentinfo"></div>
+		<div class="footer" role="contentinfo"><p style="margin: 0px; color: rgb(238, 238, 238); text-align:center">TorneosYa 2015 - IDS Grupo 3</p></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 	</body>
 </html>

@@ -9,6 +9,9 @@
 			<div class="nav">
 				<g:link class="atras" action="show" style="width: 15%;" id="${torneoInstance.id}">Volver al torneo</g:link>
 			</div>
+			<div id="show-torneo" class="content scaffold-show" role="main">
+				<h1>Tabla de Goleadores - ${torneoInstance.nombre}</h1>
+			</div>
 			<div id="tablaFixture" class="content scaffold-list">
 				<table class="table table-striped table-bordered table-hover table-condensed">
 					<thead>
@@ -21,15 +24,15 @@
 						<g:each in="${filas}" status="i" var="fila">
 							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 								<td style="width:8%">
-									${i+1}
+									&nbsp;&nbsp;&nbsp;&nbsp;${i+1}
 								</td>
 								<td> <g:link controller="jugador" action="show" id="${fila[0]}">
 									${equipos.Jugador.findById(fila[0])}
 								</g:link></td>
 								<td>
-									${fila[1]}
+									&nbsp;&nbsp;&nbsp;${fila[1]}
 								</td>
-								<td> <g:link controller="equipo" action="show" id="${fila[2]}">
+								<td> <g:link controller="equipo" action="show" id="${fila[3]}">
 									${equipos.Equipo.findById(fila[3])}
 								</g:link></td>
 							</tr>
