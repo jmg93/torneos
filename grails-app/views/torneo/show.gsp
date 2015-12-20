@@ -1,11 +1,45 @@
 
 <%@ page import="torneos.Torneo" %>
+<%@ page import="equipos.Equipo" %>
+<%@ page import="torneos.TorneoController" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'torneo.label', default: 'Torneo')}" />
-		<title><g:message code="default.show.label" args="[entityName]" /></title>
+		<title>${torneoInstance} - TorneosYa</title>
+		<style type="text/css" media="screen">
+			#status {
+				background-color: #eee;
+				border: .2em solid #fff;
+				margin: 2em 2em 1em;
+				padding: 1em;
+				width: 12em;
+				float: left;
+				-moz-box-shadow: 0px 0px 1.25em #ccc;
+				-webkit-box-shadow: 0px 0px 1.25em #ccc;
+				box-shadow: 0px 0px 1.25em #ccc;
+				-moz-border-radius: 0.6em;
+				-webkit-border-radius: 0.6em;
+				border-radius: 0.6em;
+			}
+			@media screen and (max-width: 480px) {
+				#status {
+					display: none;
+				}
+
+				#page-body {
+					margin: 0 1em 1em;
+				}
+
+				#page-body h1 {
+					margin-top: 0;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<a href="#show-torneo" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -20,11 +54,69 @@
 			</ul>
 		</div>
 		<div id="show-torneo" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			<h1>${torneoInstance }</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<ol class="property-list torneo">
+			
+			<div id="status">
+			Creador: ${torneoInstance.usuario }
+			<br/>
+			<br/>
+			<g:if test="${torneoInstance.fechaInicio > new Date() }">
+				<g:if test="${torneoInstance.fechaLimite > new Date() }">
+					Inscripción abierta hasta el ${ (new SimpleDateFormat("dd - MMM - yyyy")).format(torneoInstance.fechaLimite) }
+					<br/>
+					<br/>
+					Inicia el ${ (new SimpleDateFormat("dd - MMM - yyyy")).format(torneoInstance.fechaInicio) }
+				</g:if>
+				<g:else>
+					Inscripción cerrada
+					<br/>
+					<br/>
+					Inicia el ${ (new SimpleDateFormat("dd - MMM - yyyy")).format(torneoInstance.fechaInicio) }
+				</g:else>
+			</g:if>
+			<g:else>
+				En juego
+			</g:else>
+			<br/>
+			<br/>
+			Equipos: ${equiposAceptados} / ${torneoInstance.nMaxEquipos }
+			<br/>
+			<br/>
+			<g:link action="mostrarFixture" resource="${torneoInstance}">Ver Fixture</g:link>
+		</div>
+		
+		<div style="width: 65%; position: relative; left: 19em; top: -13.8em;">
+			<div id="tablaFixture" class="content scaffold-list">
+				<table class="table table-striped table-bordered table-hover table-condensed">
+					<thead>
+						<g:sortableColumn property="posicion" defaultOrder="asc" title="Posición" />
+						<g:sortableColumn property="equipo" defaultOrder="asc" title="Equipo" />
+						<g:sortableColumn property="puntos" title="Puntos"/>
+					</thead>
+					<tbody>
+						<g:each in="${filas}" status="i" var="fila">
+							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+								<td style="width:8%">
+									${i+1}
+								</td>
+								<td> <g:link controller="equipo" action="show" id="${fila[0]}">
+									${equipos.Equipo.findById(fila[0])}
+								</g:link></td>
+								<td>
+									${fila[1]}
+								</td>
+							</tr>
+						</g:each>
+					</tbody>
+				</table>
+			</div>	
+		</div>
+			
+			
+			<!--<ol class="property-list torneo">
 			
 				<g:if test="${torneoInstance?.nombre}">
 				<li class="fieldcontain">
@@ -121,12 +213,17 @@
 				</g:if>
 			
 			</ol>
-			<g:form url="[resource:torneoInstance, action:'delete']" method="DELETE">
-				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${torneoInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
-			</g:form>
+			
+			-->
+
 		</div>
+		<!--  
+		<g:form url="[resource:torneoInstance, action:'delete']" method="DELETE">
+			<fieldset class="buttons">
+				<g:link class="edit" action="edit" resource="${torneoInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+				<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+			</fieldset>
+		</g:form>
+		-->
 	</body>
 </html>

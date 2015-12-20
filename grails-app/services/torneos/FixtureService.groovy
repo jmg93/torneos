@@ -74,12 +74,12 @@ class FixtureService {
 		return todosPartidos		
 	}
 	
-	def int getCantidadEquipos(torneoInstance) { //devuelve la cantidad de equipos aceptados cargados en el torneo 
+	def int getCantidadEquipos(Torneo torneoInstance) { //devuelve la cantidad de equipos aceptados cargados en el torneo 
 		def todosEquipos = Equipo.where{ (torneo == torneoInstance) && (aceptado == true) }.list() //seleccionar todos los equipos aceptados del torneo a sortear
 		return todosEquipos.size()
 	}
 	
-	def int getCantidadPartidos(torneoInstance) { //devuelve la cantidad de partidos cargados (jugados y no jugados) del torneo
+	def int getCantidadPartidos(Torneo torneoInstance) { //devuelve la cantidad de partidos cargados (jugados y no jugados) del torneo
 		return torneoInstance.partidos.size()
 	}
 	

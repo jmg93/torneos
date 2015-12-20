@@ -4,6 +4,7 @@ package torneos
 
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
+import equipos.Equipo
 
 import org.springframework.transaction.annotation.Transactional
 
@@ -70,7 +71,10 @@ class TorneoController {
     }
 
     def show(Torneo torneoInstance) {
-        respond torneoInstance
+		def filas = FixtureService.calcularTablaPosiciones(torneoInstance)
+		def equiposAceptados = FixtureService.getCantidadEquipos(torneoInstance)
+		
+        respond torneoInstance, model: [filas:filas, equiposAceptados:equiposAceptados]
     }
 
 	@Secured(['ROLE_USER'])
