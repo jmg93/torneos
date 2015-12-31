@@ -66,7 +66,7 @@ class EquipoController {
 					redirect controller:"torneo", action:"listaEquipos", id:torneo.id
 				} else {
 					AdministrarService.aceptarEquipo(equipoInstance)
-					flash.message = "Equipo ${equipoInstance} aceptado en el torneo"
+					flash.message = "${equipoInstance} aceptado en el torneo"
 					redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
 				}
 			}

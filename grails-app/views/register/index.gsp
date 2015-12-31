@@ -7,6 +7,11 @@
 
 <body>
 
+<div class="nav" role="navigation">
+	<ul>
+		<li><a class="home" href="${createLink(uri: '/')}">Inicio</a></li>
+	</ul>
+</div>
 <h1 style="margin-left: 2.2%;">Creá tu usuario</h1>
 
 <p/>

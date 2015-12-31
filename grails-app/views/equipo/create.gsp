@@ -1,9 +1,11 @@
+<%@ page import="torneos.Torneo" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'equipo.label', default: 'Equipo')}" />
-		<title><g:message code="default.create.label" args="[entityName]" /></title>
+		<title>Inscribir equipo a ${Torneo.get(params.torneoId) }</title>
 	</head>
 	<body>
 		<a href="#create-equipo" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -13,7 +15,7 @@
 			</ul>
 		</div>
 		<div id="create-equipo" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
+			<h1>Inscribir equipo a ${Torneo.get(params.torneoId) }</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>

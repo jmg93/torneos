@@ -99,7 +99,7 @@ class TorneoController {
 			return
 		}
 		
-		if(FixturService.getCantidadPartidos(torneoInstance)>0){ //Si ya hay partidos significa que ya fue generado
+		if(FixtureService.getCantidadPartidos(torneoInstance)>0){ //Si ya hay partidos significa que ya fue generado
 			flash.message = "Ya generaste el fixture"
 			redirect action:"listaEquipos", id:torneoInstance.id
 			return
@@ -165,7 +165,7 @@ class TorneoController {
 		}
 		
 		if (torneoInstance.fechaInicio<=torneoInstance.fechaLimite){
-			flash.message = "La fecha de Inicio no puede ser anterior a la fecha Límite de inscripción"
+			flash.message = "El límite de inscripción debe ser anterior a la fecha de inicio del torneo"
 			redirect action:"create"
 			return	
 		}
@@ -185,7 +185,7 @@ class TorneoController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'torneo.label', default: 'Torneo'), torneoInstance.id])
+                flash.message = "${torneoInstance} creado"
                 redirect torneoInstance
             }
             '*' { respond torneoInstance, [status: CREATED] }
@@ -207,7 +207,7 @@ class TorneoController {
 		}
 		
 		if (torneoInstance.fechaInicio<=torneoInstance.fechaLimite){
-			flash.message = "La fecha de Inicio no puede ser anterior a la fecha Límite de inscripción"
+			flash.message = "El límite de inscripción debe ser anterior a la fecha de inicio del torneo"
 			redirect action:"edit", id:torneoInstance.id
 			return
 		}
@@ -226,7 +226,7 @@ class TorneoController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Torneo.label', default: 'Torneo'), torneoInstance.id])
+                flash.message = "${torneoInstance} actualizado"
                 redirect torneoInstance
             }
             '*'{ respond torneoInstance, [status: OK] }

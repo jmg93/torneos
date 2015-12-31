@@ -9,6 +9,11 @@
 
 <p/>
 
+	<div class="nav" role="navigation">
+		<ul>
+			<li><a class="home" href="${createLink(uri: '/')}">Inicio</a></li>
+		</ul>
+	</div>
 	<g:if test="${flash.message}">
 		<div class="message" role="status">${flash.message}</div>
 	</g:if>
