@@ -11,6 +11,15 @@
 
 <p/>
 
+	<g:if test="${flash.message}">
+		<div class="message" role="status">${flash.message}</div>
+	</g:if>
+
+	<g:hasErrors>
+    	<g:eachError>
+        	<li style="position: relative; left: 29%; margin: 1em;"><g:message error="${it}"/></li>
+    	</g:eachError>
+	</g:hasErrors>
 
 <g:form action='register' name='registerForm' style="width: 75%; padding-left: 22%; padding-bottom:4%;">
 

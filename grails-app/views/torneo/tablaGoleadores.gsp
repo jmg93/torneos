@@ -29,7 +29,7 @@
 								<td>
 									${fila[1]}
 								</td>
-								<td> <g:link controller="equipos" action="show" id="${fila[2]}">
+								<td> <g:link controller="equipo" action="show" id="${fila[2]}">
 									${equipos.Equipo.findById(fila[3])}
 								</g:link></td>
 							</tr>

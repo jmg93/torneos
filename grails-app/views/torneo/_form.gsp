@@ -4,7 +4,7 @@
 
 
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'nombre', 'error')} required">
-	<label for="nombre">
+	<label for="nombre" style="width: 250px;">
 		<g:message code="torneo.nombre.label" default="Nombre" />
 		<span class="required-indicator">*</span>
 	</label>
@@ -13,25 +13,25 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'fechaInicio', 'error')} required">
-	<label for="fechaInicio">
+	<label for="fechaInicio" style="width: 250px;">
 		<g:message code="torneo.fechaInicio.label" default="Fecha Inicio" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="fechaInicio" precision="day" relativeYears="[0..5]" value="${torneoInstance?.fechaInicio}"  />
+	<g:datepickerUI name="fechaInicio" locale="es_ES" required="true" value="${torneoInstance?.fechaInicio}" options="{minDate:'0', maxDate:'+1Y'}"/>
 
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'fechaLimite', 'error')} required">
-	<label for="fechaLimite">
+	<label for="fechaLimite" style="width: 250px;">
 		<g:message code="torneo.fechaLimite.label" default="Fecha límite de inscripción" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="fechaLimite" precision="day" relativeYears="[0..5]" value="${torneoInstance?.fechaLimite}"  />
+	<g:datepickerUI name="fechaLimite" locale="${new Locale("es", "ES") }" required="true" value="${torneoInstance?.fechaLimite}" options="{minDate:'0', maxDate:'+1Y'}"/>
 
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'nMaxEquipos', 'error')} required">
-	<label for="nMaxEquipos">
+	<label for="nMaxEquipos" style="width: 250px;">
 		<g:message code="torneo.nMaxEquipos.label" default="Límite de equipos" />
 		<span class="required-indicator">*</span>
 	</label>
@@ -40,8 +40,8 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'nMinJugadorXEquipo', 'error')} required">
-	<label for="nMinJugadorXEquipo">
-		<g:message code="torneo.nMinJugadorXEquipo.label" default="N Min Jugador XE quipo" />
+	<label for="nMinJugadorXEquipo" style="width: 250px;">
+		<g:message code="torneo.nMinJugadorXEquipo.label" default="Mínimo de jugadores por equipo" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="nMinJugadorXEquipo" type="number" min="5" value="${torneoInstance.nMinJugadorXEquipo}" required=""/>
@@ -49,8 +49,8 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'nMaxJugadorXEquipo', 'error')} required">
-	<label for="nMaxJugadorXEquipo">
-		<g:message code="torneo.nMaxJugadorXEquipo.label" default="N Max Jugador XE quipo" />
+	<label for="nMaxJugadorXEquipo" style="width: 250px;">
+		<g:message code="torneo.nMaxJugadorXEquipo.label" default="Máximo de jugadores por equipo" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="nMaxJugadorXEquipo" type="number" max="99" value="${torneoInstance.nMaxJugadorXEquipo}" required=""/>
@@ -58,31 +58,15 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'reglamento', 'error')} ">
-	<label for="reglamento">
+	<label for="reglamento" style="width: 250px;">
 		<g:message code="torneo.reglamento.label" default="Reglamento" />
 		
 	</label>
-	<g:textArea name="reglamento" cols="40" rows="5" maxlength="2000" value="${torneoInstance?.reglamento}"/>
+	<g:textArea name="reglamento" cols="500" rows="500" maxlength="2000" value="${torneoInstance?.reglamento}"/>
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'equipos', 'error')} ">
-	<label for="equipos">
-		<g:message code="torneo.equipos.label" default="Equipos" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${torneoInstance?.equipos?}" var="e">
-    <li><g:link controller="equipo" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="equipo" action="create" params="['torneo.id': torneoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'equipo.label', default: 'Equipo')])}</g:link>
-</li>
-</ul>
 
-
-</div>
 
 
 <div class="fieldcontain ${hasErrors(bean: torneoInstance, field: 'usuario', 'error')} required">

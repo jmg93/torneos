@@ -21,8 +21,8 @@
 	<body>
 		<div id="grailsLogo" role="banner"><a href="${createLink(uri: '/')}"><asset:image src="logo2_v1.png" width="300" height="100" alt="Grails"/></a>
 		<sec:ifNotLoggedIn>
-					<g:link class="buttons" style="position: relative; left: 32em; bottom: 1.15em;" controller="login">Ingresá</g:link>
-					<g:link class="buttons" style="position: relative; left: 20em; bottom: 1.15em;" controller="register">Registrate</g:link>
+					<g:link class="buttons" style="position: relative; left: 32em; bottom: 1.15em; text-decoration:none" controller="login">Ingresá</g:link>
+					<g:link class="buttons" style="position: relative; left: 20em; bottom: 1.15em; text-decoration:none" controller="register">Registrate</g:link>
 		</sec:ifNotLoggedIn>
 		<sec:ifLoggedIn>
 				<span style="margin: 1%; position: relative; bottom: 2.8em; left: 27em;" >

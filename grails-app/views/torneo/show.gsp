@@ -86,6 +86,7 @@
 			<g:link action="mostrarReglamento" resource="${torneoInstance}">Ver Reglamento</g:link>
 		</div>
 		
+
 		
 		<table style="width: 65%; position: relative; top: 2.1em;" class="table table-striped table-bordered table-hover table-condensed">
 			<thead>

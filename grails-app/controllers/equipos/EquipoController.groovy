@@ -4,6 +4,7 @@ package equipos
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import partidos.Partido
 
 @Transactional(readOnly = true)
 class EquipoController {
@@ -12,9 +13,20 @@ class EquipoController {
 	
 	def AdministrarService
 	def FixtureService
+	def springSecurityService
+	
 	
 	def agregarJugador(Equipo equipoInstance){
-		forward controller:"jugador", action:"create", params:[equipoId: equipoInstance.id]
+		if(FixtureService.torneoEmpezado(equipoInstance.torneo)){
+			if(equipoInstance.torneo.usuario == springSecurityService.currentUser){
+				forward controller:"jugador", action:"create", params:[equipoId: equipoInstance.id]
+				return
+			}
+			flash.message = "El torneo ya empezó, solo el administrador del torneo puede agregar jugadores al equipo"
+			redirect action:"show", id:equipoInstance.id
+			return
+		}
+		
 	}
 	
 		/* Lo uso para cargar 10 jgadores de una en un equipo
@@ -23,6 +35,11 @@ class EquipoController {
 		flash.message = "deberia haber hecho la magia"
 		redirect action:"show", id:equipoInstance.id
 	}*/
+	
+	def partidosEquipo(Equipo equipoInstance){
+		def partidosEquipo = Partido.where {((local==equipoInstance) || (visitante==equipoInstance)) && (torneo==equipoInstance.torneo)}
+		render view:"partidosEquipo", model:[equipoInstance: equipoInstance, partidosEquipo: partidosEquipo]		
+	}
 	
 	def aceptar(Equipo equipoInstance){
 		def torneo = equipoInstance.torneo
@@ -107,6 +124,11 @@ class EquipoController {
     }
 
     def edit(Equipo equipoInstance) {
+		if(1){
+			flash.message = "Los equipos no se pueden editar"
+			redirect view:"show", id:equipoInstance.id
+			return
+		}
         respond equipoInstance
     }
 
@@ -126,7 +148,7 @@ class EquipoController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Equipo.label', default: 'Equipo'), equipoInstance.id])
+                flash.message = "${equipoInstance} actualizado"
                 redirect equipoInstance
             }
             '*'{ respond equipoInstance, [status: OK] }
@@ -145,7 +167,7 @@ class EquipoController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Equipo.label', default: 'Equipo'), equipoInstance.id])
+                flash.message = "${equipoInstance} eliminado"
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }

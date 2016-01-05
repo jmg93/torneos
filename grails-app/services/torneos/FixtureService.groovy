@@ -87,8 +87,8 @@ class FixtureService {
 		return torneoInstance.partidos.size()
 	}
 	
-	def boolean torneoEmpezado(torneoInstance) { //devuelve true si el torneo esta empezado (si se sorteo el fixture o si hay algun partido cargado)
-		return (getCantidadPartidos(torneoInstance) > 0)
+	def boolean torneoEmpezado(Torneo torneoInstance) { //devuelve true si el torneo esta empezado (si ya paso la fecha de inicio)
+		return (new Date()>torneoInstance.fechaInicio)
 	}
 	
 	def calcularTablaPosiciones(Torneo torneoInstance) {

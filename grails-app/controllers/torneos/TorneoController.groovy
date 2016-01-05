@@ -21,7 +21,12 @@ class TorneoController {
 	}
 	
 	def inscripcion(Torneo torneoInstance){
-		forward controller:"equipo", action:"create", params:[torneoId:torneoInstance.id]
+		if (new Date() < torneoInstance.fechaLimite){
+			forward controller:"equipo", action:"create", params:[torneoId:torneoInstance.id]
+		}else{
+			flash.message = "La inscripción está cerrada"
+			redirect action:"show", id:torneoInstance.id
+		} 
 	}
 	
 	def busquedaTorneo(){
@@ -114,7 +119,14 @@ class TorneoController {
 
     @Transactional
     def save(Torneo torneoInstance) {
+		def torneo=torneoInstance
 		torneoInstance.usuario = springSecurityService.currentUser
+		
+		if (torneoInstance.nMaxJugadorXEquipo < torneoInstance.nMinJugadorXEquipo){
+			flash.message = "El número máximo de jugadores por equipo debe ser mayor o igual al mínimo"
+			redirect action:"create"
+			return
+		}
 		
 		if (torneoInstance.fechaInicio<=torneoInstance.fechaLimite){
 			flash.message = "La fecha de Inicio no puede ser anterior a la fecha Límite de inscripción"

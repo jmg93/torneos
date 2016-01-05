@@ -14,6 +14,7 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="list" controller="torneo" action="show" id="${equipoInstance.torneo.id }">Volver al torneo</g:link></li>
+				<li><g:link class="boton-tabla" action="partidosEquipo" resource="${equipoInstance }">Partidos en el torneo</g:link></li>
 				<li><g:link class="create" action="agregarJugador" resource="${equipoInstance }">Agregar jugador</g:link></li>
 			</ul>
 		</div>
@@ -96,12 +97,7 @@
 				
 			
 			</ol>
-			<g:form url="[resource:equipoInstance, action:'delete']" method="DELETE">
-				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${equipoInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
-			</g:form>
+						
 		</div>
 	</body>
 </html>

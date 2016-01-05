@@ -20,7 +20,7 @@
 					</thead>
 					<tbody>
 						<g:each in="${todosPartidos}" status="i" var="partido">
-							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+							<tr class="${(partido.nFecha % 2) == 0 ? 'even' : 'odd'}">
 								<td style="text-align:center"> <g:link controller="partido" action="show" id="${partido.id}">
 									${partido.nFecha}
 								</g:link></td>

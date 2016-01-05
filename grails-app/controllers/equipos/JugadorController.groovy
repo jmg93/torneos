@@ -3,12 +3,15 @@ package equipos
 
 
 import static org.springframework.http.HttpStatus.*
+import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class JugadorController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	
+	def springSecurityService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -66,9 +69,15 @@ class JugadorController {
             '*' { respond jugadorInstance, [status: CREATED] }
         }
     }
-
+	
+	@Secured(['ROLE_USER'])
     def edit(Jugador jugadorInstance) {
-        respond jugadorInstance
+        if(jugadorInstance.equipo.torneo.usuario == springSecurityService.currentUser){
+			respond jugadorInstance
+		}else{
+			flash.message = "Acceso denegado"
+			redirect action:"show", id:jugadorInstance.id
+		}
     }
 
     @Transactional
@@ -95,8 +104,14 @@ class JugadorController {
     }
 
     @Transactional
+	@Secured(['ROLE_USER'])
     def delete(Jugador jugadorInstance) {
-
+		if(jugadorInstance.equipo.torneo.usuario != springSecurityService.currentUser){
+			flash.message = "Acceso denegado"
+			redirect action:"show", id:jugadorInstance.id
+			return
+		}
+		
         if (jugadorInstance == null) {
             notFound()
             return
