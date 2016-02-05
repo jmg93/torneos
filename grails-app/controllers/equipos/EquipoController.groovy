@@ -78,8 +78,8 @@ class EquipoController {
 	def eliminar(Equipo equipoInstance){
 		def torneo = equipoInstance.torneo
 		def nombre = equipoInstance.nombre
-		if (equipoInstance.torneo.fechaLimite > new Date() && equipoInstance.aceptado) { //no se pueden borrar equipos aceptados cuando la inscripcion ya cerro 
-			flash.message = "No se pueden borrar equipos aceptados cuando cerró la inscripción"
+		if (equipoInstance.torneo.fechaLimite < new Date() && equipoInstance.aceptado) { //no se pueden borrar equipos aceptados cuando la inscripcion ya cerro 
+			flash.message = "No se pueden borrar equipos aceptados cuando cerró la inscripción o el torneo ya empezó"
 			redirect(controller:"torneo", action:"listaEquipos", id:torneo.id)
 		} else {
 			flash.message = "${nombre} eliminado del torneo"

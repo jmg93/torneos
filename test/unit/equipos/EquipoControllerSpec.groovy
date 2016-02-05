@@ -1,152 +1,70 @@
 package equipos
 
+import grails.plugin.springsecurity.annotation.Secured
+import java.util.Date;
+import java.util.List;
+import grails.test.mixin.TestFor
+import grails.test.mixin.Mock
+import spock.lang.Specification
+import torneos.Torneo
+import usuarios.User
+import partidos.Partido
 
-
-import grails.test.mixin.*
-import spock.lang.*
 
 @TestFor(EquipoController)
-@Mock(Equipo)
+@Mock([Equipo, Torneo, Jugador])
 class EquipoControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
-        // TODO: Populate valid properties like...
         //params["name"] = 'someValidName'
+		//params["nombre"] = 'EquipoPrueba'
+		//params["contacto"] = 'hola@gmail.com'
+		//params["aceptado"] = 'true'
     }
 
-    void "Test the index action returns the correct model"() {
-
-        when:"The index action is executed"
-            controller.index()
-
-        then:"The model is correct"
-            !model.equipoInstanceList
-            model.equipoInstanceCount == 0
-    }
-
-    void "Test the create action returns the correct model"() {
-        when:"The create action is executed"
+    void "Probar que el boton de crear equipo retorna un modelo correcto sin datos"() {
+        when:"Se hace click en el boton de crear equipo"
             controller.create()
 
-        then:"The model is correctly created"
+        then:"El modelo que se devuelve no tiene ningun dato"
             model.equipoInstance!= null
     }
 
-    void "Test the save action correctly persists an instance"() {
+	void "Prueba dar de alta equipo"() {
+		
+		given: "Se crea un nuevo equipo y ya existe un torneo"
+			def torneoExistente = new Torneo(nombre: "torneo Prueba", fechaInicio: new Date(2017, 2, 2), fechaLimite: new Date(2017, 1, 1), nMaxEquipos: 20, nMinJugadorXEquipo: 6, nMaxJugadorXEquipo: 20, usuario: new User(username: "pruebausuario", email: "qwe@gmail.com"))
+			def equipo = new Equipo(nombre: "equipoPrueba", contacto: "aasdasdsd@gmail.com", aceptado: false, torneo: torneoExistente)
+							
+		when: "Se intenta guardar el equipo en la base de datos"
+			equipo.save(flush: true)
+			
+		then: "Se comprueba la cantidad de equipos guardados en la base de datos"
+			Equipo.count() == 1
+	}
+	
+	void "Prueba dar de alta equipo con datos invalidos"() {
+		
+		given: "Se crea un nuevo equipo con datos incorrectos y ya existe un torneo"
+			def torneoExistente = new Torneo(nombre: "torneo Prueba", fechaInicio: new Date(2017, 2, 2), fechaLimite: new Date(2017, 1, 1), nMaxEquipos: 20, nMinJugadorXEquipo: 6, nMaxJugadorXEquipo: 20, usuario: new User(username: "pruebausuario", email: "qwe@gmail.com"))
+			def equipoConErrores = new Equipo(nombre: "", contacto: "aasdasdsd", aceptado: false, torneo: torneoExistente)
+							
+		when: "Se intenta guardar el equipo en la base de datos"
+			equipoConErrores.save(flush: true)
+			
+		then: "Se comprueba la cantidad de equipos guardados en la base de datos"
+			Equipo.count() == 0
+	}
+ 
+    void "Probar que borrar un equipo funciona "() {
 
-        when:"The save action is executed with an invalid instance"
-            request.contentType = FORM_CONTENT_TYPE
-            request.method = 'POST'
-            def equipo = new Equipo()
-            equipo.validate()
-            controller.save(equipo)
-
-        then:"The create view is rendered again with the correct model"
-            model.equipoInstance!= null
-            view == 'create'
-
-        when:"The save action is executed with a valid instance"
-            response.reset()
+        when:"Se crea un equipo valido y luego se lo borra"
             populateValidParams(params)
-            equipo = new Equipo(params)
+            def equipoAborrar = new Equipo(params).save(flush: true)
+            controller.delete(equipoAborrar)
 
-            controller.save(equipo)
-
-        then:"A redirect is issued to the show action"
-            response.redirectedUrl == '/equipo/show/1'
-            controller.flash.message != null
-            Equipo.count() == 1
-    }
-
-    void "Test that the show action returns the correct model"() {
-        when:"The show action is executed with a null domain"
-            controller.show(null)
-
-        then:"A 404 error is returned"
-            response.status == 404
-
-        when:"A domain instance is passed to the show action"
-            populateValidParams(params)
-            def equipo = new Equipo(params)
-            controller.show(equipo)
-
-        then:"A model is populated containing the domain instance"
-            model.equipoInstance == equipo
-    }
-
-    void "Test that the edit action returns the correct model"() {
-        when:"The edit action is executed with a null domain"
-            controller.edit(null)
-
-        then:"A 404 error is returned"
-            response.status == 404
-
-        when:"A domain instance is passed to the edit action"
-            populateValidParams(params)
-            def equipo = new Equipo(params)
-            controller.edit(equipo)
-
-        then:"A model is populated containing the domain instance"
-            model.equipoInstance == equipo
-    }
-
-    void "Test the update action performs an update on a valid domain instance"() {
-        when:"Update is called for a domain instance that doesn't exist"
-            request.contentType = FORM_CONTENT_TYPE
-            request.method = 'PUT'
-            controller.update(null)
-
-        then:"A 404 error is returned"
-            response.redirectedUrl == '/equipo/index'
-            flash.message != null
-
-
-        when:"An invalid domain instance is passed to the update action"
-            response.reset()
-            def equipo = new Equipo()
-            equipo.validate()
-            controller.update(equipo)
-
-        then:"The edit view is rendered again with the invalid instance"
-            view == 'edit'
-            model.equipoInstance == equipo
-
-        when:"A valid domain instance is passed to the update action"
-            response.reset()
-            populateValidParams(params)
-            equipo = new Equipo(params).save(flush: true)
-            controller.update(equipo)
-
-        then:"A redirect is issues to the show action"
-            response.redirectedUrl == "/equipo/show/$equipo.id"
-            flash.message != null
-    }
-
-    void "Test that the delete action deletes an instance if it exists"() {
-        when:"The delete action is called for a null instance"
-            request.contentType = FORM_CONTENT_TYPE
-            request.method = 'DELETE'
-            controller.delete(null)
-
-        then:"A 404 is returned"
-            response.redirectedUrl == '/equipo/index'
-            flash.message != null
-
-        when:"A domain instance is created"
-            response.reset()
-            populateValidParams(params)
-            def equipo = new Equipo(params).save(flush: true)
-
-        then:"It exists"
-            Equipo.count() == 1
-
-        when:"The domain instance is passed to the delete action"
-            controller.delete(equipo)
-
-        then:"The instance is deleted"
+        then:"No hay ningun equipo grabado"
             Equipo.count() == 0
-            response.redirectedUrl == '/equipo/index'
-            flash.message != null
     }
 }
