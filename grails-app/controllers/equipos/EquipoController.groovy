@@ -42,7 +42,7 @@ class EquipoController {
 	def partidosEquipo(Equipo equipoInstance){
 		def partidosEquipo = Partido.where {((local==equipoInstance) || (visitante==equipoInstance)) && (torneo==equipoInstance.torneo)}
 		if (partidosEquipo.size() == 0)
-			flash.message = "El equipo no ha jugado ningún partido todav�*a"
+			flash.message = "El equipo no ha jugado ningún partido todavía"
 		render view:"partidosEquipo", model:[equipoInstance: equipoInstance, partidosEquipo: partidosEquipo]		
 	}
 	
