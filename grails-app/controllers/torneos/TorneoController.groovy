@@ -83,6 +83,12 @@ class TorneoController {
 		}
 		def cantEquipos = FixtureService.getCantidadEquipos(torneoInstance) //obtiene cantidad de equipos aceptados en el torneo
 		
+		if(torneoInstance.fechaLimite > new Date()){ //Si la inscripción está abierta no se puede generar el fixture
+			flash.message = "La inscripción todavía está abierta"
+			redirect action:"listaEquipos", id:torneoInstance.id
+			return
+		}
+		
 		if(cantEquipos < 2){ //Si hay menos de dos equipos no tiene sentido
 			flash.message = "La cantidad de equipos aceptados tiene que ser 2 como mínimo"
 			redirect action:"listaEquipos", id:torneoInstance.id
@@ -91,12 +97,6 @@ class TorneoController {
 		
 		if (FixtureService.torneoEmpezado(torneoInstance)){ //Si el torneo ya empezo no se puede generar el fixture
 			flash.message = "El torneo ya empezó, no podés generar otro fixture"
-			redirect action:"listaEquipos", id:torneoInstance.id
-			return
-		}
-		
-		if(torneoInstance.fechaLimite > new Date()){ //Si la inscripción está abierta no se puede generar el fixture
-			flash.message = "La inscripción todavía está abierta"
 			redirect action:"listaEquipos", id:torneoInstance.id
 			return
 		}
