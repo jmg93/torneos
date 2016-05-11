@@ -197,6 +197,13 @@ class TorneoController {
 	
 	@Secured(['ROLE_USER'])
     def edit(Torneo torneoInstance) {
+    	
+    	if (FixtureService.torneoEmpezado(torneoInstance)){ //Si el torneo ya empezo no se puede editar el torneo
+			flash.message = "El torneo ya empezó, no podés editarlo"
+			redirect action:"listaEquipos", id:torneoInstance.id
+			return
+		}
+		
         respond torneoInstance
     }
 
